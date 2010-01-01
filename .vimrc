@@ -11,21 +11,27 @@ set nocompatible
 " Make backspace delete lots of things
 set backspace=indent,eol,start
 
-" Подсветка поиска, поиск по набору, игнорировать регистр при поиске
+" Включить подсветку выражения, которое ищется в тексте
 set hlsearch
+" При поиске перескакивать на найденный текст в процессе набора строки
 set incsearch
+" Игнорировать регистр букв при поиске
 set ignorecase
 
 " Размер таб-символа, отступа по << и >>
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-" Заменять таб-символ пробелом, ???, автоотступы, умные оступы
+" Заменять таб символ пробелами
 set expandtab
+" Умные табы
 set smarttab
+" Автоматическая расстановка отступов
 set autoindent
+" 'Умная' расстановка отступов
 set smartindent
 
+" При прокрутке не нужно прокручивать в самый низ
 set scrolljump=7
 set scrolloff=7
 
@@ -39,13 +45,14 @@ set ruler
 set number
 " Отображать выполняемую команду
 set showcmd
-" Всегда показывать строки
+" Отображать статусную строку для каждого окна
 set laststatus=2
+" Дополнительная информация в статусной строке
 set statusline=%<%f%h%m%r%=format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B\ %l,%c%V\ %P
 
-" Отключаем создание бэкапов
+" Отключить создание бэкапов
 set nobackup
-" Отключаем создание swap файлов
+" Отключить создание swap файлов
 set noswapfile
 
 " Не выгружать буфер, когда переключаемся на другой
@@ -94,7 +101,7 @@ function! RestoreFileEncodings()
     unlet b:myfileencodingsbak
 endfunction
 
-" .NFO specific (кодировка для .nfo файлов)
+" .NFO specific
 au BufReadPre *.nfo call SetFileEncodings('cp437')|set ambiwidth=single
 au BufReadPost *.nfo call RestoreFileEncodings()
 
@@ -107,4 +114,3 @@ setlocal listchars=tab:·\ ,trail:·
 " hightlight long lines
 ":au BufWinEnter * let w:m1=matchadd('Search', '\%<81v.\%>77v', -1)
 ":au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-
