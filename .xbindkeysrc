@@ -1,0 +1,24 @@
+# Backward and Forward buttons
+"xvkbd -text "\[Alt_L]\[Left]""
+  m:0x10 + b:8
+"xvkbd -text "\[Alt_L]\[Right]""
+  m:0x10 + b:9
+
+# "Cruise Control" disabled:
+#"xvkbd -text "\[Page_Up]""
+#  m:0x10 + b:11
+#"xvkbd -text "\[Page_Down]""
+#  m:0x10 + b:12
+
+# "Cruise Control" enabled:
+# Work-around extra events
+"/usr/bin/click 4"
+ m:0x10 + b:11
+"/usr/bin/click 5"
+ m:0x10 + b:12
+
+# Application-Switch button
+# A-Tab doesn't work
+# Use it as another Forward for now
+"xvkbd -text "\[Alt_L]\[Right]""
+  m:0x10 + b:10

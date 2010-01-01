@@ -1,0 +1,67 @@
+Xcursor.theme: Vanilla-DMZ
+Xcursor.size:  8
+
+xcalendar*firstDay: 1
+
+Xft.dpi: 96.0
+Xft.hinting: true
+Xft.hintstyle: hintfull
+Xft.autohint: true
+Xft.antialias: true
+Xft.rgba: rgb
+
+UXTerm*font: -*-terminus-medium-r-normal-*-14-*-*-*-*-*-iso10646-1
+UXTerm*boldFont: -*-terminus-bold-r-normal-*-14-*-*-*-*-*-iso10646-1
+UXTerm*saveLines: 65535
+UXTerm*termName: uxterm
+UXTerm*scrollBar: false
+UXTerm*geometry: 130x40
+UXTerm*background: #222222
+UXTerm*foreground: #9DAAAC
+UXTerm*cursorColor: grey
+
+UXTerm*color0:      #000000
+UXTerm*color1:      #9e1828
+UXTerm*color2:      #aece92
+UXTerm*color3:      #968a38
+UXTerm*color4:      #414171
+UXTerm*color5:      #963c59
+UXTerm*color6:      #418179
+UXTerm*color7:      #bebebe
+UXTerm*color8:      #666666
+UXTerm*color9:      #cf6171
+UXTerm*color10:     #c5f779
+UXTerm*color11:     #fff796
+UXTerm*color12:     #4186be
+UXTerm*color13:     #cf9ebe
+UXTerm*color14:     #71bebe
+UXTerm*color15:     #ffffff
+
+! URxvt*font:          xft:DejaVu Sans Mono:pixelsize=12:antialias=true:autohinting=true
+! URxvt*boldFont:      xft:DejaVu Sans Mono:pixelsize=12:bold:antialias=true:autohinting=true
+URxvt*font: -*-terminus-medium-r-normal-*-14-*-*-*-*-*-iso10646-1
+URxvt*boldFont: -*-terminus-bold-r-normal-*-14-*-*-*-*-*-iso10646-1
+URxvt*scrollBar:     false
+URxvt*saveLines:     65535
+URxvt*geometry:      130x40
+URxvt*background:    #222222
+URxvt*foreground:    #9DAAAC
+URxvt*cursorColor:   grey
+
+URxvt*color0:      #000000
+URxvt*color1:      #9e1828
+URxvt*color2:      #aece92
+URxvt*color3:      #968a38
+URxvt*color4:      #414171
+URxvt*color5:      #963c59
+URxvt*color6:      #418179
+URxvt*color7:      #bebebe
+URxvt*color8:      #666666
+URxvt*color9:      #cf6171
+URxvt*color10:     #c5f779
+URxvt*color11:     #fff796
+URxvt*color12:     #4186be
+URxvt*color13:     #cf9ebe
+URxvt*color14:     #71bebe
+URxvt*color15:     #ffffff
+
