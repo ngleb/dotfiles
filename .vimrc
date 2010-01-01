@@ -73,6 +73,7 @@ if has('gui')
     set guioptions-=m
     " Шрифт для gui-версии
     set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
+    "set guifont=Droid\ Sans\ Mono\ 10
 end
 
 " Включить посдветку синтаксиса

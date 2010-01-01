@@ -1,19 +1,13 @@
 include "/home/b3nd3r/.themes/Rezlooks-clear/gtk-2.0/gtkrc"
 
 style "user-font" {
-	font_name = "Bitstream Vera Sans 8"
+	font_name = "DejaVu Sans 8"
 }
 
 widget_class "*" style "user-font"
 
-gtk-font-name="Bitstream Vera Sans 8"
-
+gtk-font-name="DejaVu Sans 8"
 gtk-theme-name  = "Rezlooks-clear"
 gtk-icon-theme-name = "Tango"
-
-gtk-xft-antialias = 1
-gtk-xft-hinting = 1
-gtk-xft-hintstyle = "hintfull"
-gtk-xft-rgba = "rgb"
 
 include "/home/b3nd3r/.gtkrc.mine"
