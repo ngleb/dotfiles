@@ -33,19 +33,19 @@ set scrolloff=7
 set wrap
 set linebreak
 
-" Показывать положение курсора, номер строки, вводимую команду, всегда показывать статусную строку
+" Показывать положение курсора
 set ruler
+" Показывать номер строки
 set number
+" Отображать выполняемую команду
 set showcmd
+" Всегда показывать строки
 set laststatus=2
 set statusline=%<%f%h%m%r%=format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B\ %l,%c%V\ %P
 
-" Таб-символ как точка
-set listchars=tab:··
-set list
-
-" Не делать бэкапы и свап-файлы
+" Отключаем создание бэкапов
 set nobackup
+" Отключаем создание swap файлов
 set noswapfile
 
 " Не выгружать буфер, когда переключаемся на другой
@@ -65,10 +65,10 @@ if has('gui')
     " Отключить меню
     set guioptions-=m
     " Шрифт для gui-версии
-    set guifont=Consolas\ 10
+    set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
 end
 
-" Посдветка синтаксиса
+" Включить посдветку синтаксиса
 syntax on
 
 " Enable filetype settings
@@ -76,7 +76,7 @@ filetype on
 filetype plugin on
 filetype indent on
 
-" Отключить автоматическое комментирование
+" Отключить автоматическое комментирование (не работает)
 set formatoptions-=ro
 set fo+=cr
 
@@ -94,10 +94,17 @@ function! RestoreFileEncodings()
     unlet b:myfileencodingsbak
 endfunction
 
-" .NFO specific
+" .NFO specific (кодировка для .nfo файлов)
 au BufReadPre *.nfo call SetFileEncodings('cp437')|set ambiwidth=single
 au BufReadPost *.nfo call RestoreFileEncodings()
 
-" Visualizing tabs
-" syntax match Tab /\t/
-" hi Tab gui=underline guifg=blue ctermbg=blue
+" Включить подсветку невидимых символов
+setlocal list
+" Настройка подсветки невидимых символов
+setlocal listchars=tab:·\ ,trail:·
+" highlight trailing spaces
+:au BufNewFile,BufRead * let b:mtrailingws=matchadd('ErrorMsg', '\s\+$', -1)
+" hightlight long lines
+":au BufWinEnter * let w:m1=matchadd('Search', '\%<81v.\%>77v', -1)
+":au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+
