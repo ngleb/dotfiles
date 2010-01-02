@@ -14,6 +14,6 @@ xkbcomp $HOME/.xkb.my $DISPLAY &> /dev/null &
 xrdb -load ~/.Xdefaults &> /dev/null &
 xbindkeys &> /dev/null &
 
-exec $DEFAULTWM &> /dev/null & wmpid=$! 
+exec $DEFAULTWM &> ~/.ion3/error.log & wmpid=$!
     stalonetray &> /dev/null &
 wait $wmpid
