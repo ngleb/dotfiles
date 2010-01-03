@@ -10,10 +10,10 @@ export GTK2_RC_FILES="/home/b3nd3r/.gtkrc-2.0"
 #export QT_IM_MODULE=uim
 #export XMODIFIERS=@im=uim
 
-xkbcomp $HOME/.xkb.my $DISPLAY &> /dev/null &
+xkbcomp $HOME/.xkb.my $DISPLAY &> ~/my/logs/xkbcomp.log &
 xrdb -load ~/.Xdefaults &> /dev/null &
-xbindkeys &> /dev/null &
+xbindkeys &> ~/my/logs/xbindkeys.log &
 
-exec $DEFAULTWM &> ~/.ion3/error.log & wmpid=$!
-    stalonetray &> /dev/null &
+exec $DEFAULTWM &> ~/my/logs/ion3.log & wmpid=$!
+    stalonetray &> ~/my/logs/stalonetray.log &
 wait $wmpid
