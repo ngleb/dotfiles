@@ -6,6 +6,8 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[0
 # make less more friendly for non-text input files
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
+export EDITOR=/usr/bin/vim
+
 # Options
 set show-all-if-ambiguous on
 
@@ -48,6 +50,10 @@ alias ls='ls --color=auto'
 alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
+
+alias tmnt='mount -t'
+alias myip='curl icanhazip.com'
+alias futurama='curl -Is slashdot.org | egrep \'^X-(F|B|L)\' | cut -d \- -f 2'
 
 # functions
 
