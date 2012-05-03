@@ -1,7 +1,20 @@
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+Bundle 'git://git.wincent.com/command-t.git'
+Bundle 'bufexplorer.zip'
+
+filetype plugin on
+filetype indent on
+
 set tabstop=4
 set shiftwidth=4
-set ai
-set si
+set autoindent
+set smartindent
 set wrap
 
 if has("gui_running")
@@ -9,9 +22,6 @@ if has("gui_running")
 	colorscheme desert
 	set nu
 endif
-
-filetype plugin on
-filetype indent on
 
 set nobackup
 set noswapfile
