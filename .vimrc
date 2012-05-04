@@ -10,7 +10,7 @@ Bundle 'bufexplorer.zip'
 
 filetype plugin on
 filetype indent on
-syntax enable
+syntax on
 
 scriptencoding utf-8
 set encoding=utf-8
