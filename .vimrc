@@ -7,6 +7,9 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'git://git.wincent.com/command-t.git'
 Bundle 'bufexplorer.zip'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
 
 filetype plugin on
 filetype indent on
@@ -40,7 +43,8 @@ if has("gui")
 	set guioptions-=m " menu
 	set guifont=DejaVu\ Sans\ Mono\ 10
 	set cursorline
-	colorscheme desert
+	set background=dark
+	colorscheme solarized
 endif
 
 set nobackup
@@ -79,3 +83,16 @@ au BufReadPost *.nfo call RestoreFileEncodings()
 setlocal list
 setlocal listchars=tab:·\ ,trail:·
 :au BufNewFile,BufRead * let b:mtrailingws=matchadd('ErrorMsg', '\s\+$', -1)
+
+" Command T options (dynamicly when ruby is avaiable)
+let g:CommandTMaxHeight = 10
+
+if has('ruby')
+	if has('unix')
+		nnoremap <silent><C-t> :CommandT<CR>
+	else
+		nnoremap <silent><M-t> :CommandT<CR>
+	endif
+
+	" Leader commands
+	nnoremap <leader>t :CommandT<CR>
