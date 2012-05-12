@@ -11,6 +11,8 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 
+set autoread
+
 filetype plugin on
 filetype indent on
 syntax on
@@ -64,6 +66,28 @@ set fo+=cr
 set fileencodings=utf-8,cp1251,koi8-r,cp866
 set fileformats=unix,dos,mac
 
+" Leader commands
+
+" Edit .vimrc with \v
+nmap <silent><leader>v :e ~/.vimrc<CR>
+
+" Window movements
+nmap <silent><C-h> :wincmd h<CR>
+nmap <silent><C-j> :wincmd j<CR>
+nmap <silent><C-k> :wincmd k<CR>
+nmap <silent><C-l> :wincmd l<CR>
+" Previous window
+nmap <silent><C-p> :windmd p<CR>
+" Equal size windows
+nmap <silent><leader>w= :wincmd =<CR>
+" Swap windows
+nmap <silent><leader>wx :wincmd x<CR>
+
+" Window splitting
+nmap <silent><leader>sh :split<CR>
+nmap <silent><leader>sv :vsplit<CR>
+nmap <silent><leader>sc :close<CR>
+
 " Common code for encodings
 function! SetFileEncodings(encodings)
     let b:myfileencodingsbak=&fileencodings
@@ -96,3 +120,4 @@ if has('ruby')
 
 	" Leader commands
 	nnoremap <leader>t :CommandT<CR>
+endif
