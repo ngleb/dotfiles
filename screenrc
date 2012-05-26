@@ -1,0 +1,26 @@
+# encoding
+defutf8 on
+encoding UTF-8
+
+# term setup
+term xterm-256color
+
+# colors setup
+attrcolor b ".I"
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+defbce on
+
+# status line
+hardstatus off
+caption always ' %{-b dd}%-w%{cd}%n* %t%{-}%+w %{cd}%-=(%l) %d/%m %c%{-} '
+
+# behavior
+startup_message off
+autodetach on
+vbell off
+defscrollback 10000
+
+screen -t htop 0 htop
+screen -t bash 1 bash
+screen -t bash 2 bash
+screen -t mc 3 mc
