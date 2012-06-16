@@ -77,7 +77,7 @@ nmap <silent><C-j> :wincmd j<CR>
 nmap <silent><C-k> :wincmd k<CR>
 nmap <silent><C-l> :wincmd l<CR>
 " Previous window
-nmap <silent><C-p> :windmd p<CR>
+nmap <silent><C-p> :wincmd p<CR>
 " Equal size windows
 nmap <silent><leader>w= :wincmd =<CR>
 " Swap windows
