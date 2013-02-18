@@ -22,6 +22,8 @@ alias mkdir='mkdir -p -v'
 alias nano='nano -w'
 alias ping='ping -c 5'
 alias ..='cd ..'
+alias sudo='sudo env PATH=$PATH'
+alias nmrestart='pkill nm-applet && nm-applet'
 
 # new commands
 alias da='date "+%A, %B %d, %Y [%T]"'
@@ -100,3 +102,17 @@ extract() {
 
     return $e
 }
+
+# Set the title of a Terminal window
+function settitle() {
+	if [ -n "$STY" ] ; then
+		echo "Setting screen titles to $@"
+		printf "\033k%s\033\\" "$@"
+		screen -X eval "at \\# title $@" "shelltitle $@"
+	else
+		printf "\033]0;%s\007" "$@"
+	fi
+}
+
+alias android-connect="mtpfs -o allow_other /media/kirokko/SonyXperiaU"
+alias android-disconnect="fusermount -u /media/kirokko/SonyXperiaU"

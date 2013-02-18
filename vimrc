@@ -4,12 +4,20 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+" github plugins
 Bundle 'gmarik/vundle'
-Bundle 'git://git.wincent.com/command-t.git'
-Bundle 'bufexplorer.zip'
+"Bundle 'wincent/Command-T'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
+Bundle 'majutsushi/tagbar'
+
+" vim-scripts plugins
+Bundle 'bufexplorer.zip'
+Bundle 'Command-T'
+
+" other sources plugins
+Bundle 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
 
 set autoread
 
@@ -29,7 +37,7 @@ set smartindent
 set wrap
 set linebreak
 set number
-set ruler
+set noruler
 set showcmd
 set laststatus=2
 set statusline=%<%f%h%m%r%=format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B\ %l,%c%V\ %P
@@ -47,6 +55,7 @@ if has("gui")
 	set cursorline
 	set background=dark
 	colorscheme solarized
+	set lines=40 columns=120
 endif
 
 set nobackup
@@ -87,6 +96,8 @@ nmap <silent><leader>wx :wincmd x<CR>
 nmap <silent><leader>sh :split<CR>
 nmap <silent><leader>sv :vsplit<CR>
 nmap <silent><leader>sc :close<CR>
+
+nmap <F8> :TagbarToggle<CR>
 
 " Common code for encodings
 function! SetFileEncodings(encodings)
