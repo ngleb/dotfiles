@@ -113,6 +113,3 @@ function settitle() {
 		printf "\033]0;%s\007" "$@"
 	fi
 }
-
-alias android-connect="mtpfs -o allow_other /media/kirokko/SonyXperiaU"
-alias android-disconnect="fusermount -u /media/kirokko/SonyXperiaU"
