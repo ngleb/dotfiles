@@ -21,9 +21,10 @@ subfont-osd-scale=3
 subfont-text-scale=4
 
 # audio
-softvol=yes
-softvol-max=300
-volstep=1
+ao=alsa
+#softvol=no
+#softvol-max=300
+#volstep=1
 
 # other
 stop-xscreensaver=yes
