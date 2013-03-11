@@ -26,3 +26,4 @@ screen -t htop 0 htop
 screen -t bash 1 bash
 screen -t bash 2 bash
 screen -t mc 3 mc
+select 1
