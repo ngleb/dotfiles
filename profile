@@ -1,3 +1,3 @@
-export PATH=${PATH}:/usr/local/texlive/2012/bin/x86_64-linux
-export MANPATH=${MANPATH}:/usr/local/texlive/2012/texmf/doc/man
-export INFOPATH=${INFOPATH}:/usr/local/texlive/2012/texmf/doc/info
+PATH=/usr/local/texlive/2013/bin/x86_64-linux:$PATH; export PATH
+MANPATH=/usr/local/texlive/2013/texmf-dist/doc/man:$MANPATH; export MANPATH
+INFOPATH=/usr/local/texlive/2013/texmf-dist/doc/info:$INFOPATH; export INFOPATH

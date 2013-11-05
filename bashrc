@@ -8,6 +8,7 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[1;32m\]\$\[\e[m\] \[\e[0m\]'
+export WINEARCH=win32
 
 shopt -s checkwinsize
 shopt -s extglob

@@ -1,31 +1,33 @@
 cache=16384
 
 # video
-vo=vaapi
+#vo=vaapi
+#va=vaapi
 #vo=xv
-#lavdopts=fast=1:threads=4
+#lavdopts=threads=2
 
 # subtitles
 subcp=enca:ru:cp1251
-nofontconfig=yes
-#fontconfig=yes
+#nofontconfig=yes
+fontconfig=yes
 #embeddedfonts=yes
-#ass=yes
-#ass-color=ffff0000
-#ass-border-color=00000000
-#ass-font-scale=1.3
-spuaa=4
-subfont-autoscale=3
-subfont-blur=2
-subfont-osd-scale=3
-subfont-text-scale=4
+ass=yes
+ass-color=ffff0000
+ass-border-color=00000000
+ass-font-scale=1.5
+#spuaa=4
+#subfont-autoscale=3
+#subfont-blur=2
+#subfont-osd-scale=3
+#subfont-text-scale=4
 
 # audio
 ao=pulse
-#softvol=no
-#softvol-max=300
-#volstep=1
+softvol=yes
+softvol-max=200
+volstep=2
 
 # other
 stop-xscreensaver=yes
 geometry=50%:50%
+heartbeat-cmd="xscreensaver-command -deactivate >&- 2>&- &"
