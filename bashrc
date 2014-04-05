@@ -16,7 +16,6 @@ shopt -s extglob
 # modified commands
 alias diff='colordiff'              # requires colordiff package
 alias grep='grep --color=auto'
-alias more='less'
 alias df='df -h'
 alias du='du -c -h'
 alias mkdir='mkdir -p -v'
@@ -54,7 +53,7 @@ alias chgrp='chgrp --preserve-root'
 
 # apt commands
 alias update="sudo apt-get update"
-alias upgrade="sudo apt-get upgrade"
+alias upgrade="sudo apt-get dist-upgrade"
 
 man() {
 	env \

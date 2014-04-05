@@ -45,17 +45,20 @@ set statusline=%<%f%h%m%r%=format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&
 set scrolljump=7
 set scrolloff=7
 
-if has("gui")
+if has("gui_running")
 	set guioptions-=T " toolbar
 	set guioptions+=c " gui boxes
 	set guioptions-=r " scrollbar
 	set guioptions-=e " tabs
 	set guioptions-=m " menu
 	set guifont=DejaVu\ Sans\ Mono\ 10
-	set cursorline
+	"set cursorline
 	set background=dark
 	colorscheme solarized
 	set lines=40 columns=120
+else
+	set background=dark
+	colorscheme default
 endif
 
 set nobackup
@@ -115,9 +118,11 @@ au BufReadPost *.nfo call RestoreFileEncodings()
 
 " options for invisible symbols like space at the end of line
 " or tabs
-setlocal list
-setlocal listchars=tab:·\ ,trail:·
-:au BufNewFile,BufRead * let b:mtrailingws=matchadd('ErrorMsg', '\s\+$', -1)
+if has("gui_running")
+	setlocal list
+	setlocal listchars=tab:·\ ,trail:·
+	:au BufNewFile,BufRead * let b:mtrailingws=matchadd('ErrorMsg', '\s\+$', -1)
+endif
 
 " Command T options (dynamicly when ruby is avaiable)
 let g:CommandTMaxHeight = 10
