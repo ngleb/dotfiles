@@ -1,28 +1,27 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
 
 " github plugins
-Bundle 'gmarik/vundle'
-"Bundle 'wincent/Command-T'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
-Bundle 'majutsushi/tagbar'
+Plugin 'gmarik/Vundle.vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'majutsushi/tagbar'
 
 " vim-scripts plugins
-Bundle 'bufexplorer.zip'
-Bundle 'Command-T'
+Plugin 'bufexplorer.zip'
+Plugin 'Command-T'
 
 " other sources plugins
-Bundle 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
+Plugin 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
+call vundle#end()
 
-set autoread
+" set autoread
 
-filetype plugin on
-filetype indent on
+filetype plugin indent on
 syntax on
 
 scriptencoding utf-8
