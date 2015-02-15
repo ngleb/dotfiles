@@ -43,6 +43,7 @@ alias pg='ps -Af | grep $1'         # requires an argument (note: /usr/bin/pg is
 alias qdl='wget -U QuickTime/7.6.4 '
 alias mpvh='mpv --profile=hwd'
 alias mpvo='mpv --profile=hwdo'
+alias spkg='dpkg -l | grep $1'
 
 # ls
 alias ls='ls -hF --color=auto'
