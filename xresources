@@ -32,7 +32,7 @@ xterm*VT100.geometry: 120x40
 xterm*metaSendsEscape: true
 XTerm*utf8: 1
 xterm*locale: true
-!xterm*termName: xterm-256color
+xterm*termName: xterm-256color
 xterm*selectToClipboard: true
 *VT100.colorBDMode:     true
 *VT100.colorBD:         red
