@@ -1,23 +1,23 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
+"set rtp+=~/.vim/bundle/Vundle.vim/
+"call vundle#begin()
 
 " github plugins
-Plugin 'gmarik/Vundle.vim'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'majutsushi/tagbar'
+"Plugin 'gmarik/Vundle.vim'
+"Plugin 'altercation/vim-colors-solarized'
+"Plugin 'scrooloose/nerdcommenter'
+"Plugin 'scrooloose/nerdtree'
+"Plugin 'majutsushi/tagbar'
 
 " vim-scripts plugins
-Plugin 'bufexplorer.zip'
-Plugin 'Command-T'
+"Plugin 'bufexplorer.zip'
+"Plugin 'Command-T'
 
 " other sources plugins
-Plugin 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
-call vundle#end()
+"Plugin 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
+"call vundle#end()
 
 " set autoread
 
@@ -50,10 +50,10 @@ if has("gui_running")
 	set guioptions-=r " scrollbar
 	set guioptions-=e " tabs
 	set guioptions-=m " menu
-	set guifont=DejaVu\ Sans\ Mono\ 10
+	set guifont=Consolas\ 10
 	"set cursorline
 	set background=dark
-	colorscheme solarized
+	colorscheme default 
 	set lines=40 columns=120
 else
 	set background=dark
