@@ -53,7 +53,7 @@ if has("gui_running")
 	set guifont=Consolas\ 10
 	"set cursorline
 	set background=dark
-	colorscheme default 
+	colorscheme desert
 	set lines=40 columns=120
 else
 	set background=dark
@@ -115,13 +115,18 @@ endfunction
 au BufReadPre *.nfo call SetFileEncodings('cp437')|set ambiwidth=single
 au BufReadPost *.nfo call RestoreFileEncodings()
 
-" options for invisible symbols like space at the end of line
-" or tabs
-if has("gui_running")
-	setlocal list
-	setlocal listchars=tab:·\ ,trail:·
-	:au BufNewFile,BufRead * let b:mtrailingws=matchadd('ErrorMsg', '\s\+$', -1)
-endif
+" Highlight anything exceeding 80 characters
+:au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+
+" Highlight trailing spaces
+:au BufNewFile,BufRead * let b:mtrailingws=matchadd('ErrorMsg', '\s\+$', -1)
+
+" Highlight tabs between spaces
+:au BufNewFile,BufRead * let b:mtabbeforesp=matchadd('ErrorMsg', '\v(\t+)\ze( +)', -1)
+:au BufNewFile,BufRead * let b:mtabaftersp=matchadd('ErrorMsg', '\v( +)\zs(\t+)', -1)
+
+" Disable syntax highlight on files bigger than 512kB
+:au BufReadPost * if getfsize(bufname("%")) > 524288 | set syntax= | endif
 
 " Command T options (dynamicly when ruby is avaiable)
 let g:CommandTMaxHeight = 10
