@@ -50,7 +50,7 @@ if has("gui_running")
 	set guioptions-=r " scrollbar
 	set guioptions-=e " tabs
 	set guioptions-=m " menu
-	set guifont=Meslo\ LG\ S\ 11
+	set guifont=Hack\ 10
 	"set cursorline
 	set background=dark
 	colorscheme desert
