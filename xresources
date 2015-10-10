@@ -26,9 +26,9 @@ xterm*color14:   #37c3d6
 xterm*color7:    #A2A2A2
 xterm*color15:   #f9f9f9
 
-xterm*faceName: xft:Consolas:size=10:antialias=true
+xterm*faceName: xft:Hack:size=10:antialias=true
 xterm*borderWidth: 0
-xterm*VT100.geometry: 120x40
+xterm*VT100.geometry: 100x36
 xterm*metaSendsEscape: true
 XTerm*utf8: 1
 xterm*locale: true
