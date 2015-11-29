@@ -24,6 +24,8 @@ filetype off
 filetype plugin indent on
 syntax on
 
+set viminfo="NONE"
+
 scriptencoding utf-8
 set encoding=utf-8
 set termencoding=utf-8
