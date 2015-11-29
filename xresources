@@ -28,7 +28,7 @@ xterm*color15:   #f9f9f9
 
 xterm*faceName: xft:Hack:size=10:antialias=true
 xterm*borderWidth: 0
-xterm*VT100.geometry: 100x36
+xterm*VT100.geometry: 140x50
 xterm*metaSendsEscape: true
 XTerm*utf8: 1
 xterm*locale: true
@@ -39,3 +39,35 @@ xterm*selectToClipboard: true
 *VT100.colorULMode:     true
 *VT100.colorUL:         cyan
 *VT100.veryBoldColors: 6
+
+urxvt*background: #282828
+urxvt*foreground: #A2A2A2
+urxvt*cursorColor: #0F75BD
+!Black
+urxvt*color0:    #555555
+urxvt*color8:    #888888
+!Red
+urxvt*color1:    #9C3528
+urxvt*color9:    #d64937
+!Green
+urxvt*color2:    #61BC3B
+urxvt*color10:   #86DF5D
+!yellow
+urxvt*color3:    #F3B43A
+urxvt*color11:   #FDD75A
+!blue
+urxvt*color4:    #0D68A8
+urxvt*color12:   #0F75BD
+!Magenta
+urxvt*color5:    #744560
+urxvt*color13:   #9E5E83
+!Cyan
+urxvt*color6:    #288e9c
+urxvt*color14:   #37c3d6
+!White
+urxvt*color7:    #A2A2A2
+urxvt*color15:   #f9f9f9
+
+urxvt*font: xft:Hack:size=10
+urxvt.letterSpace: -1
+urxvt.scrollBar: false

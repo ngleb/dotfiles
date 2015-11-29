@@ -116,10 +116,10 @@ au BufReadPre *.nfo call SetFileEncodings('cp437')|set ambiwidth=single
 au BufReadPost *.nfo call RestoreFileEncodings()
 
 " Highlight anything exceeding 80 characters
-:au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+" :au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 
 " Highlight trailing spaces
-:au BufNewFile,BufRead * let b:mtrailingws=matchadd('ErrorMsg', '\s\+$', -1)
+" :au BufNewFile,BufRead * let b:mtrailingws=matchadd('ErrorMsg', '\s\+$', -1)
 
 " Highlight tabs between spaces
 :au BufNewFile,BufRead * let b:mtabbeforesp=matchadd('ErrorMsg', '\v(\t+)\ze( +)', -1)
