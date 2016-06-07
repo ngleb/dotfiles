@@ -1,4 +1,4 @@
-# .bashrc
+# -*- mode: sh -*-
 
 if [[ $- != *i* ]] ; then
 	# Shell is non-interactive.  Be done now!
@@ -23,6 +23,8 @@ shopt -s cmdhist
 shopt -s cdspell # correct minor spelling errors in cd
 shopt -s checkwinsize # check window size after each command
 shopt -s extglob
+
+export LIBVIRT_DEFAULT_URI="qemu:///system"
 
 alias cdiff='colordiff'              # requires colordiff package
 alias grep='grep --color=auto'

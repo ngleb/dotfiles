@@ -1,4 +1,3 @@
-Config files
-New Commit
-New line
-New test line
+# README
+
+Configuration.
