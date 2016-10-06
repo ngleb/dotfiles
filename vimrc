@@ -22,16 +22,20 @@ set laststatus=2
 set scrolljump=7
 set scrolloff=7
 
+if &term == "screen"
+    set t_Co=256
+endif
+
 if has("gui_running")
 	set guioptions-=T " toolbar
 	set guioptions+=c " gui boxes
 	set guioptions-=r " scrollbar
 	set guioptions-=e " tabs
 	set guioptions-=m " menu
-	set lines=40 columns=120
+	set lines=60 columns=140
 else
 	set background=dark
-	colorscheme default
+	colorscheme desert
 endif
 
 set nobackup
@@ -96,7 +100,7 @@ au BufReadPost *.nfo call RestoreFileEncodings()
 " :au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 
 " Highlight trailing spaces
-" :au BufNewFile,BufRead * let b:mtrailingws=matchadd('ErrorMsg', '\s\+$', -1)
+:au BufNewFile,BufRead * let b:mtrailingws=matchadd('ErrorMsg', '\s\+$', -1)
 
 " Highlight tabs between spaces
 :au BufNewFile,BufRead * let b:mtabbeforesp=matchadd('ErrorMsg', '\v(\t+)\ze( +)', -1)
