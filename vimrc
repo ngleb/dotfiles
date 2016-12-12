@@ -100,11 +100,11 @@ au BufReadPost *.nfo call RestoreFileEncodings()
 " :au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 
 " Highlight trailing spaces
-:au BufNewFile,BufRead * let b:mtrailingws=matchadd('ErrorMsg', '\s\+$', -1)
+":au BufNewFile,BufRead * let b:mtrailingws=matchadd('ErrorMsg', '\s\+$', -1)
 
 " Highlight tabs between spaces
-:au BufNewFile,BufRead * let b:mtabbeforesp=matchadd('ErrorMsg', '\v(\t+)\ze( +)', -1)
-:au BufNewFile,BufRead * let b:mtabaftersp=matchadd('ErrorMsg', '\v( +)\zs(\t+)', -1)
+":au BufNewFile,BufRead * let b:mtabbeforesp=matchadd('ErrorMsg', '\v(\t+)\ze( +)', -1)
+":au BufNewFile,BufRead * let b:mtabaftersp=matchadd('ErrorMsg', '\v( +)\zs(\t+)', -1)
 
 " Disable syntax highlight on files bigger than 512kB
 :au BufReadPost * if getfsize(bufname("%")) > 524288 | set syntax= | endif
