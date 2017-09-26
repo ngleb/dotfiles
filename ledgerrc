@@ -1,0 +1,4 @@
+--strict
+--file ~/Nextcloud/Finance/home.ledger
+--start-of-week monday
+--exchange RUB

@@ -32,7 +32,8 @@ if has("gui_running")
 	set guioptions-=r " scrollbar
 	set guioptions-=e " tabs
 	set guioptions-=m " menu
-	set lines=60 columns=140
+	set lines=50 columns=150
+	set guifont=Source\ Code\ Pro\ 12
 else
 	set background=dark
 	colorscheme desert

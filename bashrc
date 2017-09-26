@@ -14,8 +14,9 @@ ulimit -S -c 0 # no coredumps
 export HISTCONTROL="ignoredumps"
 export HISTIGNORE="&:ls:[bf]g:exit"
 
-HISTSIZE=2500
-HISTFILESIZE=2500
+HISTSIZE=10000
+HISTFILESIZE=10000
+
 shopt -s histappend
 PROMPT_COMMAND='history -a'
 
@@ -23,8 +24,6 @@ shopt -s cmdhist
 shopt -s cdspell # correct minor spelling errors in cd
 shopt -s checkwinsize # check window size after each command
 shopt -s extglob
-
-export LIBVIRT_DEFAULT_URI="qemu:///system"
 
 alias cdiff='colordiff'              # requires colordiff package
 alias grep='grep --color=auto'
@@ -48,5 +47,6 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -I'                    # 'rm -i' prompts for every file
 alias ln='ln -i'
+alias anki='anki -b ~/my/anki'
 
 # end of .bashrc file
