@@ -1,0 +1,26 @@
+# -*- mode: sh -*-
+# /etc/skel/.bash_profile
+
+# This file is sourced by bash for login shells.  The following line
+# runs your .bashrc and is recommended by the bash info pages.
+if [[ -f ~/.bashrc ]] ; then
+	. ~/.bashrc
+fi
+
+function gentoo-sync {
+	/usr/bin/layman -S
+	/usr/bin/emerge --sync
+	if [[ -e /var/cache/eix/portage.eix ]]; then
+		cp -a /var/cache/eix/portage.eix /var/cache/eix/previous.eix;
+	fi
+	/usr/bin/eix-update
+	if [[ -e /var/cache/eix/previous.eix ]]; then
+		/usr/bin/eix-diff
+	fi
+}
+
+function gentoo-update {
+	/usr/bin/emerge -avuDN --with-bdeps=y @world
+}
+
+# .bash_profile ends here
