@@ -11,7 +11,7 @@ function gentoo-sync {
 	/usr/bin/layman -S
 	/usr/bin/emerge --sync
 	if [[ -e /var/cache/eix/portage.eix ]]; then
-		cp -a /var/cache/eix/portage.eix /var/cache/eix/previous.eix;
+		/bin/cp -a /var/cache/eix/portage.eix /var/cache/eix/previous.eix;
 	fi
 	/usr/bin/eix-update
 	if [[ -e /var/cache/eix/previous.eix ]]; then
