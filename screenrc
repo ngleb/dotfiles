@@ -9,7 +9,8 @@ vbell off
 term screen-256color
 
 caption always
-caption string "%w"
+#caption string "%w"
+caption string "%{-b ..}%-w%{+b ..}%n%f*%t%{-}%+w"
 
 escape ``
 
