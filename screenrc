@@ -2,6 +2,8 @@ defscrollback 15000
 
 shell -$SHELL
 
+altscreen on
+
 startup_message off
 msgwait 1
 vbell off
