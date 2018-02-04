@@ -5,20 +5,20 @@ if [[ $- != *i* ]] ; then
 	return
 fi
 
-# # Change the window title of X terminals
-# case ${TERM} in
-# 	[aEkx]term*|rxvt*|gnome*|konsole*|interix)
-# 		PS1='\[\033]0;\u@\h:\w\007\]'
-# 		;;
-# 	screen*)
-# 		PS1='\[\033k\u@\h:\w\033\\\]'
-# 		;;
-# 	*)
-# 		unset PS1
-# 		;;
-# esac
+# Change the window title of X terminals
+case ${TERM} in
+	[aEkx]term*|rxvt*|gnome*|konsole*|interix|screen*)
+		PS1='\[\033]0;\u@\h:\w\007\]'
+		;;
+	# screen*)
+	# 	PS1='\[\033k\u@\h:\w\033\\\]'
+	# 	;;
+	*)
+		unset PS1
+		;;
+esac
 
-PS1='\[\033]0;\u@\h:\w\007\]'
+# PS1='\[\033]0;\u@\h:\w\007\]'
 
 if [[ ${EUID} == 0 ]] ; then
 	PS1+='\[\033[01;31m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\] '
@@ -51,6 +51,7 @@ alias da='date "+%A, %B %d, %Y [%T]"'
 alias hist='history | grep $1'      # requires an argument
 alias qdl='wget -U QuickTime/7.6.4 '
 alias mpvh='mpv --profile=hwd'
+alias dls='cd /media/data/dls'
 alias ls='ls -hF --color=auto'
 alias lr='ls -R'                    # recursive ls
 alias ll='ls -l'
