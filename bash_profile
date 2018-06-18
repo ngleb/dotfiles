@@ -16,4 +16,6 @@ export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/python
 source /usr/bin/virtualenvwrapper.sh
 
+export QT_QPA_PLATFORMTHEME="qt5ct"
+
 # .bash_profile ends here

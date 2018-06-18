@@ -7,7 +7,9 @@ if [[ -f ~/.bashrc ]] ; then
 	. ~/.bashrc
 fi
 
-function gentoo-sync {
+LIVE_EBUILDS="media-sound/deadbeef net-p2p/retroshare dev-python/python-axolotl-curve25519 x11-misc/compton x11-themes/qtstyleplugins media-plugins/deadbeef-fb"
+
+function gentoo-sync () {
 	/usr/bin/layman -S
 	/usr/bin/emerge --sync
 	if [[ -e /var/cache/eix/portage.eix ]]; then
@@ -19,8 +21,16 @@ function gentoo-sync {
 	fi
 }
 
-function gentoo-update {
-	/usr/bin/emerge -avuDN --with-bdeps=y @world
+function gentoo-update () {
+	/usr/bin/emerge -avuDN --with-bdeps=y "$@" @world
 }
 
+function gentoo-update-with-deps () {
+	#/usr/bin/emerge -avuDN --with-bdeps=y --changed-deps=y --exclude "$LIVE_EBUILDS" @world
+    gentoo-update --changed-deps=y --exclude "$LIVE_EBUILDS"
+}
+
+function gentoo-update-no-a () {
+	/usr/bin/emerge -vuDN --with-bdeps=y @world
+}
 # .bash_profile ends here
