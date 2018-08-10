@@ -22,15 +22,11 @@ function gentoo-sync () {
 }
 
 function gentoo-update () {
-	/usr/bin/emerge -avuDN --with-bdeps=y "$@" @world
+	/usr/bin/emerge -vuDN --with-bdeps=y "$@" @world
 }
 
-function gentoo-update-with-deps () {
-	#/usr/bin/emerge -avuDN --with-bdeps=y --changed-deps=y --exclude "$LIVE_EBUILDS" @world
-    gentoo-update --changed-deps=y --exclude "$LIVE_EBUILDS"
+function gentoo-update-full () {
+    gentoo-update -a --changed-deps=y --exclude "$LIVE_EBUILDS $@"
 }
 
-function gentoo-update-no-a () {
-	/usr/bin/emerge -vuDN --with-bdeps=y @world
-}
 # .bash_profile ends here
