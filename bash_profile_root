@@ -11,7 +11,7 @@ LIVE_EBUILDS="media-sound/deadbeef net-p2p/retroshare dev-python/python-axolotl-
 
 function gentoo-sync () {
 	/usr/bin/layman -S
-	/usr/bin/emerge --sync
+	/usr/bin/emerge --sync --quiet
 	if [[ -e /var/cache/eix/portage.eix ]]; then
 		/bin/cp -a /var/cache/eix/portage.eix /var/cache/eix/previous.eix;
 	fi
