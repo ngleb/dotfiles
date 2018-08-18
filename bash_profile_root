@@ -7,11 +7,14 @@ if [[ -f ~/.bashrc ]] ; then
 	. ~/.bashrc
 fi
 
-LIVE_EBUILDS="media-sound/deadbeef net-p2p/retroshare dev-python/python-axolotl-curve25519 x11-misc/compton x11-themes/qtstyleplugins media-plugins/deadbeef-fb"
+LIVE_EBUILDS="media-sound/deadbeef
+              net-p2p/retroshare
+              x11-misc/compton
+              x11-themes/qtstyleplugins
+              media-plugins/deadbeef-fb"
 
 function gentoo-sync () {
-	/usr/bin/layman -S
-	/usr/bin/emerge --sync --quiet
+	/usr/bin/emerge --sync
 	if [[ -e /var/cache/eix/portage.eix ]]; then
 		/bin/cp -a /var/cache/eix/portage.eix /var/cache/eix/previous.eix;
 	fi
