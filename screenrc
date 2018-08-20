@@ -10,8 +10,8 @@ vbell off
 
 term screen-256color
 
-caption always
-caption string "%{-b ..}%-w%{+b bW}%n%f %t%{-}%+w%=%H |%C%a "
+caption always "%{-b ..}%-w%{+b bW}%n%f %t%{-}%+w%=%H |%C%a "
+# hardstatus alwayslastline "%{-b ..}%-w%{+b bW}%n%f %t%{-}%+w%=%H |%C%a "
 
 escape ``
 
