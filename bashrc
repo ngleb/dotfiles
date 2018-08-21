@@ -47,6 +47,7 @@ shopt -s extglob
 alias cdiff='colordiff'              # requires colordiff package
 alias grep='grep --color=auto'
 alias ..='cd ..'
+alias ...='cd ../..'
 alias da='date "+%A, %B %d, %Y [%T]"'
 alias hist='history | grep $1'      # requires an argument
 alias qdl='wget -U QuickTime/7.6.4 '
