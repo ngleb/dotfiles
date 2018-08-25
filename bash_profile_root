@@ -7,11 +7,11 @@ if [[ -f ~/.bashrc ]] ; then
 	. ~/.bashrc
 fi
 
-LIVE_EBUILDS="media-sound/deadbeef
+LIVE_EBUILDS="media-plugins/deadbeef-fb
               net-p2p/retroshare
               x11-misc/compton
               x11-themes/qtstyleplugins
-              media-plugins/deadbeef-fb"
+              media-sound/deadbeef"
 
 function gentoo-sync () {
 	/usr/bin/emerge --sync
@@ -25,11 +25,11 @@ function gentoo-sync () {
 }
 
 function gentoo-update () {
-	/usr/bin/emerge -vuDN --with-bdeps=y "$@" @world
+	/usr/bin/emerge --ask --verbose --update --deep --newuse --with-bdeps=y "$@" @world
 }
 
 function gentoo-update-full () {
-    gentoo-update -a --changed-deps=y --exclude "$LIVE_EBUILDS $@"
+    gentoo-update --changed-deps=y --exclude "$LIVE_EBUILDS $@"
 }
 
 # .bash_profile ends here
