@@ -33,6 +33,10 @@ export HISTIGNORE="&:ls:[bf]g:exit"
 
 set -o noclobber
 
+# bind "set completion-ignore-case on"
+# bind "set completion-map-case on"
+bind "set show-all-if-ambiguous on"
+
 HISTSIZE=10000
 HISTFILESIZE=10000
 
