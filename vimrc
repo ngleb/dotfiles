@@ -32,8 +32,15 @@ if has("gui_running")
 	set guioptions-=r " scrollbar
 	set guioptions-=e " tabs
 	set guioptions-=m " menu
+	set guicursor+=a:blinkon0
 	set lines=50 columns=150
-	set guifont=Source\ Code\ Pro\ 12
+	if has("gui_running")
+  		if has("gui_gtk2")
+		    set guifont=Source\ Code\ Pro\ 12
+  		elseif has("gui_win32")
+           set guifont=Consolas:h12:cANSI
+        endif
+	endif
 else
 	set background=dark
 	colorscheme desert
