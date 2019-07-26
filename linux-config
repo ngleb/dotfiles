@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.14.16-gentoo Kernel Configuration
+# Linux/x86 4.14.24-gentoo Kernel Configuration
 #
 
 #
@@ -3995,8 +3995,6 @@ CONFIG_DEBUG_MEMORY_INIT=y
 # CONFIG_DEBUG_PER_CPU_MAPS is not set
 CONFIG_HAVE_DEBUG_STACKOVERFLOW=y
 CONFIG_DEBUG_STACKOVERFLOW=y
-CONFIG_HAVE_ARCH_KMEMCHECK=y
-# CONFIG_KMEMCHECK is not set
 CONFIG_HAVE_ARCH_KASAN=y
 # CONFIG_KASAN is not set
 CONFIG_ARCH_HAS_KCOV=y
