@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.12.6-gentoo Kernel Configuration
+# Linux/x86 4.12.7-gentoo Kernel Configuration
 #
 
 #
@@ -1192,7 +1192,11 @@ CONFIG_BRIDGE_EBT_NFLOG=m
 # CONFIG_RDS is not set
 # CONFIG_TIPC is not set
 # CONFIG_ATM is not set
-# CONFIG_L2TP is not set
+CONFIG_L2TP=m
+# CONFIG_L2TP_DEBUGFS is not set
+CONFIG_L2TP_V3=y
+CONFIG_L2TP_IP=m
+CONFIG_L2TP_ETH=m
 CONFIG_STP=y
 CONFIG_BRIDGE=y
 CONFIG_BRIDGE_IGMP_SNOOPING=y
@@ -1838,6 +1842,7 @@ CONFIG_PPP_FILTER=y
 CONFIG_PPP_MPPE=m
 # CONFIG_PPP_MULTILINK is not set
 CONFIG_PPPOE=m
+CONFIG_PPPOL2TP=m
 CONFIG_PPP_ASYNC=m
 CONFIG_PPP_SYNC_TTY=m
 # CONFIG_SLIP is not set
