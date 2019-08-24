@@ -56,7 +56,6 @@ alias da='date "+%A, %B %d, %Y [%T]"'
 alias hist='history | grep $1'      # requires an argument
 alias qdl='wget -U QuickTime/7.6.4 '
 alias mpvh='mpv --profile=hwd'
-alias dls='cd /media/data/dls'
 alias ls='ls -hF --color=auto'
 alias lr='ls -R'                    # recursive ls
 alias ll='ls -l'

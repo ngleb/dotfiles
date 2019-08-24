@@ -7,21 +7,11 @@ if [[ -f ~/.bashrc ]] ; then
 	. ~/.bashrc
 fi
 
-LIVE_EBUILDS="media-plugins/deadbeef-fb
-              net-p2p/retroshare
-              x11-misc/compton
-              x11-themes/qtstyleplugins
-              media-sound/deadbeef"
+LIVE_EBUILDS="x11-misc/compton
+              x11-themes/qtstyleplugins"
 
 function gentoo-sync () {
-	/usr/bin/emerge --sync
-	if [[ -e /var/cache/eix/portage.eix ]]; then
-		/bin/cp -a /var/cache/eix/portage.eix /var/cache/eix/previous.eix;
-	fi
-	/usr/bin/eix-update
-	if [[ -e /var/cache/eix/previous.eix ]]; then
-		/usr/bin/eix-diff
-	fi
+	/usr/sbin/emaint sync -a
 }
 
 function gentoo-update () {
@@ -29,7 +19,7 @@ function gentoo-update () {
 }
 
 function gentoo-update-full () {
-    gentoo-update --changed-deps=y --exclude "$LIVE_EBUILDS $@"
+	gentoo-update --changed-deps=y --exclude "$LIVE_EBUILDS $@"
 }
 
 # .bash_profile ends here
