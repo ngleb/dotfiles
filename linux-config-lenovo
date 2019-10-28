@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 5.2.7-gentoo Kernel Configuration
+# Linux/x86 5.2.14-gentoo Kernel Configuration
 #
 
 #
@@ -596,7 +596,6 @@ CONFIG_FIRMWARE_MEMMAP=y
 CONFIG_DMIID=y
 CONFIG_DMI_SYSFS=m
 CONFIG_DMI_SCAN_MACHINE_NON_EFI_FALLBACK=y
-# CONFIG_ISCSI_IBFT_FIND is not set
 # CONFIG_FW_CFG_SYSFS is not set
 # CONFIG_GOOGLE_FIRMWARE is not set
 CONFIG_EFI_EARLYCON=y
