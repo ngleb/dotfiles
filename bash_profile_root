@@ -7,8 +7,8 @@ if [[ -f ~/.bashrc ]] ; then
 	. ~/.bashrc
 fi
 
-LIVE_EBUILDS="x11-misc/compton
-              x11-themes/qtstyleplugins"
+LIVE_EBUILDS="x11-misc/compton"
+#              x11-themes/qtstyleplugins"
 
 function gentoo-sync () {
 	/usr/sbin/emaint sync -a
@@ -19,7 +19,7 @@ function gentoo-update () {
 }
 
 function gentoo-update-full () {
-	gentoo-update --changed-deps=y --exclude "$LIVE_EBUILDS $@"
+	gentoo-update --changed-deps=y --exclude "$LIVE_EBUILDS" "$@"
 }
 
 # .bash_profile ends here
