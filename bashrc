@@ -35,7 +35,7 @@ set -o noclobber
 
 # bind "set completion-ignore-case on"
 # bind "set completion-map-case on"
-bind "set show-all-if-ambiguous on"
+# bind "set show-all-if-ambiguous on"
 
 HISTSIZE=10000
 HISTFILESIZE=10000
@@ -44,7 +44,7 @@ shopt -s histappend
 PROMPT_COMMAND='history -a'
 
 shopt -s cmdhist
-shopt -s cdspell # correct minor spelling errors in cd
+# shopt -s cdspell # correct minor spelling errors in cd
 shopt -s checkwinsize # check window size after each command
 shopt -s extglob
 
