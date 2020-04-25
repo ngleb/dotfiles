@@ -7,19 +7,16 @@ if [[ -f ~/.bashrc ]] ; then
 	. ~/.bashrc
 fi
 
-LIVE_EBUILDS="x11-misc/compton"
-#              x11-themes/qtstyleplugins"
-
 function gentoo-sync () {
 	/usr/sbin/emaint sync -a
 }
 
 function gentoo-update () {
-	/usr/bin/emerge --ask --verbose --update --deep --newuse --with-bdeps=y "$@" @world
+    /usr/bin/emerge --ask --verbose --update --deep --changed-use --with-bdeps=y "$@" @world
 }
 
 function gentoo-update-full () {
-	gentoo-update --changed-deps=y --exclude "$LIVE_EBUILDS" "$@"
+	gentoo-update --newuse --changed-deps=y "$@"
 }
 
 # .bash_profile ends here
