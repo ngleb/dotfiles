@@ -12,7 +12,11 @@ function gentoo-sync () {
 }
 
 function gentoo-update () {
-    /usr/bin/emerge --ask --verbose --update --deep --changed-use --with-bdeps=y --exclude gentoo-sources "$@" @world
+    /usr/bin/emerge --ask --verbose --update --deep --changed-use --with-bdeps=y "$@" @world
+}
+
+function gentoo-update-no-kernel () {
+    gentoo-update --exluce gentoo-sources
 }
 
 function gentoo-update-full () {
