@@ -6,4 +6,4 @@ export LIBVIRT_DEFAULT_URI="qemu:///system"
 
 # virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/dev/python
+export PROJECT_HOME=$HOME/dev

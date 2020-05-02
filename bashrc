@@ -57,6 +57,4 @@ alias lz='ll -rS'                   # sort by size
 alias lt='ll -rt'                   # sort by date
 alias lm='la | more'
 
-source /usr/bin/virtualenvwrapper.sh
-
 # end of .bashrc file
