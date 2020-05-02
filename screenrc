@@ -1,6 +1,8 @@
-defscrollback 15000
+# -*- mode: conf -*-
 
-# shell $SHELL
+defscrollback 30000
+
+shell $SHELL
 # shell -$SHELL
 
 altscreen on
