@@ -1,6 +1,6 @@
 defscrollback 15000
 
-shell $SHELL
+# shell $SHELL
 # shell -$SHELL
 
 altscreen on
