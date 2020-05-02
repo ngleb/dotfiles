@@ -14,7 +14,7 @@ fi
 
 # virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/my/dev/python
+export PROJECT_HOME=$HOME/dev/python
 source /usr/bin/virtualenvwrapper.sh
 
 # .bash_profile ends here

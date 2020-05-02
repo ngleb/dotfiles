@@ -33,10 +33,6 @@ export HISTIGNORE="&:ls:[bf]g:exit"
 
 set -o noclobber
 
-# bind "set completion-ignore-case on"
-# bind "set completion-map-case on"
-# bind "set show-all-if-ambiguous on"
-
 HISTSIZE=10000
 HISTFILESIZE=10000
 
@@ -44,18 +40,14 @@ shopt -s histappend
 PROMPT_COMMAND='history -a'
 
 shopt -s cmdhist
-# shopt -s cdspell # correct minor spelling errors in cd
 shopt -s checkwinsize # check window size after each command
 shopt -s extglob
 
-alias cdiff='colordiff'              # requires colordiff package
 alias grep='grep --color=auto'
 alias ..='cd ..'
 alias ...='cd ../..'
-alias da='date "+%A, %B %d, %Y [%T]"'
 alias hist='history | grep $1'      # requires an argument
 alias qdl='wget -U QuickTime/7.6.4 '
-alias mpvh='mpv --profile=hwd'
 alias ls='ls -hF --color=auto'
 alias lr='ls -R'                    # recursive ls
 alias ll='ls -l'
