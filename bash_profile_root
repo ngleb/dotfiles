@@ -16,7 +16,7 @@ function gentoo-update () {
 }
 
 function gentoo-update-no-kernel () {
-    gentoo-update --exluce gentoo-sources
+    gentoo-update --exclude gentoo-sources
 }
 
 function gentoo-update-full () {
