@@ -1,3 +1,11 @@
+Xft.dpi:       96
+Xft.antialias: 1
+Xft.rgba:      rgb
+Xft.autohint:  0
+Xft.lcdfilter: lcddefault
+Xft.hinting:   0
+Xft.hintstyle: hintnone
+
 xterm*background: #282828
 xterm*foreground: #A2A2A2
 xterm*cursorColor: #0F75BD
