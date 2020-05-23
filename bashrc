@@ -37,7 +37,7 @@ HISTSIZE=10000
 HISTFILESIZE=10000
 
 shopt -s histappend
-PROMPT_COMMAND='history -a'
+PROMPT_COMMAND='history -a;$PROMPT_COMMAND'
 
 shopt -s cmdhist
 shopt -s checkwinsize # check window size after each command
@@ -56,6 +56,7 @@ alias lx='ll -BX'                   # sort by extension
 alias lz='ll -rS'                   # sort by size
 alias lt='ll -rt'                   # sort by date
 alias lm='la | more'
+alias mpvp='mpv --ao=pulse'
 
 source /usr/bin/virtualenvwrapper_lazy.sh
 
