@@ -95,11 +95,10 @@
 
 (use-package ivy
   :config
-  (setq ivy-use-virtual-buffers t
-        ivy-display-style 'fancy
-        ivy-count-format "(%d/%d) "
-        ivy-initial-inputs-alist nil
-        ivy-do-completion-in-region nil)
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-display-style 'fancy)
+  (setq ivy-count-format "(%d/%d) ")
+  (setq ivy-do-completion-in-region nil)
   (ivy-mode 1))
 
 (use-package counsel
@@ -107,13 +106,15 @@
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
 	     ("C-c j" . counsel-imenu)
-         ("C-x r b" . counsel-bookmark)))
+         ("C-x r b" . counsel-bookmark))
+  :config
+  (setq ivy-initial-inputs-alist nil))
 
 (use-package swiper
   :after ivy
   :commands swiper-isearch
-  :bind (("C-s" . swiper-isearch)
-         ("<f3>" . swiper-isearch)))
+  :bind (("C-s" . swiper-backward)
+         ("<f3>" . swiper-backward)))
 
 (use-package monokai-theme
   :config
