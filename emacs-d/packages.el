@@ -14,7 +14,6 @@
     ivy
     ledger-mode
     monokai-theme
-    smooth-scrolling
     swiper
     use-package
     which-key)

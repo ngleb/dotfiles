@@ -4,10 +4,7 @@
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-(add-to-list 'package-archives
              '("org" . "http://orgmode.org/elpa/") t)
-
 (package-initialize)
 
 (eval-when-compile
@@ -24,8 +21,6 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
-(load (expand-file-name "init-ledger" user-emacs-directory))
-
 (bind-keys
  ("<f1>" . ibuffer)
  ("C-x C-b" . ibuffer)
@@ -41,6 +36,13 @@
 (setq confirm-kill-emacs 'y-or-n-p)
 (setq visible-bell t)
 (setq ring-bell-function 'ignore)
+
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))
+      scroll-conservatively most-positive-fixnum
+      scroll-preserve-screen-position t
+      scroll-margin 0
+      hscroll-margin 1
+      hscroll-step 1)
 
 ;; MULE & encoding setup
 (set-terminal-coding-system 'utf-8)
@@ -72,55 +74,49 @@
       auto-save-interval 200)
 
 (use-package company
-  :bind (("C-<tab>" . company-complete-common-or-cycle)
-	 ("C-M-i" . company-complete-common-or-cycle))
+  :diminish " ❋"
+  :bind(:map company-mode-map
+        ("TAB" . company-indent-or-complete-common)
+        :map company-active-map
+        ("TAB" . company-complete-common-or-cycle)
+        ("<tab>" . company-complete-common-or-cycle))
   :init
-  (setq company-require-match nil)
-  (setq company-idle-delay 0.5)
-  (setq company-tooltip-limit 10)
-  (setq company-minimum-prefix-length 2)
-  (setq company-tooltip-flip-when-above t)
+  (add-hook 'prog-mode-hook 'company-mode)
   :config
-  (add-hook 'prog-mode-hook 'global-company-mode))
+  (setq company-require-match nil
+        company-show-numbers t
+        company-minimum-prefix-length 2
+        company-idle-delay 0.1))
+
+(use-package flycheck)
+
+(use-package ivy
+  :config
+  (setq ivy-use-virtual-buffers t
+        ivy-display-style 'fancy
+        ivy-count-format "(%d/%d) "
+        ivy-initial-inputs-alist nil
+        ivy-do-completion-in-region nil)
+  (ivy-mode 1))
 
 (use-package counsel
   :after ivy
-  :demand t
   :bind (("M-x" . counsel-M-x)
-	 ("C-x C-f" . counsel-find-file)
-	 ("C-c j" . counsel-imenu)
-	 ("C-x r b" . counsel-bookmark)))
-  
-(use-package flycheck
-  :defer 5)
+         ("C-x C-f" . counsel-find-file)
+	     ("C-c j" . counsel-imenu)
+         ("C-x r b" . counsel-bookmark)))
 
-(use-package ivy
-  :demand t
-  :bind ("C-c C-r" . ivy-resume)
-  :custom
-  (ivy-use-virtual-buffers t)
-  (ivy-display-style 'fancy)
-  (ivy-count-format "(%d/%d) ")
-  (ivy-initial-inputs-alist nil)
-  (ivy-do-completion-in-region nil)
-  :config
-  (ivy-mode 1))
+(use-package swiper
+  :after ivy
+  :commands swiper-isearch
+  :bind (("C-s" . swiper-isearch)
+         ("<f3>" . swiper-isearch)))
 
 (use-package monokai-theme
   :config
   (load-theme 'monokai t))
 
-(use-package smooth-scrolling
-  :config
-  (setq smooth-scroll-margin 5)
-  (smooth-scrolling-mode 1))
-
-(use-package swiper
-  :after ivy
-  :commands swiper
-  :bind (("C-s" . swiper)
-	 :map read-expression-map
-	 ("C-r" . counsel-expression-history)))
+(load (expand-file-name "init-ledger" user-emacs-directory))
 
 (find-file (expand-file-name "Nextcloud/Finance/accounts.ledger" my-base-dir))
 (find-file (expand-file-name "Nextcloud/Finance/commands.org" my-base-dir))

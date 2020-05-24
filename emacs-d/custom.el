@@ -5,7 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (use-package solarized-theme smooth-scrolling monokai-theme ledger-mode hydra flycheck-ledger diminish counsel company))))
+    (use-package solarized-theme monokai-theme ledger-mode hydra flycheck-ledger diminish counsel company))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
