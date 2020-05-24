@@ -20,6 +20,7 @@
   (add-hook 'ledger-mode-hook 'my-ledger-mode-hook)
   (add-hook 'ledger-report-mode-hook 'hl-line-mode)
   :config
+  (setq ledger-report-links-in-register nil)
   (setq ledger-report-use-header-line t)
   (setq ledger-report-use-strict t)
 
