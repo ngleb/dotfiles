@@ -73,6 +73,8 @@
       auto-save-timeout 20
       auto-save-interval 200)
 
+(setq calendar-week-start-day 1)
+
 (use-package company
   :diminish " ❋"
   :bind(:map company-mode-map
@@ -118,8 +120,11 @@
 
 (load (expand-file-name "init-ledger" user-emacs-directory))
 
-(find-file (expand-file-name "Nextcloud/Finance/accounts.ledger" my-base-dir))
-(find-file (expand-file-name "Nextcloud/Finance/commands.org" my-base-dir))
-(find-file (expand-file-name "Nextcloud/Finance/home.ledger" my-base-dir))
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (find-file (expand-file-name "Nextcloud/Finance/accounts.ledger" my-base-dir))
+            (find-file (expand-file-name "Nextcloud/Finance/commands.org" my-base-dir))
+            (find-file (expand-file-name "Nextcloud/Finance/home.ledger" my-base-dir))
+            (end-of-buffer)))
 
 ;;; init.el ends here
