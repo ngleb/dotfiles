@@ -60,6 +60,10 @@ set ignorecase
 
 set backspace=indent,eol,start
 
+filetype on
+filetype plugin on
+filetype indent on
+
 set formatoptions-=ro
 set fo+=cr
 
@@ -73,25 +77,6 @@ map Q :qa!<CR>
 
 " Edit .vimrc with \v
 nmap <silent><leader>v :e ~/.vimrc<CR>
-
-" Window movements
-nmap <silent><C-h> :wincmd h<CR>
-nmap <silent><C-j> :wincmd j<CR>
-nmap <silent><C-k> :wincmd k<CR>
-nmap <silent><C-l> :wincmd l<CR>
-" Previous window
-nmap <silent><C-p> :wincmd p<CR>
-" Equal size windows
-nmap <silent><leader>w= :wincmd =<CR>
-" Swap windows
-nmap <silent><leader>wx :wincmd x<CR>
-
-" Window splitting
-nmap <silent><leader>sh :split<CR>
-nmap <silent><leader>sv :vsplit<CR>
-nmap <silent><leader>sc :close<CR>
-
-nmap <F8> :TagbarToggle<CR>
 
 " Common code for encodings
 function! SetFileEncodings(encodings)
