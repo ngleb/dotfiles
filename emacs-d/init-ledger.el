@@ -5,12 +5,21 @@
          ("C-<f7>" . quick-calc)
          ("<f8>"   . my-ledger-report/body)
          ("<f9>"   . ledger-mode-clean-buffer)
+         ("TAB"    . company-indent-or-complete-common)
          :map ledger-report-mode-map
          ("n"      . next-line)
          ("p"      . previous-line))
-
+  :init
+  (defun my-ledger-mode-hook ()
+    (flycheck-mode 1)
+    (company-mode 1)
+    (setq-local company-backends '(company-capf))
+    (setq-local tab-always-indent 'complete)
+    (setq-local completion-ignore-case t)
+    (setq-local ledger-complete-in-steps t))
+  (add-hook 'ledger-mode-hook 'my-ledger-mode-hook)
+  (add-hook 'ledger-report-mode-hook 'hl-line-mode)
   :config
-  (setq ledger-report-links-in-register nil)
   (setq ledger-report-use-header-line t)
   (setq ledger-report-use-strict t)
 
@@ -21,22 +30,11 @@
           ("payee" "%(binary) -f %(ledger-file) --wide register @%(payee)")
           ("account" "%(binary) -f %(ledger-file) --wide register %(account)")
           ("account-last-45days" "%(binary) -f %(ledger-file) --wide -d \"d>=[last 45 days]\" register %(account)")
-          ("assets-short" "%(binary) -f %(ledger-file) --wide balance ^assets and not Foreign and not Reim")
-          ("assets-full" "%(binary) -f %(ledger-file) --wide balance ^assets")
-          ("expenses-monthly" "%(binary) -f %(ledger-file) --period %(month) --aux-date --wide balance ^expenses")
+          ("assets-short" "%(binary) -f %(ledger-file) --wide balance \"^assets:cash.*$|^assets:checking.*$|^assets:savings.*$\"")
+          ("assets-full" "%(binary) -f %(ledger-file) --wide balance ^assets ^liabilities")
+          ("expenses-monthly" "%(binary) -f %(ledger-file) --period %(month) --aux-date --wide balance \"^expenses|^liabilities\"")
           ("budget-monthly" "%(binary) -f %(ledger-file) --period %(month) --aux-date --wide --budget --invert bal ^expenses")
           ("unbudgeted-monthly" "%(binary) -f %(ledger-file) --period %(month) --aux-date --wide --unbudgeted balance ^expenses"))))
-
-  (defun my-ledger-mode-hook ()
-    (flycheck-mode 1)
-    (company-mode 1)
-    (setq pcomplete-ignore-case t)
-    (setq completion-ignore-case t))
-  (add-hook 'ledger-mode-hook 'my-ledger-mode-hook)
-
-  (defun my-ledger-report-mode-hook ()
-    (hl-line-mode 1))
-  (add-hook 'ledger-report-mode-hook 'my-ledger-report-mode-hook)
 
   (defun my-center-buffer (&rest args)
     (recenter))
