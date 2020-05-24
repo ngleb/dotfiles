@@ -24,7 +24,8 @@
 (bind-keys
  ("<f1>" . ibuffer)
  ("C-x C-b" . ibuffer)
- ("<f10>" . save-buffer))
+ ("<f10>" . save-buffer)
+ ("<f4>" . end-of-buffer))
 
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
