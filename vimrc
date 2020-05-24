@@ -18,12 +18,17 @@ set number
 set noruler
 set showcmd
 set laststatus=2
+set wildmenu
 
 set scrolljump=7
 set scrolloff=7
 
 if &term == "screen"
-    set t_Co=256
+	set t_Co=256
+endif
+
+if &diff
+    colorscheme evening
 endif
 
 if has("gui_running")
@@ -33,13 +38,11 @@ if has("gui_running")
 	set guioptions-=e " tabs
 	set guioptions-=m " menu
 	set guicursor+=a:blinkon0
-	set lines=50 columns=150
-	if has("gui_running")
-  		if has("gui_gtk2")
-		    set guifont=Source\ Code\ Pro\ 12
-  		elseif has("gui_win32")
-           set guifont=Consolas:h12:cANSI
-        endif
+	set lines=50 columns=140
+	if has("gui_gtk3")
+		set guifont=IBM\ Plex\ Mono\ 12
+	elseif has("gui_win32")
+		set guifont=Consolas:h12:cANSI
 	endif
 else
 	set background=dark
