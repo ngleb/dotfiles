@@ -37,7 +37,7 @@ HISTSIZE=10000
 HISTFILESIZE=10000
 
 shopt -s histappend
-PROMPT_COMMAND='history -a;$PROMPT_COMMAND'
+PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
 shopt -s cmdhist
 shopt -s checkwinsize # check window size after each command
