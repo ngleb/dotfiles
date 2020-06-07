@@ -11,11 +11,11 @@ set tabstop=4
 set shiftwidth=4
 set autoindent
 set smartindent
+set smarttab
 
 set nowrap
 set linebreak
 set number
-set noruler
 set showcmd
 set laststatus=2
 set wildmenu
@@ -51,7 +51,6 @@ endif
 
 set nobackup
 set noswapfile
-set nowb
 set hidden
 
 set hlsearch
