@@ -31,7 +31,7 @@ ulimit -S -c 0 # no coredumps
 export HISTCONTROL="$HISTCONTROL erasedups:ignoreboth"
 export HISTIGNORE="&:ls:[bf]g:exit"
 
-set -o noclobber
+# set -o noclobber
 
 HISTSIZE=10000
 HISTFILESIZE=10000
