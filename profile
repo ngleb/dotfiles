@@ -1,5 +1,6 @@
 # -*- mode: sh -*-
 
+export MOZ_WEBRENDER=1
 export MOZ_USE_XINPUT2=0
 export MOZ_PLUGIN_PATH="/usr/lib64/nsbrowser/plugins"
 export GPODDER_HOME=$HOME/my/gpodder
