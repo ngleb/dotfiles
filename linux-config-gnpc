@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 5.10.42-gentoo Kernel Configuration
+# Linux/x86 5.10.46-gentoo Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="gcc (Gentoo 10.3.0 p1) 10.3.0"
 CONFIG_CC_IS_GCC=y
@@ -5578,4 +5578,15 @@ CONFIG_GENTOO_LINUX_PORTAGE=y
 CONFIG_GENTOO_LINUX_INIT_SCRIPT=y
 CONFIG_GENTOO_LINUX_INIT_SYSTEMD=y
 # end of Support for init systems, system and service managers
+
+#
+# Enable Kernel Self Protection Project Recommendations
+#
+# CONFIG_GENTOO_KERNEL_SELF_PROTECTION is not set
+
+#
+# Architecture Specific Self Protection Project Recommendations
+#
+# end of Architecture Specific Self Protection Project Recommendations
+# end of Enable Kernel Self Protection Project Recommendations
 # end of Gentoo Linux
