@@ -48,7 +48,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias hist='history | grep $1'      # requires an argument
 alias qdl='wget -U QuickTime/7.6.4 '
-alias ls='ls -hF --color=auto'
+alias ls='ls -hF --color=auto --group-directories-first'
 alias lr='ls -R'                    # recursive ls
 alias ll='ls -l'
 alias la='ll -A'
