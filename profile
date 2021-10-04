@@ -6,6 +6,7 @@ export MOZ_PLUGIN_PATH="/usr/lib64/nsbrowser/plugins"
 export GPODDER_HOME=$HOME/my/gpodder
 export LIBVIRT_DEFAULT_URI="qemu:///system"
 export WINEDLLOVERRIDES=winemenubuilder.exe=d
+export GTK_OVERLAY_SCROLLING=0
 
 # virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
