@@ -18,11 +18,6 @@ case ${TERM} in
 		;;
 esac
 
-if [ -n "$TERMCAP" ] && [ "$TERM" = "screen-256color" ]; then
-    TERMCAP=$(echo "$TERMCAP" | sed -e 's/Co#8/Co#256/g')
-    export TERMCAP
-fi
-
 # PS1='\[\033]0;\u@\h:\w\007\]'
 
 if [[ ${EUID} == 0 ]] ; then
