@@ -7,19 +7,19 @@ if [[ -f ~/.bashrc ]] ; then
 	. ~/.bashrc
 fi
 
-function gentoo-sync () {
+function my-update-bin () {
+	/usr/bin/emerge --ask --verbose --update "www-client/firefox-bin net-im/slack net-im/zoom net-im/signal-desktop-bin net-im/telegram-desktop-bin"
+}
+
+function my-gentoo-sync () {
 	/usr/sbin/emaint sync -a
 }
 
-function gentoo-update () {
+function my-gentoo-update () {
     /usr/bin/emerge --ask --verbose --update --deep --changed-use --with-bdeps=y "$@" @world
 }
 
-function gentoo-update-no-kernel () {
-    gentoo-update --exclude gentoo-sources
-}
-
-function gentoo-update-full () {
+function my-gentoo-update-full () {
 	gentoo-update --newuse --changed-deps=y "$@"
 }
 
