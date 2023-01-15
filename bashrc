@@ -57,7 +57,8 @@ alias lz='ll -rS'                   # sort by size
 alias lt='ll -rt'                   # sort by date
 alias lm='la | more'
 alias mpvp='mpv --ao=pulse'
-alias ytdl='yt-dlp'
+alias mpvn='mpv --profile=norm'
+alias yt='yt-dlp'
 
 source /usr/bin/virtualenvwrapper_lazy.sh
 
