@@ -43,6 +43,8 @@ shopt -s cmdhist
 shopt -s checkwinsize # check window size after each command
 shopt -s extglob
 
+
+alias e='emacsclient -n'
 alias grep='grep --color=auto'
 alias ..='cd ..'
 alias ...='cd ../..'
