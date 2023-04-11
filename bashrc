@@ -7,7 +7,7 @@ fi
 
 # Change the window title of X terminals
 case ${TERM} in
-	[aEkx]term*|rxvt*|gnome*|konsole*|interix|screen*)
+    [aEkx]term*|rxvt*|gnome*|konsole*|interix|screen*|tmux*)
 		PS1='\[\033]0;\u@\h:\w\007\]'
 		;;
 	# screen*)

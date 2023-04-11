@@ -2,6 +2,8 @@
 
 defscrollback 30000
 
+defutf8 on
+
 shell $SHELL
 # shell -$SHELL
 
