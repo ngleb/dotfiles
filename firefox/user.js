@@ -72,7 +72,7 @@ user_pref("userChrome.rounding.square_tab",           false);
 // user_pref("userChrome.theme.proton_color.dark_blue_accent", true);
 // user_pref("userChrome.theme.monospace",                     true);
 
-// user_pref("userChrome.decoration.disable_panel_animate",    true);
+user_pref("userChrome.decoration.disable_panel_animate",    true);
 // user_pref("userChrome.decoration.disable_sidebar_animate",  true);
 // user_pref("userChrome.decoration.panel_button_separator",   true);
 // user_pref("userChrome.decoration.panel_arrow",              true);
