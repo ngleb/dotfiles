@@ -7,6 +7,7 @@ export GPODDER_HOME=$HOME/my/gpodder
 export LIBVIRT_DEFAULT_URI="qemu:///system"
 export WINEDLLOVERRIDES=winemenubuilder.exe=d
 export GTK_OVERLAY_SCROLLING=0
+export PATH=$PATH:/var/lib/flatpak/exports/bin
 
 # virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
