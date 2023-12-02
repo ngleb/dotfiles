@@ -2,17 +2,8 @@
 // userchrome.css usercontent.css activate
 user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 
-// Proton Enabled #127 || Removed at 97 #328 (Maintained for compatibility with ESR)
-user_pref("browser.proton.enabled", true);
-
 // Fill SVG Color
 user_pref("svg.context-properties.content.enabled", true);
-
-// CSS Color Mix - 88 Above
-user_pref("layout.css.color-mix.enabled", true);
-
-// CSS Blur Filter - 88 Above
-user_pref("layout.css.backdrop-filter.enabled", true);
 
 // Restore Compact Mode - 89 Above
 user_pref("browser.compactmode.show", true);
@@ -69,10 +60,15 @@ user_pref("userChrome.rounding.square_tab",           false);
 
 // == Theme Custom Settings ====================================================
 // -- User Chrome --------------------------------------------------------------
+// user_pref("userChrome.theme.private",                       true);
 // user_pref("userChrome.theme.proton_color.dark_blue_accent", true);
 // user_pref("userChrome.theme.monospace",                     true);
+// user_pref("userChrome.theme.transparent.frame",             true);
+// user_pref("userChrome.theme.transparent.menu",              true);
+// user_pref("userChrome.theme.transparent.panel",             true);
+// user_pref("userChrome.theme.non_native_menu",               true); // only for linux
 
-user_pref("userChrome.decoration.disable_panel_animate",    true);
+// user_pref("userChrome.decoration.disable_panel_animate",    true);
 // user_pref("userChrome.decoration.disable_sidebar_animate",  true);
 // user_pref("userChrome.decoration.panel_button_separator",   true);
 // user_pref("userChrome.decoration.panel_arrow",              true);
@@ -95,6 +91,7 @@ user_pref("userChrome.decoration.disable_panel_animate",    true);
 // user_pref("userChrome.hidden.tab_icon.always",              true);
 // user_pref("userChrome.hidden.tabbar",                       true);
 // user_pref("userChrome.hidden.navbar",                       true);
+// user_pref("userChrome.hidden.private_indicator",            true);
 // user_pref("userChrome.hidden.titlebar_container",           true);
 // user_pref("userChrome.hidden.sidebar_header",               true);
 // user_pref("userChrome.hidden.sidebar_header.vertical_tab_only", true);
@@ -179,6 +176,9 @@ user_pref("userChrome.decoration.disable_panel_animate",    true);
 // user_pref("userChrome.tab.close_button_at_hover.always",    true); // Need close_button_at_hover
 // user_pref("userChrome.tab.close_button_at_hover.with_selected", true);  // Need close_button_at_hover
 // user_pref("userChrome.tab.sound_show_label",                true); // Need remove sound_hide_label
+// user_pref("userChrome.tab.container.on_top",                true);
+// user_pref("userChrome.tab.sound_with_favicons.on_center",   true);
+// user_pref("userChrome.tab.selected_bold",                   true);
 
 // user_pref("userChrome.navbar.as_sidebar",                   true);
 
@@ -202,9 +202,11 @@ user_pref("userChrome.decoration.disable_panel_animate",    true);
 // user_pref("userContent.player.ui.twoline",                  true);
 
 // user_pref("userContent.newTab.hidden_logo",                 true);
+// user_pref("userContent.newTab.background_image",            true); // Need wallpaper image to `userContent.css`. :root { --uc-newTab-wallpaper: url("../icons/background_image.png"); }
 
 // user_pref("userContent.page.proton_color.dark_blue_accent", true);
 // user_pref("userContent.page.proton_color.system_accent",    true);
+// user_pref("userContent.page.dark_mode.pdf",                 true);
 // user_pref("userContent.page.monospace",                     true);
 
 // == Theme Default Settings ===================================================
