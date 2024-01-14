@@ -180,6 +180,16 @@
         "force user" = "gleb";
         "force group" = "users";
       };
+      Data = {
+        path = "/media/data";
+        browseable = "yes";
+        "read only" = "yes";
+        "guest ok" = "no";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "gleb";
+        "force group" = "users";
+      };
       Passport = {
         path = "/media/passport";
         browseable = "yes";
