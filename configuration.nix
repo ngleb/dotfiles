@@ -300,7 +300,11 @@
     (deadbeef-with-plugins.override {
       plugins = with pkgs; [ deadbeefPlugins.lyricbar (callPackage ./deadbeef-fb.nix {}) ];
     })
-  #  emacs29-gtk3
+    (emacs29-gtk3.override (args: {
+      withNativeCompilation = true;
+      withTreeSitter = true;
+    }))
+    # emacs29-gtk3
     inputs.agenix.packages.x86_64-linux.default
     git
     aegisub
