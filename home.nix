@@ -122,7 +122,7 @@
 
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs29-gtk3;
+    package = pkgs.emacs29-pgtk;
     extraPackages = epkgs: with epkgs; [
       ag
       avy
@@ -162,7 +162,7 @@
       smex
       sokoban
       treemacs
-      use-package
+#      use-package
       vertico
       w32-browser
       web-mode
