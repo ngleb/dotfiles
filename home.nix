@@ -120,55 +120,55 @@
     yt = "yt-dlp";
   };
 
-  programs.emacs = {
-    enable = true;
-    package = pkgs.emacs29-gtk3;
-    extraPackages = epkgs: with epkgs; [
-      ag
-      avy
-      bind-key
-      cape
-      consult
-      corfu
-      csv-mode
-      deft
-      diminish
-      docker-compose-mode
-      dockerfile-mode
-      elfeed
-      elpy
-      find-file-in-project
-      flycheck
-      flycheck-ledger
-      flyspell-popup
-      js2-mode
-      langtool
-      ledger-mode
-      lsp-mode
-      lsp-pyright
-      lsp-ui
-      magit
-      marginalia
-      markdown-mode
-      nginx-mode
-      nix-mode
-      olivetti
-      orderless
-      org
-      org-contrib
-      ox-clip
-      ox-pandoc
-      smartparens
-      smex
-      sokoban
-      treemacs
-      use-package
-      vertico
-      w32-browser
-      web-mode
-      which-key
-      yasnippet
-      zenburn-theme
-    ];
-  };
+  # programs.emacs = {
+  #   enable = true;
+  #   package = pkgs.emacs29-gtk3;
+  #   extraPackages = epkgs: with epkgs; [
+  #     ag
+  #     avy
+  #     bind-key
+  #     cape
+  #     consult
+  #     corfu
+  #     csv-mode
+  #     deft
+  #     diminish
+  #     docker-compose-mode
+  #     dockerfile-mode
+  #     elfeed
+  #     elpy
+  #     find-file-in-project
+  #     flycheck
+  #     flycheck-ledger
+  #     flyspell-popup
+  #     js2-mode
+  #     langtool
+  #     ledger-mode
+  #     lsp-mode
+  #     lsp-pyright
+  #     lsp-ui
+  #     magit
+  #     marginalia
+  #     markdown-mode
+  #     nginx-mode
+  #     nix-mode
+  #     olivetti
+  #     orderless
+  #     org
+  #     org-contrib
+  #     ox-clip
+  #     ox-pandoc
+  #     smartparens
+  #     smex
+  #     sokoban
+  #     treemacs
+  #     use-package
+  #     vertico
+  #     w32-browser
+  #     web-mode
+  #     which-key
+  #     yasnippet
+  #     zenburn-theme
+  #   ];
+  # };
 }
