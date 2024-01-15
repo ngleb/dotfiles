@@ -54,7 +54,7 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
     ".npmrc".text = ''
-      prefix=/home/gleb/.npm-packages
+      prefix=${config.home.homeDirectory}/.npm-packages
     '';
   };
 
