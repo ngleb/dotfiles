@@ -53,43 +53,18 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+    ".npmrc".text = ''
+      prefix=/home/gleb/.npm-packages
+    '';
   };
 
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. If you don't want to manage your shell through Home
-  # Manager then you have to manually source 'hm-session-vars.sh' located at
-  # either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/gleb/etc/profile.d/hm-session-vars.sh
-  #
   home.sessionVariables = {
     GTK_OVERLAY_SCROLLING = "0";
     WINEDLLOVERRIDES = "winemenubuilder.exe=d";
     LIBVIRT_DEFAULT_URI = "qemu:///system";
-    WORKON_HOME = "$HOME/.virtualenvs";
-    PROJECT_HOME = "$HOME/dev";
-
-    NPM_CONFIG_USERCONFIG = "${config.xdg.configHome}/npm/config";
-    NPM_CONFIG_CACHE      = "${config.xdg.cacheHome}/npm";
-    NPM_CONFIG_PREFIX     = "${config.xdg.stateHome}/npm";
-    NODE_REPL_HISTORY     = "${config.xdg.dataHome}/node/repl_history";
+    PATH = "$HOME/.npm-packages/bin:$PATH";
   };
 
-  home.sessionPath = [
-    "$(${pkgs.yarn}/bin/yarn global bin)"
-  ];
-
-  xdg.configFile."npm/config".text = ''
-    userconfig=${config.xdg.configHome}/npm/config
-    cache=${config.xdg.cacheHome}/npm
-    prefix=${config.xdg.stateHome}/npm
-  '';
-
-  # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   programs.bash = {
