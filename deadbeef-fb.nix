@@ -4,15 +4,11 @@ stdenv.mkDerivation rec {
   version = "git";
   src = fetchurl {
     url = "https://gitlab.com/zykure/deadbeef-fb/-/archive/master/deadbeef-fb-master.tar.gz";
-    sha256 = "1m78gd9paxw0182n5xsjzb8fxq90dq1izgff0fgxcx72fbgkvxzx";
+    sha256 = "05a4c5468cbe1465f5277ead182f5f1ea6e46a93e8fdfad0dafc6be9de4407fa";
   };
 
   nativeBuildInputs = [ autoconf automake libtool pkg-config ];
   buildInputs = [ deadbeef glib gtk3 ];
-
-  postPatch = ''
-    sed -i "s/errno/errorNum/g" utils.c
-  '';
 
   preConfigure = ''
     ./autogen.sh
