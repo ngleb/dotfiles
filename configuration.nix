@@ -72,7 +72,7 @@
     "/media/passport" = {
       device = "/dev/disk/by-uuid/526EDBA46EDB7EE3";
       fsType = "ntfs-3g";
-      options = [ "rw" "uid=1000" "gid=100" "dmask=0002" "fmask=0113" "windows_names" ];
+      options = [ "rw" "uid=1000" "gid=1000" "dmask=0002" "fmask=0113" "windows_names" ];
     };
     "/media/media" = {
       device = "//192.168.1.2/Media";
@@ -80,7 +80,7 @@
       options = let
         # this line prevents hanging on network split
         automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-      in ["${automount_opts},credentials=/etc/nixos/smb-secrets"];
+      in ["${automount_opts},credentials=/etc/nixos/smb-secrets,file_mode=0644,dir_mode=0755,uid=1000,gid=1000"];
     };
   };
 
