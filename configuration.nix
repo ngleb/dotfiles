@@ -74,6 +74,14 @@
       fsType = "ntfs-3g";
       options = [ "rw" "uid=1000" "gid=100" "dmask=0002" "fmask=0113" "windows_names" ];
     };
+    "/media/media" = {
+      device = "//192.168.1.2/Media";
+      fsType = "cifs";
+      options = let
+        # this line prevents hanging on network split
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+      in ["${automount_opts},credentials=/etc/nixos/smb-secrets"];
+    };
   };
 
   i18n = {
@@ -300,6 +308,7 @@
     (deadbeef-with-plugins.override {
       plugins = with pkgs; [ deadbeefPlugins.lyricbar (callPackage ./deadbeef-fb.nix {}) ];
     })
+    cifs-utils
     emacs29-gtk3
     inputs.agenix.packages.x86_64-linux.default
     git
