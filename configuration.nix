@@ -52,11 +52,13 @@
       allowPing = true;
       allowedTCPPorts = [
         5357 # wsdd
+        8083
         61831
         61832
       ];
       allowedUDPPorts = [
         3702 # wsdd
+        8083
         61831
         61832
       ];
@@ -308,6 +310,7 @@
     (deadbeef-with-plugins.override {
       plugins = with pkgs; [ deadbeefPlugins.lyricbar (callPackage ./deadbeef-fb.nix {}) ];
     })
+    file
     cifs-utils
     emacs29-gtk3
     inputs.agenix.packages.x86_64-linux.default
@@ -346,6 +349,7 @@
     libreoffice-fresh
     libsForQt5.qt5ct
     libsForQt5.qtstyleplugins
+    qt6Packages.qt6gtk2
     mc
     mediainfo
     mediainfo-gui
@@ -372,7 +376,6 @@
     shadowsocks-libev
     signal-desktop
     skypeforlinux
-    strongswan
     telegram-desktop
     thunderbird
     transmission_4-gtk
