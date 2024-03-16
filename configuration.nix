@@ -11,7 +11,7 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.permittedInsecurePackages = [
     "qtwebkit-5.212.0-alpha4"
-    "xpdf-4.04"
+    #"xpdf-4.04"
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -414,7 +414,6 @@
     xfce.xfce4-pulseaudio-plugin
     xfce.xfce4-weather-plugin
     xfce.xfce4-xkb-plugin
-    xpdf
     yt-dlp
     zathura
   ];
