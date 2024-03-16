@@ -353,10 +353,12 @@
     emacs29-gtk3
     ffmpeg
     file
+    findutils
     flameshot
     freerdp
     gajim
     galculator
+    smartmontools
     gimp
     git
     gnome.gnome-mahjongg
@@ -376,6 +378,7 @@
     libreoffice-fresh
     libsForQt5.qt5ct
     libsForQt5.qtstyleplugins
+    lsof
     mc
     mediainfo
     mediainfo-gui
@@ -391,7 +394,9 @@
     nvd
     obs-studio
     pandoc
+    parted
     pavucontrol
+    psmisc
     python3
     qalculate-gtk
     qbittorrent
