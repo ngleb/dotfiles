@@ -164,6 +164,12 @@
     desktopManager.xfce.enable = true;
   };
 
+  services.locate = {
+    enable = true;
+    package = pkgs.mlocate;
+    localuser = null;
+  };
+
   qt = {
     enable = true;
     platformTheme = "qt5ct";
@@ -374,6 +380,7 @@
     mediainfo
     mediainfo-gui
     mkvtoolnix
+    mlocate
     mpv
     nextcloud-client
     nix-bash-completions
