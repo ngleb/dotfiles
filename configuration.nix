@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 {
   imports =
@@ -29,6 +29,8 @@
   age.secrets = {
     proxyip.file = ./secrets/proxyip.age;
     proxypwd.file = ./secrets/proxypwd.age;
+    ipsec_secrets.file = ./secrets/ipsec_secrets.age;
+    ipsec_conf.file = ./secrets/ipsec_conf.age;
   };
 
   environment.etc = {
@@ -39,7 +41,19 @@
         ["bluez5.enable-hw-volume"] = true,
         ["bluez5.headset-roles"] = "[ hsp_hs hsp_ag hfp_hf hfp_ag ]"
       }
-      '';
+    '';
+    "strongswan/strongswan.conf".text = ''
+      charon {
+        plugins {
+          stroke {
+            secrets_file = ${config.age.secrets."ipsec_secrets".path}
+          }
+        }
+      }
+      starter {
+        config_file = ${config.age.secrets."ipsec_conf".path}
+      }
+    '';
   };
 
   time.timeZone = "Asia/Tomsk";
@@ -47,6 +61,7 @@
   networking = {
     hostName = "gnpc";
     networkmanager.enable = true;
+    networkmanager.enableStrongSwan = false;
     firewall = {
       enable = true;
       allowPing = true;
@@ -65,6 +80,13 @@
     };
   };
 
+  services.strongswan.enable = true;
+  services.xl2tpd.enable = true;
+  systemd.services.xl2tpd.serviceConfig.ExecStart = lib.mkForce "${pkgs.xl2tpd}/bin/xl2tpd -D -c /home/gleb/xl2tpd.conf -s /etc/xl2tpd/l2tp-secrets -p /run/xl2tpd/pid -C /run/xl2tpd/control";
+  systemd.services.strongswan.environment.STRONGSWAN_CONF = lib.mkForce "/etc/strongswan/strongswan.conf";
+
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
   fileSystems = {
     "/media/data" = {
       device = "/dev/disk/by-uuid/9baee153-7402-4050-90ec-250e369534a0";
@@ -243,7 +265,7 @@
 
   users.users.gleb = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "audio" "video" "input" "lp" "wireshark" "adbusers" ];
+    extraGroups = [ "wheel" "networkmanager" "audio" "video" "input" "lp" "wireshark" "adbusers" "libvirtd" ];
   };
 
   fonts.packages = with pkgs; [
@@ -310,14 +332,10 @@
     (deadbeef-with-plugins.override {
       plugins = with pkgs; [ deadbeefPlugins.lyricbar (callPackage ./deadbeef-fb.nix {}) ];
     })
-    file
-    cifs-utils
-    emacs29-gtk3
-    inputs.agenix.packages.x86_64-linux.default
-    git
     aegisub
     anydesk
     calibre
+    cifs-utils
     curl
     darktable
     dbeaver
@@ -326,13 +344,15 @@
     direnv
     element-desktop
     elementary-xfce-icon-theme
+    emacs29-gtk3
     ffmpeg
-    tor-browser
+    file
     flameshot
     freerdp
     gajim
     galculator
     gimp
+    git
     gnome.gnome-mahjongg
     gnupg
     goldendict
@@ -343,13 +363,13 @@
     hunspellDicts.en-us
     hunspellDicts.ru-ru
     inkscape
+    inputs.agenix.packages.x86_64-linux.default
     keepassxc
     languagetool
     ledger
     libreoffice-fresh
     libsForQt5.qt5ct
     libsForQt5.qtstyleplugins
-    qt6Packages.qt6gtk2
     mc
     mediainfo
     mediainfo-gui
@@ -369,6 +389,7 @@
     qalculate-gtk
     qbittorrent
     qpdfview
+    qt6Packages.qt6gtk2
     remmina
     rename
     ripgrep
@@ -376,8 +397,10 @@
     shadowsocks-libev
     signal-desktop
     skypeforlinux
+    strongswan
     telegram-desktop
     thunderbird
+    tor-browser
     transmission_4-gtk
     unar
     usbutils
