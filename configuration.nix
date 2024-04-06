@@ -139,7 +139,7 @@
 
   services.printing = {
     enable = true;
-    drivers = with pkgs; [ splix ];
+    drivers = with pkgs; [ splix samsung-unified-linux-driver_1_00_37 ];
   };
 
   services.pipewire = {
