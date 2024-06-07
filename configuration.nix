@@ -158,11 +158,14 @@
 
   services.xserver = {
     enable = true;
-    layout = "us,ru";
-    xkbOptions = "grp:caps_select,compose:ralt";
-    libinput.enable = true;
+    xkb = {
+      layout = "us,ru";
+      options = "grp:caps_select,compose:ralt";
+    };
     desktopManager.xfce.enable = true;
   };
+
+  services.libinput.enable = true;
 
   services.locate = {
     enable = true;
