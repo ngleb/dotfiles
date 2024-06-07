@@ -349,7 +349,7 @@
     cifs-utils
     curl
     darktable
-    dbeaver
+    dbeaver-bin
     desktop-file-utils
     dig
     direnv
