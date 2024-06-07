@@ -9,10 +9,10 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [
-    "qtwebkit-5.212.0-alpha4"
-    #"xpdf-4.04"
-  ];
+  # nixpkgs.config.permittedInsecurePackages = [
+  #   "qtwebkit-5.212.0-alpha4"
+  #   #"xpdf-4.04"
+  # ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -185,8 +185,10 @@
     client.enable = true;
     settings = {
       UseBridges = true;
-      ClientTransportPlugin = "obfs4 exec ${pkgs.obfs4}/bin/obfs4proxy";
-      Bridge = "obfs4 159.69.144.204:9004 BCF68B43F4EBE143EE8025CF6A823A99B5F17C72 cert=OrSHk5li167HyyAYYL8/xtatFfRUvY2jiOVFnJxxxkfIiZ0Qlc5MaO5K5dNOqWghkj/wFQ iat-mode=0";
+      ClientTransportPlugin = "obfs4 exec ${pkgs.obfs4}/bin/lyrebird";
+      Bridge = [
+        "obfs4 51.79.71.20:3303 972A60902543FDD9BC3BF76A795DC009F65427F3 cert=JAWEDu8myB2uUp+VTwC36HS0Y3+ca72rJxl9dOvs7aRS2LqccMO743CVdKX8n2DHC3X3KQ iat-mode=0"
+        "obfs4 38.132.101.43:45757 FD1C2CB480994CB12A4E4575BC6C36DA871C13C2 cert=05+SUTtmbH26IubqwikLfEe3xd+sgCX2XZF/rtXXgsK224dUrZtDrH4PS7fjV/Vy/Ja9bA iat-mode=0" ];
     };
   };
 
@@ -204,7 +206,7 @@
       server string = gnpc
       netbios name = gnpc
       security = user
-      hosts allow = 192.168.1. 127.0.0.1 localhost
+      hosts allow = 192.168.1. 192.168.122. 127.0.0.1 localhost
       map to guest = bad user
     '';
     shares = {
@@ -271,7 +273,7 @@
 
   users.users.gleb = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "audio" "video" "input" "lp" "wireshark" "adbusers" "libvirtd" ];
+    extraGroups = [ "wheel" "networkmanager" "audio" "video" "input" "lp" "wireshark" "adbusers" "libvirtd" "vboxusers" ];
   };
 
   fonts.packages = with pkgs; [
@@ -363,7 +365,7 @@
     git
     gnome.gnome-mahjongg
     gnupg
-    goldendict
+    goldendict-ng
     google-chrome
     greybird
     hexchat
@@ -404,6 +406,9 @@
     qt6Packages.qt6gtk2
     remmina
     rename
+    unzipNLS
+    lm_sensors
+    speedtest-cli
     ripgrep
     sakura
     shadowsocks-libev
@@ -428,6 +433,7 @@
     xfce.xfce4-xkb-plugin
     yt-dlp
     zathura
+    zoom-us
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
