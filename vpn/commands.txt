@@ -1,0 +1,15 @@
+sudo ipsec up work
+sudo ipsec status
+ping ip-address
+echo "c l2tp_vpn_name" | sudo tee -a /run/xl2tpd/control
+ip route
+sudo ip route del ip-address
+ping ip-address
+sudo ip route add 10.0.0.1/24 dev ppp0
+sudo ip route add 10.0.0.2/24 dev ppp0
+dig workstation.company.local @10.0.0.1
+
+
+
+echo "d l2tp_vpn_name" | sudo tee -a /run/xl2tpd/control
+sudo ipsec down work
