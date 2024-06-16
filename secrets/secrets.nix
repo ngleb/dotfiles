@@ -8,4 +8,6 @@ in
   "proxyip.age".publicKeys = keys;
   "ipsec_secrets.age".publicKeys = keys;
   "ipsec_conf.age".publicKeys = keys;
+  "options.age".publicKeys = keys;
+  "xl2tpd.age".publicKeys = keys;
 }
