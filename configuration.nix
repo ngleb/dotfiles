@@ -31,6 +31,8 @@
     proxypwd.file = ./secrets/proxypwd.age;
     ipsec_secrets.file = ./secrets/ipsec_secrets.age;
     ipsec_conf.file = ./secrets/ipsec_conf.age;
+    options.file = ./secrets/options.age;
+    xl2tpd.file = ./secrets/xl2tpd.age;
   };
 
   environment.etc = {
@@ -82,7 +84,8 @@
 
   services.strongswan.enable = true;
   services.xl2tpd.enable = true;
-  systemd.services.xl2tpd.serviceConfig.ExecStart = lib.mkForce "${pkgs.xl2tpd}/bin/xl2tpd -D -c /home/gleb/xl2tpd.conf -s /etc/xl2tpd/l2tp-secrets -p /run/xl2tpd/pid -C /run/xl2tpd/control";
+  # systemd.services.xl2tpd.serviceConfig.ExecStart = lib.mkForce "${pkgs.xl2tpd}/bin/xl2tpd -D -c /home/gleb/xl2tpd.conf -s /etc/xl2tpd/l2tp-secrets -p /run/xl2tpd/pid -C /run/xl2tpd/control";
+  systemd.services.xl2tpd.serviceConfig.ExecStart = lib.mkForce "${pkgs.xl2tpd}/bin/xl2tpd -D -c ${config.age.secrets."xl2tpd".path} -s /etc/xl2tpd/l2tp-secrets -p /run/xl2tpd/pid -C /run/xl2tpd/control";
   systemd.services.strongswan.environment.STRONGSWAN_CONF = lib.mkForce "/etc/strongswan/strongswan.conf";
 
   virtualisation.libvirtd.enable = true;
@@ -103,7 +106,7 @@
       fsType = "cifs";
       options = let
         # this line prevents hanging on network split
-        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,user,users";
       in ["${automount_opts},credentials=/etc/nixos/smb-secrets,file_mode=0644,dir_mode=0755,uid=1000,gid=1000"];
     };
   };
