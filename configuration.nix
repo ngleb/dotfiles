@@ -133,6 +133,8 @@
     QT_QPA_PLATFORMTHEME="qt5ct";
   };
 
+  environment.localBinInPath = true;
+
   environment.shellAliases = {
     la = "ll -A";
   };
