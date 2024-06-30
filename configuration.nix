@@ -421,6 +421,7 @@
     shadowsocks-libev
     signal-desktop
     skypeforlinux
+    hugo
     strongswan
     telegram-desktop
     thunderbird
