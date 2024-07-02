@@ -422,6 +422,8 @@
     signal-desktop
     skypeforlinux
     hugo
+    qpdf
+    pdftk
     strongswan
     telegram-desktop
     thunderbird
