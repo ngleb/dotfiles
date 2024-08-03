@@ -72,12 +72,14 @@
         8083
         61831
         61832
+        1081
       ];
       allowedUDPPorts = [
         3702 # wsdd
         8083
         61831
         61832
+        1081
       ];
     };
   };
@@ -424,6 +426,8 @@
     hugo
     qpdf
     pdftk
+    gnumake
+    gcc
     strongswan
     telegram-desktop
     thunderbird
