@@ -262,23 +262,23 @@
     };
   };
 
-  systemd.services.shadowsocks-client = {
-    description = "Shadowsocks client service";
-    after = [ "network-online.target" ];
-    wants = [ "network-online.target" ];
-    wantedBy = [ "multi-user.target" ];
-    path = with pkgs; [ shadowsocks-libev ];
-    script = ''
-      exec ss-local \
-        -s ''$(cat ${config.age.secrets."proxyip".path}) \
-        -p 8388 \
-        -b 0.0.0.0 \
-        -l 1080 \
-        -k ''$(cat ${config.age.secrets."proxypwd".path}) \
-        -m chacha20-ietf-poly1305 \
-        -a nobody
-    '';
-  };
+  # systemd.services.shadowsocks-client = {
+  #   description = "Shadowsocks client service";
+  #   after = [ "network-online.target" ];
+  #   wants = [ "network-online.target" ];
+  #   wantedBy = [ "multi-user.target" ];
+  #   path = with pkgs; [ shadowsocks-libev ];
+  #   script = ''
+  #     exec ss-local \
+  #       -s ''$(cat ${config.age.secrets."proxyip".path}) \
+  #       -p 8388 \
+  #       -b 0.0.0.0 \
+  #       -l 1080 \
+  #       -k ''$(cat ${config.age.secrets."proxypwd".path}) \
+  #       -m chacha20-ietf-poly1305 \
+  #       -a nobody
+  #   '';
+  # };
 
   users.users.gleb = {
     isNormalUser = true;
