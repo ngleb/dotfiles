@@ -90,6 +90,8 @@
   systemd.services.xl2tpd.serviceConfig.ExecStart = lib.mkForce "${pkgs.xl2tpd}/bin/xl2tpd -D -c ${config.age.secrets."xl2tpd".path} -s /etc/xl2tpd/l2tp-secrets -p /run/xl2tpd/pid -C /run/xl2tpd/control";
   systemd.services.strongswan.environment.STRONGSWAN_CONF = lib.mkForce "/etc/strongswan/strongswan.conf";
 
+  virtualisation.docker.enable = true;
+
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
   fileSystems = {
@@ -282,7 +284,7 @@
 
   users.users.gleb = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "audio" "video" "input" "lp" "wireshark" "adbusers" "libvirtd" "vboxusers" ];
+    extraGroups = [ "wheel" "networkmanager" "audio" "video" "input" "lp" "wireshark" "adbusers" "libvirtd" "vboxusers" "docker" ];
   };
 
   fonts.packages = with pkgs; [
