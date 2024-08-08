@@ -91,6 +91,9 @@
   systemd.services.strongswan.environment.STRONGSWAN_CONF = lib.mkForce "/etc/strongswan/strongswan.conf";
 
   virtualisation.docker.enable = true;
+  virtualisation.docker.extraPackages = with pkgs; [
+    docker-compose
+  ];
 
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
@@ -410,7 +413,7 @@
     parted
     pavucontrol
     psmisc
-    python3
+    (python3.withPackages(ps: with ps; [ pandas requests yapf pip python-lsp-server jedi pytest_7 yapf rope pyflakes autopep8 ]))
     qalculate-gtk
     qbittorrent
     qpdfview
@@ -450,6 +453,7 @@
     yt-dlp
     zathura
     zoom-us
+    vscodium
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
