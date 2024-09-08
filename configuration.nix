@@ -73,6 +73,7 @@
         61831
         61832
         1081
+        8080
       ];
       allowedUDPPorts = [
         3702 # wsdd
@@ -80,6 +81,7 @@
         61831
         61832
         1081
+        8080
       ];
     };
   };
@@ -94,6 +96,9 @@
   virtualisation.docker.extraPackages = with pkgs; [
     docker-compose
   ];
+
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
 
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
@@ -436,6 +441,7 @@
     strongswan
     telegram-desktop
     thunderbird
+    go
     tor-browser
     transmission_4-gtk
     unar
@@ -450,10 +456,14 @@
     xfce.xfce4-pulseaudio-plugin
     xfce.xfce4-weather-plugin
     xfce.xfce4-xkb-plugin
+    xfce.catfish
     yt-dlp
     zathura
     zoom-us
     vscodium
+    winetricks
+    wineWowPackages.stable
+    imagemagickBig
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
