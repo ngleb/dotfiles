@@ -92,6 +92,8 @@
   systemd.services.xl2tpd.serviceConfig.ExecStart = lib.mkForce "${pkgs.xl2tpd}/bin/xl2tpd -D -c ${config.age.secrets."xl2tpd".path} -s /etc/xl2tpd/l2tp-secrets -p /run/xl2tpd/pid -C /run/xl2tpd/control";
   systemd.services.strongswan.environment.STRONGSWAN_CONF = lib.mkForce "/etc/strongswan/strongswan.conf";
 
+  systemd.services.NetworkManager-wait-online.enable = false;
+
   virtualisation.docker.enable = true;
   virtualisation.docker.extraPackages = with pkgs; [
     docker-compose
@@ -359,6 +361,8 @@
     (deadbeef-with-plugins.override {
       plugins = with pkgs; [ deadbeefPlugins.lyricbar (callPackage ./deadbeef-fb.nix {}) ];
     })
+    direnv
+    nix-direnv
     aegisub
     anydesk
     calibre
@@ -418,7 +422,20 @@
     parted
     pavucontrol
     psmisc
-    (python3.withPackages(ps: with ps; [ pandas requests yapf pip python-lsp-server jedi pytest_7 yapf rope pyflakes autopep8 ]))
+    # (python3.withPackages(ps: with ps; [ pandas requests pip python-lsp-server jedi pytest_7 yapf rope pyflakes autopep8 ]))
+    (vscode-with-extensions.override {
+      vscodeExtensions = with vscode-extensions; [
+        jnoortheen.nix-ide
+        mkhl.direnv
+        ms-azuretools.vscode-docker
+        ms-python.debugpy
+        ms-python.python
+        ms-python.vscode-pylance
+        ms-vscode-remote.remote-containers
+        ms-vscode-remote.remote-ssh
+        vscode-icons-team.vscode-icons
+      ];
+    })
     qalculate-gtk
     qbittorrent
     qpdfview
