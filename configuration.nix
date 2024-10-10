@@ -361,68 +361,19 @@
     (deadbeef-with-plugins.override {
       plugins = with pkgs; [ deadbeefPlugins.lyricbar (callPackage ./deadbeef-fb.nix {}) ];
     })
-    direnv
-    nix-direnv
-    aegisub
-    anydesk
-    calibre
-    cifs-utils
-    curl
-    darktable
-    dbeaver-bin
-    desktop-file-utils
-    dig
-    direnv
-    element-desktop
-    elementary-xfce-icon-theme
-    emacs29-gtk3
-    ffmpeg
-    file
-    findutils
-    flameshot
-    freerdp
-    gajim
-    galculator
-    smartmontools
-    gimp
-    git
-    gnome.gnome-mahjongg
-    gnupg
-    goldendict-ng
-    google-chrome
-    greybird
-    hexchat
-    hunspell
-    hunspellDicts.en-us
-    hunspellDicts.ru-ru
-    inkscape
-    inputs.agenix.packages.x86_64-linux.default
-    keepassxc
-    languagetool
-    ledger
-    libreoffice-fresh
-    libsForQt5.qt5ct
-    libsForQt5.qtstyleplugins
-    lsof
-    mc
-    mediainfo
-    mediainfo-gui
-    mkvtoolnix
-    mlocate
-    mpv
-    nextcloud-client
-    nix-bash-completions
-    nodePackages.typescript
-    nodePackages.typescript-language-server
-    nodejs
-    nomacs
-    nvd
-    obs-studio
-    pandoc
-    parted
-    pavucontrol
-    psmisc
-    # (python3.withPackages(ps: with ps; [ pandas requests pip python-lsp-server jedi pytest_7 yapf rope pyflakes autopep8 ]))
+    (python311.withPackages(ps: with ps; [
+      autopep8
+      debugpy
+      jedi
+      pandas
+      pip
+      pyflakes
+      pytest_7
+      python-lsp-server
+      requests
+      rope
+      yapf
+    ]))
     (vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions; [
         jnoortheen.nix-ide
@@ -436,51 +387,112 @@
         vscode-icons-team.vscode-icons
       ];
     })
+    aegisub
+    anydesk
+    calibre
+    cifs-utils
+    curl
+    darktable
+    dbeaver-bin
+    desktop-file-utils
+    dig
+    direnv
+    direnv
+    element-desktop
+    elementary-xfce-icon-theme
+    emacs29-gtk3
+    ffmpeg
+    file
+    findutils
+    flameshot
+    freerdp
+    gajim
+    galculator
+    gcc
+    gimp
+    git
+    gnome.gnome-mahjongg
+    gnumake
+    gnupg
+    go
+    goldendict-ng
+    google-chrome
+    greybird
+    hexchat
+    hugo
+    hunspell
+    hunspellDicts.en-us
+    hunspellDicts.ru-ru
+    imagemagickBig
+    inkscape
+    inputs.agenix.packages.x86_64-linux.default
+    keepassxc
+    languagetool
+    ledger
+    libreoffice-fresh
+    libsForQt5.qt5ct
+    libsForQt5.qtstyleplugins
+    lm_sensors
+    lsof
+    mc
+    mediainfo
+    mediainfo-gui
+    mkvtoolnix
+    mlocate
+    mpv
+    nextcloud-client
+    nix-bash-completions
+    nix-direnv
+    nodePackages.typescript
+    nodePackages.typescript-language-server
+    nodejs
+    nomacs
+    nvd
+    obs-studio
+    pandoc
+    parted
+    pavucontrol
+    pdftk
+    psmisc
     qalculate-gtk
     qbittorrent
+    qpdf
     qpdfview
     qt6Packages.qt6gtk2
     remmina
     rename
-    unzipNLS
-    lm_sensors
-    speedtest-cli
     ripgrep
     sakura
     shadowsocks-libev
     signal-desktop
     skypeforlinux
-    hugo
-    qpdf
-    pdftk
-    gnumake
-    gcc
+    smartmontools
+    speedtest-cli
     strongswan
     telegram-desktop
     thunderbird
-    go
     tor-browser
     transmission_4-gtk
     unar
+    unzipNLS
     usbutils
     vanilla-dmz
     vlc
+    vscodium
     wget
+    wineWowPackages.stable
+    winetricks
     wmctrl
     wol
     wxhexeditor
     xdg-utils
+    xfce.catfish
     xfce.xfce4-pulseaudio-plugin
     xfce.xfce4-weather-plugin
     xfce.xfce4-xkb-plugin
-    xfce.catfish
     yt-dlp
     zathura
     zoom-us
-    vscodium
-    winetricks
-    wineWowPackages.stable
-    imagemagickBig
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
