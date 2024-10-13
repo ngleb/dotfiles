@@ -1,5 +1,6 @@
 /** Import Lepton stylesheet (Chrome) *****************************************/
 @import url("css/leptonChrome.css");
+@import url("my-fix.css");
 
 
 /** Add your custom styles below **********************************************/
