@@ -21,10 +21,10 @@
     enable = true;
    };
 
-  hardware.opengl = {
-    driSupport = true;
-    driSupport32Bit = true;
-  };
+  # hardware.opengl = {
+  #   driSupport = true;
+  #   driSupport32Bit = true;
+  # };
 
   age.secrets = {
     proxyip.file = ./secrets/proxyip.age;
@@ -223,16 +223,15 @@
   services.samba = {
     enable = true;
     openFirewall = true;
-    securityType = "user";
-    extraConfig = ''
-      workgroup = WORKGROUP
-      server string = gnpc
-      netbios name = gnpc
-      security = user
-      hosts allow = 192.168.1. 192.168.122. 127.0.0.1 localhost
-      map to guest = bad user
-    '';
-    shares = {
+    settings = {
+      global = {
+        workgroup = "WORKGROUP";
+        "server string" = "gnpc";
+        "netbios name" = "gnpc";
+        security = "user";
+        "hosts allow" = "192.168.1. 192.168.122. 127.0.0.1 localhost";
+        "map to guest" = "bad user";
+      };
       Movies = {
         path = "/media/data/Movies";
         browseable = "yes";
@@ -309,8 +308,10 @@
     liberation_ttf
     meslo-lg
     noto-fonts
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
     noto-fonts-emoji
+    noto-fonts-color-emoji
     noto-fonts-extra
     source-code-pro
     source-sans
@@ -319,7 +320,7 @@
   ];
 
   programs.bash = {
-    enableCompletion = true;
+    completion.enable = true;
     promptInit =
       ''
       # Provide a nice prompt if the terminal supports it.
@@ -345,8 +346,11 @@
   programs.git.enable = true;
   programs.adb.enable = true;
   programs.tmux.enable = true;
-  programs.vim.defaultEditor = true;
-  programs.vim.package = pkgs.vim-full;
+  programs.vim = {
+    enable = true;
+    defaultEditor = true;
+    package = pkgs.vim-full;
+  };
   programs.thunar.enable = true;
   programs.thunar.plugins = with pkgs.xfce; [
     thunar-archive-plugin
@@ -389,6 +393,8 @@
         vscode-icons-team.vscode-icons
       ];
     })
+    jetbrains.pycharm-community-bin
+    allure
     aegisub
     anydesk
     calibre
@@ -413,7 +419,7 @@
     gcc
     gimp
     git
-    gnome.gnome-mahjongg
+    gnome-mahjongg
     gnumake
     gnupg
     go
