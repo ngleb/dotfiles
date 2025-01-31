@@ -13,3 +13,5 @@ map <C-i> zoom in
 map <C-,> zoom out
 map d scroll half-down
 map w scroll half-up
+set selection-clipboard clipboard
+set selection-notification false

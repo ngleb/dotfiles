@@ -49,6 +49,7 @@
     ".tmux.conf".source = dotfiles/tmux.conf;
     ".vimrc".source = dotfiles/vimrc;
     ".config/sakura/sakura.conf".source = dotfiles/sakura.conf;
+    ".config/zathura/zathurarc".source = dotfiles/zathurarc;
 
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''

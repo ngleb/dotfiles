@@ -17,7 +17,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_6_12;
 
   hardware.bluetooth = {
     enable = true;
@@ -483,6 +483,7 @@
     thunderbird
     tor-browser
     transmission_4-gtk
+    aria2
     unar
     unzipNLS
     usbutils
