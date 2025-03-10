@@ -149,6 +149,9 @@
 
   environment.sessionVariables = {
     QT_QPA_PLATFORMTHEME="qt5ct";
+    PLAYWRIGHT_BROWSERS_PATH = pkgs.playwright-driver.browsers;
+    PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1";
+    PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS="true";
   };
 
   environment.localBinInPath = true;
@@ -381,6 +384,24 @@
       requests
       rope
       yapf
+      playwright
+      pytest-playwright
+    ]))
+    (python312.withPackages(ps: with ps; [
+      autopep8
+      black
+      debugpy
+      jedi
+      pandas
+      pip
+      pyflakes
+      pytest_7
+      python-lsp-server
+      requests
+      rope
+      yapf
+      playwright
+      pytest-playwright
     ]))
     (vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions; [
@@ -395,6 +416,7 @@
         vscode-icons-team.vscode-icons
       ];
     })
+    playwright-driver
     jetbrains.pycharm-community-bin
     allure
     aegisub
@@ -458,6 +480,7 @@
     nodejs
     nomacs
     nvd
+    freecad
     obs-studio
     pandoc
     parted
