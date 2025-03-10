@@ -432,7 +432,7 @@
     direnv
     element-desktop
     elementary-xfce-icon-theme
-    emacs29-gtk3
+    emacs-gtk
     ffmpeg
     file
     findutils
