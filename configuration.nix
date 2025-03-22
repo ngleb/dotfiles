@@ -429,7 +429,6 @@
     desktop-file-utils
     dig
     direnv
-    direnv
     element-desktop
     elementary-xfce-icon-theme
     emacs-gtk
@@ -527,6 +526,7 @@
     yt-dlp
     zathura
     zoom-us
+    bruno
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
