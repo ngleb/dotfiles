@@ -77,6 +77,7 @@
         1081
         8080
         1080
+        8082
       ];
       allowedUDPPorts = [
         3702 # wsdd
@@ -86,6 +87,7 @@
         1081
         8080
         1080
+        8082
       ];
     };
   };
@@ -507,6 +509,7 @@
     transmission_4-gtk
     aria2
     unar
+    wireshark
     unzipNLS
     usbutils
     vanilla-dmz
