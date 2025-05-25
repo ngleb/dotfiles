@@ -361,7 +361,12 @@
   }
   /** Activity Stream - Web Site Icon: full size ******************************/
   @supports -moz-bool-pref("userContent.newTab.full_icon") {
+    .top-site-outer {
+      width: 120px !important; /* v135: calc(var(--size-item-large) * 3); */
+    }
     .top-site-outer .tile {
+      width: 80px !important; /* v135: calc(var(--size-item-large) * 2); */
+      height: 80px !important; /* v135: calc(var(--size-item-large) * 2); */
       overflow: hidden;
     }
     .top-site-outer .icon-wrapper {
@@ -426,7 +431,8 @@
   @supports -moz-bool-pref("userContent.newTab.pocket_to_last") {
     .body-wrapper.on {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: wrap !important;
+      flex-direction: row !important;
     }
     .body-wrapper.on > .discovery-stream.ds-layout {
       flex-basis: 100%;
@@ -875,6 +881,14 @@
           --menu-border-color: var(--dark-menu-border-color);
           --menu-icon-opacity: var(--dark-menu-icon-opacity);
         }
+      }
+    }
+    @supports -moz-bool-pref("userContent.page.proton_color.dark_blue_accent") or -moz-bool-pref("userContent.page.proton_color.system_accent") {
+      :root,
+      :host(.anonymous-content-host) {
+        --color-accent-primary: var(--in-content-primary-button-background) !important;
+        --color-accent-primary-hover: var(--in-content-primary-button-background-hover) !important;
+        --color-accent-primary-active: light-dark(var(--color-blue-70), var(--color-cyan-20));
       }
     }
     @supports -moz-bool-pref("userContent.page.proton_color.dark_blue_accent") {
@@ -3793,7 +3807,7 @@
     }
     @-moz-document url-prefix("about:addons") {
       @supports -moz-bool-pref("userChrome.icon.context_menu") {
-        button[role="menuitem"] {
+        button:is([role="menuitem"], [role="menuitemcheckbox"]) {
           background-image: var(--icon, url("../icons/blank.svg")); /* Don't use !important. because of [checked] */
         }
         panel-item[action="check-for-updates"] {
