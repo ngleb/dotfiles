@@ -9,10 +9,6 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   nixpkgs.config.allowUnfree = true;
-  # nixpkgs.config.permittedInsecurePackages = [
-  #   "qtwebkit-5.212.0-alpha4"
-  #   #"xpdf-4.04"
-  # ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -22,11 +18,6 @@
   hardware.bluetooth = {
     enable = true;
    };
-
-  # hardware.opengl = {
-  #   driSupport = true;
-  #   driSupport32Bit = true;
-  # };
 
   age.secrets = {
     proxyip.file = ./secrets/proxyip.age;
@@ -46,18 +37,6 @@
         ["bluez5.headset-roles"] = "[ hsp_hs hsp_ag hfp_hf hfp_ag ]"
       }
     '';
-    "strongswan/strongswan.conf".text = ''
-      charon {
-        plugins {
-          stroke {
-            secrets_file = ${config.age.secrets."ipsec_secrets".path}
-          }
-        }
-      }
-      starter {
-        config_file = ${config.age.secrets."ipsec_conf".path}
-      }
-    '';
   };
 
   time.timeZone = "Asia/Tomsk";
@@ -65,7 +44,6 @@
   networking = {
     hostName = "gnpc";
     networkmanager.enable = true;
-    networkmanager.enableStrongSwan = false;
     firewall = {
       enable = true;
       allowPing = true;
@@ -92,12 +70,6 @@
     };
   };
 
-  services.strongswan.enable = true;
-  services.xl2tpd.enable = true;
-  # systemd.services.xl2tpd.serviceConfig.ExecStart = lib.mkForce "${pkgs.xl2tpd}/bin/xl2tpd -D -c /home/gleb/xl2tpd.conf -s /etc/xl2tpd/l2tp-secrets -p /run/xl2tpd/pid -C /run/xl2tpd/control";
-  systemd.services.xl2tpd.serviceConfig.ExecStart = lib.mkForce "${pkgs.xl2tpd}/bin/xl2tpd -D -c ${config.age.secrets."xl2tpd".path} -s /etc/xl2tpd/l2tp-secrets -p /run/xl2tpd/pid -C /run/xl2tpd/control";
-  systemd.services.strongswan.environment.STRONGSWAN_CONF = lib.mkForce "/etc/strongswan/strongswan.conf";
-
   systemd.services.NetworkManager-wait-online.enable = false;
 
   virtualisation.docker.enable = true;
@@ -109,7 +81,9 @@
   virtualisation.virtualbox.host.enableExtensionPack = true;
 
   virtualisation.libvirtd.enable = true;
+
   programs.virt-manager.enable = true;
+
   fileSystems = {
     "/media/data" = {
       device = "/dev/disk/by-uuid/9baee153-7402-4050-90ec-250e369534a0";
@@ -198,7 +172,6 @@
   services.locate = {
     enable = true;
     package = pkgs.mlocate;
-    localuser = null;
   };
 
   qt = {
@@ -282,24 +255,6 @@
     };
   };
 
-  # systemd.services.shadowsocks-client = {
-  #   description = "Shadowsocks client service";
-  #   after = [ "network-online.target" ];
-  #   wants = [ "network-online.target" ];
-  #   wantedBy = [ "multi-user.target" ];
-  #   path = with pkgs; [ shadowsocks-libev ];
-  #   script = ''
-  #     exec ss-local \
-  #       -s ''$(cat ${config.age.secrets."proxyip".path}) \
-  #       -p 8388 \
-  #       -b 0.0.0.0 \
-  #       -l 1080 \
-  #       -k ''$(cat ${config.age.secrets."proxypwd".path}) \
-  #       -m chacha20-ietf-poly1305 \
-  #       -a nobody
-  #   '';
-  # };
-
   users.users.gleb = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "audio" "video" "input" "lp" "wireshark" "adbusers" "libvirtd" "vboxusers" "docker" ];
@@ -346,23 +301,25 @@
       fi
       '';
   };
-  programs.wireshark.enable = true;
+  programs.adb.enable = true;
   programs.firefox.enable = true;
   programs.firefox.languagePacks = [ "en-US" ];
-  programs.seahorse.enable = true;
   programs.git.enable = true;
-  programs.adb.enable = true;
+  programs.seahorse.enable = true;
   programs.tmux.enable = true;
+  programs.wireshark.enable = true;
   programs.vim = {
     enable = true;
     defaultEditor = true;
     package = pkgs.vim-full;
   };
-  programs.thunar.enable = true;
-  programs.thunar.plugins = with pkgs.xfce; [
-    thunar-archive-plugin
-    thunar-volman
-  ];
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-archive-plugin
+      thunar-volman
+    ];
+  };
   programs.file-roller.enable = true;
   programs.gnupg.agent.enable = true;
   programs.htop.enable = true;
@@ -372,23 +329,8 @@
 
   environment.systemPackages = with pkgs; [
     (deadbeef-with-plugins.override {
-      plugins = with pkgs; [ deadbeefPlugins.lyricbar (callPackage ./deadbeef-fb.nix {}) ];
+      plugins = with pkgs; [ (callPackage ./deadbeef-fb.nix {}) ];
     })
-    (python311.withPackages(ps: with ps; [
-      autopep8
-      debugpy
-      jedi
-      pandas
-      pip
-      pyflakes
-      pytest_7
-      python-lsp-server
-      requests
-      rope
-      yapf
-      playwright
-      pytest-playwright
-    ]))
     (python312.withPackages(ps: with ps; [
       autopep8
       black
@@ -418,11 +360,11 @@
         vscode-icons-team.vscode-icons
       ];
     })
-    playwright-driver
-    jetbrains.pycharm-community-bin
-    allure
     aegisub
+    allure
     anydesk
+    aria2
+    bruno
     calibre
     cifs-utils
     curl
@@ -438,6 +380,7 @@
     file
     findutils
     flameshot
+    freecad
     freerdp
     gajim
     galculator
@@ -459,6 +402,7 @@
     imagemagickBig
     inkscape
     inputs.agenix.packages.x86_64-linux.default
+    jetbrains.pycharm-community-bin
     keepassxc
     languagetool
     ledger
@@ -481,35 +425,29 @@
     nodejs
     nomacs
     nvd
-    freecad
     obs-studio
     pandoc
     parted
     pavucontrol
     pdftk
+    playwright-driver
     psmisc
     qalculate-gtk
     qbittorrent
     qpdf
     qpdfview
     qt6Packages.qt6gtk2
-    remmina
     rename
     ripgrep
     sakura
-    shadowsocks-libev
     signal-desktop
-    skypeforlinux
     smartmontools
     speedtest-cli
-    strongswan
     telegram-desktop
     thunderbird
     tor-browser
     transmission_4-gtk
-    aria2
     unar
-    wireshark
     unzipNLS
     usbutils
     vanilla-dmz
@@ -518,6 +456,7 @@
     wget
     wineWowPackages.stable
     winetricks
+    wireshark
     wmctrl
     wol
     wxhexeditor
@@ -529,7 +468,6 @@
     yt-dlp
     zathura
     zoom-us
-    bruno
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

@@ -1,18 +1,43 @@
-{ stdenv, fetchurl, pkg-config, deadbeef, gtk3, autoconf, automake, libtool, glib }:
+{
+  stdenv,
+  fetchFromGitLab,
+  pkg-config,
+  deadbeef,
+  gtk3,
+  autoconf,
+  automake,
+  libtool,
+  glib
+}:
 stdenv.mkDerivation rec {
   pname = "deadbeef-fb";
   version = "git";
-  src = fetchurl {
-    url = "https://gitlab.com/zykure/deadbeef-fb/-/archive/master/deadbeef-fb-master.tar.gz";
-    sha256 = "05a4c5468cbe1465f5277ead182f5f1ea6e46a93e8fdfad0dafc6be9de4407fa";
+  src = fetchFromGitLab {
+    owner = "zykure";
+    repo = "deadbeef-fb";
+    rev = "17accd5345adeb3b81315d284dd81ac881517cc6";
+    hash = "sha256-xmC0m47OnEQS4nXRG+bq5vMiAui0+ehhCrcWF8n1t/s=";
   };
 
-  nativeBuildInputs = [ autoconf automake libtool pkg-config ];
-  buildInputs = [ deadbeef glib gtk3 ];
+  nativeBuildInputs = [
+    autoconf
+    automake
+    libtool
+    pkg-config
+  ];
+
+  buildInputs = [
+    deadbeef
+    glib
+    gtk3
+  ];
 
   preConfigure = ''
     ./autogen.sh
   '';
 
-  configureFlags = [ "--prefix=$(out)" "--disable-gtk2" ];
+  configureFlags = [
+    "--prefix=$(out)"
+    "--disable-gtk2"
+  ];
 }
