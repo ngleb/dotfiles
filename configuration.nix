@@ -137,7 +137,6 @@
   };
 
   security.rtkit.enable = true;
-  security.pam.services.lightdm.enableGnomeKeyring = true;
 
   services.printing = {
     enable = true;
@@ -158,15 +157,12 @@
     packages = [ pkgs.dconf ];
   };
 
-  services.xserver = {
-    enable = true;
-    xkb = {
-      layout = "us,ru";
-      options = "grp:caps_select,compose:ralt";
-    };
-    desktopManager.xfce.enable = true;
-  };
-
+  services.xserver.enable = true;
+  services.xserver.xkb.layout = "us,ru";
+  services.xserver.xkb.options = "grp:caps_select,compose:ralt";
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.desktopManager.xfce.enable = false;
   services.libinput.enable = true;
 
   services.locate = {
@@ -360,6 +356,13 @@
         vscode-icons-team.vscode-icons
       ];
     })
+    adwaita-qt
+    adwaita-qt6
+    gnomeExtensions.appindicator
+    gnomeExtensions.dash-to-panel
+    gnomeExtensions.openweather-refined
+    gnomeExtensions.applications-menu
+    gnomeExtensions.auto-move-windows
     aegisub
     allure
     anydesk
@@ -449,6 +452,7 @@
     transmission_4-gtk
     unar
     unzipNLS
+    gnome-tweaks
     usbutils
     vanilla-dmz
     vlc
