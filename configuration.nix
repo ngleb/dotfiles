@@ -253,7 +253,7 @@
 
   users.users.gleb = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "audio" "video" "input" "lp" "wireshark" "adbusers" "libvirtd" "vboxusers" "docker" ];
+    extraGroups = [ "wheel" "networkmanager" "audio" "video" "input" "lp" "wireshark" "adbusers" "libvirtd" "vboxusers" "docker" "ydotool" ];
   };
 
   fonts.packages = with pkgs; [
@@ -304,6 +304,7 @@
   programs.seahorse.enable = true;
   programs.tmux.enable = true;
   programs.wireshark.enable = true;
+  programs.ydotool.enable = true;
   programs.vim = {
     enable = true;
     defaultEditor = true;
@@ -363,6 +364,7 @@
     gnomeExtensions.openweather-refined
     gnomeExtensions.applications-menu
     gnomeExtensions.auto-move-windows
+    gnomeExtensions.run-or-raise
     aegisub
     allure
     anydesk
@@ -378,7 +380,7 @@
     direnv
     element-desktop
     elementary-xfce-icon-theme
-    emacs-gtk
+    emacs-pgtk
     ffmpeg
     file
     findutils
