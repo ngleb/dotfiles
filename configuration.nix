@@ -410,6 +410,9 @@
       yapf
       playwright
       pytest-playwright
+      ledger
+      pyqt6
+      pyqt5
     ]))
     (vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions; [
@@ -432,6 +435,7 @@
     gnomeExtensions.applications-menu
     gnomeExtensions.auto-move-windows
     gnomeExtensions.run-or-raise
+    gnomeExtensions.just-perfection
     aegisub
     allure
     anydesk
