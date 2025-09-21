@@ -11,9 +11,7 @@
   nixpkgs.config.allowUnfree = true;
 
   nixpkgs.overlays = [
-    (
-      final: prev:
-
+    (final: prev:
       let
         fonts = {
           aegan = {
@@ -84,7 +82,14 @@
 
   hardware.bluetooth = {
     enable = true;
-   };
+  };
+  hardware.graphics.extraPackages = with pkgs; [ rocmPackages.clr.icd ];
+  environment.variables = {
+    ROC_ENABLE_PRE_VEGA = "1";
+    PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
+    PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = "true";
+    PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1";
+  };
 
   age.secrets = {
     proxyip.file = ./secrets/proxyip.age;
@@ -391,7 +396,7 @@
   programs.steam.enable = true;
   programs.gamescope.enable = true;
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = (with pkgs; [
     (deadbeef-with-plugins.override {
       plugins = with pkgs; [ (callPackage ./deadbeef-fb.nix {}) ];
     })
@@ -399,20 +404,22 @@
       autopep8
       black
       debugpy
+      flake8
       jedi
+      ledger
       pandas
       pip
+      playwright
       pyflakes
+      pylint
+      pyqt5
+      pyqt6
+      pytest-playwright
       pytest_7
       python-lsp-server
       requests
       rope
       yapf
-      playwright
-      pytest-playwright
-      ledger
-      pyqt6
-      pyqt5
     ]))
     (vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions; [
@@ -427,15 +434,12 @@
         vscode-icons-team.vscode-icons
       ];
     })
+    (llama-cpp.override {
+      vulkanSupport = true;
+    })
+    playwright-driver
     adwaita-qt
     adwaita-qt6
-    gnomeExtensions.appindicator
-    gnomeExtensions.dash-to-panel
-    gnomeExtensions.openweather-refined
-    gnomeExtensions.applications-menu
-    gnomeExtensions.auto-move-windows
-    gnomeExtensions.run-or-raise
-    gnomeExtensions.just-perfection
     aegisub
     allure
     anydesk
@@ -443,12 +447,12 @@
     bruno
     calibre
     cifs-utils
+    clinfo
     curl
     darktable
     dbeaver-bin
     desktop-file-utils
     dig
-    direnv
     element-desktop
     elementary-xfce-icon-theme
     emacs-pgtk
@@ -464,6 +468,7 @@
     gimp
     git
     gnome-mahjongg
+    gnome-tweaks
     gnumake
     gnupg
     go
@@ -486,6 +491,7 @@
     libsForQt5.qt5ct
     libsForQt5.qtstyleplugins
     lm_sensors
+    lmstudio
     lsof
     mc
     mediainfo
@@ -495,7 +501,6 @@
     mpv
     nextcloud-client
     nix-bash-completions
-    nix-direnv
     nodePackages.typescript
     nodePackages.typescript-language-server
     nodejs
@@ -506,15 +511,16 @@
     parted
     pavucontrol
     pdftk
-    playwright-driver
     psmisc
     qalculate-gtk
     qbittorrent
     qpdf
     qpdfview
     qt6Packages.qt6gtk2
+    radeontop
     rename
     ripgrep
+    rocmPackages.rocminfo
     sakura
     signal-desktop
     smartmontools
@@ -523,13 +529,12 @@
     thunderbird
     tor-browser
     transmission_4-gtk
+    tree
     unar
     unzipNLS
-    gnome-tweaks
     usbutils
     vanilla-dmz
     vlc
-    vscodium
     wget
     wineWowPackages.stable
     winetricks
@@ -538,14 +543,16 @@
     wol
     wxhexeditor
     xdg-utils
-    xfce.catfish
-    xfce.xfce4-pulseaudio-plugin
-    xfce.xfce4-weather-plugin
-    xfce.xfce4-xkb-plugin
     yt-dlp
     zathura
-    zoom-us
-  ];
+  ]) ++ (with pkgs.gnomeExtensions; [
+    advanced-weather-companion
+    appindicator
+    dash-to-panel
+    auto-move-windows
+    run-or-raise
+    just-perfection
+  ]);
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
