@@ -26,7 +26,8 @@
       pkgs = nixpkgs.legacyPackages.${system};
       pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
     in {
-      overlays = import ./overlays {inherit inputs;};
+      overlays = import ./overlays {inherit inputs pkgs;};
+
       nixosConfigurations = {
         "gnpc" = lib.nixosSystem {
           system = system;
@@ -34,9 +35,10 @@
             ./configuration.nix
             agenix.nixosModules.default
           ];
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs outputs; };
         };
       };
+
       homeConfigurations =  {
         "gleb" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
