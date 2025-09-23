@@ -11,6 +11,10 @@
   nixpkgs.config.allowUnfree = true;
 
   nixpkgs.overlays = [
+    (final: prev: {
+      spoofdpi = pkgs.callPackage ./pkgs/spoofdpi/spoofdpi.nix { };
+    })
+
     (final: prev:
       let
         fonts = {
@@ -545,6 +549,7 @@
     xdg-utils
     yt-dlp
     zathura
+    spoofdpi
   ]) ++ (with pkgs.gnomeExtensions; [
     advanced-weather-companion
     appindicator
