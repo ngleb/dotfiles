@@ -11,73 +11,8 @@
   nixpkgs.config.allowUnfree = true;
 
   nixpkgs.overlays = [
-    # (final: prev: {
-    # })
     outputs.overlays.additions
     outputs.overlays.modifications
-
-    # (final: prev:
-    #   let
-    #     fonts = {
-    #       aegan = {
-    #         file = "Aegean.zip";
-    #         hash = "sha256-3HmCqCMZLN6zF1N/EirQOPnHKTGHoc4aHKoZxFYTB34=";
-    #       };
-    #       aegyptus = {
-    #         file = "Aegyptus.zip";
-    #         hash = "sha256-SSAK707xhpsUTq8tSBcrzNGunCYad58amtCqAWuevnY=";
-    #       };
-    #       akkadian = {
-    #         file = "Akkadian.zip";
-    #         hash = "sha256-wXiDYyfujAs6fklOCqXq7Ms7wP5RbPlpNVwkUy7CV4k=";
-    #       };
-    #       assyrian = {
-    #         file = "Assyrian.zip";
-    #         hash = "sha256-CZj1sc89OexQ0INb7pbEu5GfE/w2E5JmhjT8cosoLSg=";
-    #       };
-    #       eemusic = {
-    #         file = "EEMusic.zip";
-    #         hash = "sha256-LxOcQOPEImw0wosxJotbOJRbe0qlK5dR+kazuhm99Kg=";
-    #       };
-    #       maya = {
-    #         file = "Maya%20Hieroglyphs.zip";
-    #         hash = "sha256-PAwF1lGqm6XVf4NQCA8AFLGU40N0Xsn5Q8x9ikHJDhY=";
-    #       };
-    #       symbola = {
-    #         file = "Symbola.zip";
-    #         hash = "sha256-TsHWmzkEyMa8JOZDyjvk7PDhm239oH/FNllizNFf398=";
-    #       };
-    #       textfonts = {
-    #         file = "Textfonts.zip";
-    #         hash = "sha256-7S3NiiyDvyYoDrLPt2z3P9bEEFOEZACv2sIHG1Tn6yI=";
-    #       };
-    #       unidings = {
-    #         file = "Unidings.zip";
-    #         hash = "sha256-WUY+Ylphep6WuzqLQ3Owv+vK5Yuu/aAkn4GOFXL0uQY=";
-    #       };
-    #     };
-    #   in
-    #     prev.lib.attrsets.mapAttrs (name: drv:
-    #       drv.overrideAttrs (old: {
-    #         src = prev.fetchzip {
-    #           url = "https://web.archive.org/web/20221006174450/https://dn-works.com/wp-content/uploads/2020/UFAS-Fonts/${fonts.${name}.file}";
-    #           stripRoot = false;
-    #           inherit (fonts.${name}) hash;
-    #         };
-    #       }))
-    #       {
-    #         inherit (prev)
-    #           aegyptus
-    #           akkadian
-    #           assyrian
-    #           eemusic
-    #           maya
-    #           symbola
-    #           textfonts
-    #           unidings
-    #         ;
-    #       }
-    # )
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -264,8 +199,25 @@
       UseBridges = true;
       ClientTransportPlugin = "obfs4 exec ${pkgs.obfs4}/bin/lyrebird";
       Bridge = [
-        "obfs4 82.170.12.177:3082 6DBB32214BFEF1BF4E7C182DBD6AF13225B06034 cert=avVfhTVqWExsiHodqs1MgE9Vvpvp4nEecqORyJwoFbLBwzhPozKJdYTDjvjnJPVcVFdbVA iat-mode=0" ];
+        "obfs4 141.144.242.150:443 259D40B5345BD8ED89309E065022FFB37A6F0368 cert=HsYMGKItPlon6pz4Iw0Dx595x60b7z3V3fJ8iCas0ie813t7HIvZ/SsDyqsuZosJkAaacg iat-mode=0"
+        "obfs4 77.57.57.222:9003 FB3C9523017BE03DA622A71D98AF0E6AAEE676B8 cert=2SnJpsZdzUpEdEt0CcaTflaUpPYJd7qYPHVSI8DUfKmdLJ1i40I6H5PQjobBfuRWWVM5NA iat-mode=0"
+      ];
     };
+  };
+
+  services.zapret = {
+    enable = true;
+    params = [
+      "--dpi-desync=fake"
+      "--dpi-desync-ttl=3"
+    ];
+    whitelist = [
+      "youtube.com"
+      "googlevideo.com"
+      "ytimg.com"
+      "youtu.be"
+      "linkedin.com"
+    ];
   };
 
   services.gnome.gnome-keyring.enable = true;
@@ -411,6 +363,7 @@
       debugpy
       flake8
       jedi
+      ipython
       ledger
       pandas
       pip
@@ -442,6 +395,7 @@
     (llama-cpp.override {
       vulkanSupport = true;
     })
+    qt6.qtwayland
     playwright-driver
     adwaita-qt
     adwaita-qt6

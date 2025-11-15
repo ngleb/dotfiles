@@ -26,22 +26,23 @@
       pkgs = nixpkgs.legacyPackages.${system};
       pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
     in {
-      overlays = import ./overlays {inherit inputs pkgs;};
+      overlays = import ./overlays { inherit inputs; };
 
       nixosConfigurations = {
         "gnpc" = lib.nixosSystem {
           system = system;
+          specialArgs = { inherit inputs outputs; };
           modules = [
             ./configuration.nix
             agenix.nixosModules.default
           ];
-          specialArgs = { inherit inputs outputs; };
         };
       };
 
       homeConfigurations =  {
         "gleb" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
+          extraSpecialArgs = { inherit inputs outputs; };
           modules = [ ./home.nix ];
         };
       };

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, outputs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -34,10 +34,15 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    nodejs
-    yarn
     languagetool
   ];
+
+  nixpkgs = {
+    overlays = [
+      outputs.overlays.additions
+      outputs.overlays.modifications
+    ];
+  };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -97,4 +102,20 @@
     mpvn = "mpv --profile=norm";
     yt = "yt-dlp";
   };
+
+  systemd.user.services = {
+    spoofdpi = {
+      Unit = {
+        Description = "SpoofDPI service";
+      };
+      Install = {
+        WantedBy = [ "default.target" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.spoofdpi}/bin/spoofdpi -enable-doh -addr 0.0.0.0 -dns-addr 8.8.8.8 -window-size 0";
+      };
+    };
+  };
+
+  systemd.user.startServices = "sd-switch";
 }
