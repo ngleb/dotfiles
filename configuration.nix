@@ -206,7 +206,7 @@
   };
 
   services.zapret = {
-    enable = true;
+    enable = false;
     params = [
       "--dpi-desync=fake"
       "--dpi-desync-ttl=3"
