@@ -172,8 +172,8 @@
   services.xserver.enable = true;
   services.xserver.xkb.layout = "us,ru";
   services.xserver.xkb.options = "grp:caps_select,compose:ralt";
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
   services.xserver.desktopManager.xfce.enable = false;
   services.libinput.enable = true;
 
@@ -297,9 +297,7 @@
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
-    noto-fonts-emoji
     noto-fonts-color-emoji
-    noto-fonts-extra
     source-code-pro
     source-sans
     source-serif
@@ -346,7 +344,6 @@
       thunar-volman
     ];
   };
-  programs.file-roller.enable = true;
   programs.gnupg.agent.enable = true;
   programs.htop.enable = true;
 
@@ -354,9 +351,9 @@
   programs.gamescope.enable = true;
 
   environment.systemPackages = (with pkgs; [
-    (deadbeef-with-plugins.override {
-      plugins = with pkgs; [ (callPackage ./deadbeef-fb.nix {}) ];
-    })
+    # (deadbeef-with-plugins.override {
+    #   plugins = with pkgs; [ (callPackage ./deadbeef-fb.nix {}) ];
+    # })
     (python312.withPackages(ps: with ps; [
       autopep8
       black
@@ -395,8 +392,6 @@
     (llama-cpp.override {
       vulkanSupport = true;
     })
-    qt6.qtwayland
-    playwright-driver
     adwaita-qt
     adwaita-qt6
     aegisub
@@ -417,6 +412,7 @@
     emacs-pgtk
     ffmpeg
     file
+    file-roller
     findutils
     flameshot
     freecad
@@ -443,7 +439,11 @@
     inkscape
     inputs.agenix.packages.x86_64-linux.default
     jetbrains.pycharm-community-bin
+    k9s
     keepassxc
+    krew
+    kubectl
+    kubernetes-helm
     languagetool
     ledger
     libreoffice-fresh
@@ -455,6 +455,7 @@
     mc
     mediainfo
     mediainfo-gui
+    minikube
     mkvtoolnix
     mlocate
     mpv
@@ -465,16 +466,19 @@
     nodejs
     nomacs
     nvd
+    nvme-cli
     obs-studio
     pandoc
     parted
     pavucontrol
     pdftk
+    playwright-driver
     psmisc
     qalculate-gtk
     qbittorrent
     qpdf
     qpdfview
+    qt6.qtwayland
     qt6Packages.qt6gtk2
     radeontop
     rename
@@ -484,6 +488,7 @@
     signal-desktop
     smartmontools
     speedtest-cli
+    spoofdpi
     telegram-desktop
     thunderbird
     tor-browser
@@ -504,7 +509,6 @@
     xdg-utils
     yt-dlp
     zathura
-    spoofdpi
   ]) ++ (with pkgs.gnomeExtensions; [
     advanced-weather-companion
     appindicator
