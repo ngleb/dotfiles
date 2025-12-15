@@ -102,11 +102,11 @@
       fsType = "ext4";
       options = [ "noatime" ];
     };
-    "/media/passport" = {
-      device = "/dev/disk/by-uuid/526EDBA46EDB7EE3";
-      fsType = "ntfs-3g";
-      options = [ "rw" "uid=1000" "gid=1000" "dmask=0002" "fmask=0113" "windows_names" ];
-    };
+    # "/media/passport" = {
+    #   device = "/dev/disk/by-uuid/526EDBA46EDB7EE3";
+    #   fsType = "ntfs-3g";
+    #   options = [ "rw" "uid=1000" "gid=1000" "dmask=0002" "fmask=0113" "windows_names" ];
+    # };
     "/media/media" = {
       device = "//192.168.1.2/Media";
       fsType = "cifs";
@@ -489,6 +489,7 @@
     smartmontools
     speedtest-cli
     spoofdpi
+    stern
     telegram-desktop
     thunderbird
     tor-browser
@@ -512,10 +513,11 @@
   ]) ++ (with pkgs.gnomeExtensions; [
     advanced-weather-companion
     appindicator
-    dash-to-panel
     auto-move-windows
-    run-or-raise
+    dash-to-panel
     just-perfection
+    notification-timeout
+    run-or-raise
   ]);
 
   # Some programs need SUID wrappers, can be configured further or are
