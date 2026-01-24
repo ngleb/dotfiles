@@ -357,6 +357,7 @@
     (python312.withPackages(ps: with ps; [
       autopep8
       black
+      camelot
       debugpy
       flake8
       jedi
@@ -375,6 +376,8 @@
       requests
       rope
       yapf
+      ghostscript
+      pkgs.ghostscript
     ]))
     (vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions; [
@@ -392,6 +395,7 @@
     (llama-cpp.override {
       vulkanSupport = true;
     })
+    ghostscript
     adwaita-qt
     adwaita-qt6
     aegisub
