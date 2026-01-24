@@ -193,14 +193,13 @@
   };
 
   services.tor = {
-    enable = true;
+    enable = false;
     client.enable = true;
     settings = {
       UseBridges = true;
       ClientTransportPlugin = "obfs4 exec ${pkgs.obfs4}/bin/lyrebird";
       Bridge = [
-        "obfs4 141.144.242.150:443 259D40B5345BD8ED89309E065022FFB37A6F0368 cert=HsYMGKItPlon6pz4Iw0Dx595x60b7z3V3fJ8iCas0ie813t7HIvZ/SsDyqsuZosJkAaacg iat-mode=0"
-        "obfs4 77.57.57.222:9003 FB3C9523017BE03DA622A71D98AF0E6AAEE676B8 cert=2SnJpsZdzUpEdEt0CcaTflaUpPYJd7qYPHVSI8DUfKmdLJ1i40I6H5PQjobBfuRWWVM5NA iat-mode=0"
+        ""
       ];
     };
   };
@@ -442,7 +441,7 @@
     imagemagickBig
     inkscape
     inputs.agenix.packages.x86_64-linux.default
-    jetbrains.pycharm-community-bin
+    # jetbrains.pycharm
     k9s
     keepassxc
     krew
