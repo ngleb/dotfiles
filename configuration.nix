@@ -513,6 +513,8 @@
     xdg-utils
     yt-dlp
     zathura
+    localsend
+    element-desktop
   ]) ++ (with pkgs.gnomeExtensions; [
     advanced-weather-companion
     appindicator
