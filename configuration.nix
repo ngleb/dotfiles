@@ -515,6 +515,7 @@
     zathura
     localsend
     element-desktop
+    deno
   ]) ++ (with pkgs.gnomeExtensions; [
     advanced-weather-companion
     appindicator
