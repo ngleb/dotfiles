@@ -518,6 +518,7 @@
     localsend
     element-desktop
     deno
+    amnezia-vpn-bin
   ]) ++ (with pkgs.gnomeExtensions; [
     advanced-weather-companion
     appindicator
