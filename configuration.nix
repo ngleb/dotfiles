@@ -15,6 +15,8 @@
     outputs.overlays.modifications
   ];
 
+  documentation.doc.enable = false;
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -323,7 +325,6 @@
       fi
       '';
   };
-  programs.adb.enable = true;
   programs.firefox.enable = true;
   programs.firefox.languagePacks = [ "en-US" ];
   programs.git.enable = true;
@@ -338,7 +339,7 @@
   };
   programs.thunar = {
     enable = true;
-    plugins = with pkgs.xfce; [
+    plugins = with pkgs; [
       thunar-archive-plugin
       thunar-volman
     ];
@@ -394,6 +395,7 @@
     (llama-cpp.override {
       vulkanSupport = true;
     })
+    android-tools
     ghostscript
     adwaita-qt
     adwaita-qt6
@@ -464,8 +466,8 @@
     mpv
     nextcloud-client
     nix-bash-completions
-    nodePackages.typescript
-    nodePackages.typescript-language-server
+    typescript
+    typescript-language-server
     nodejs
     nomacs
     nvd
@@ -504,7 +506,7 @@
     vanilla-dmz
     vlc
     wget
-    wineWowPackages.stable
+    wineWow64Packages.stable
     winetricks
     wireshark
     wmctrl
