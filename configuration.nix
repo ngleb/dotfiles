@@ -332,6 +332,9 @@
   programs.tmux.enable = true;
   programs.wireshark.enable = true;
   programs.ydotool.enable = true;
+  programs.amnezia-vpn = {
+    enable = true;
+  };
   programs.vim = {
     enable = true;
     defaultEditor = true;
@@ -518,7 +521,6 @@
     localsend
     element-desktop
     deno
-    amnezia-vpn-bin
   ]) ++ (with pkgs.gnomeExtensions; [
     advanced-weather-companion
     appindicator
