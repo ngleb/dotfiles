@@ -398,12 +398,11 @@
     (llama-cpp.override {
       vulkanSupport = true;
     })
-    android-tools
-    ghostscript
     adwaita-qt
     adwaita-qt6
     aegisub
     allure
+    android-tools
     anydesk
     aria2
     bruno
@@ -413,8 +412,10 @@
     curl
     darktable
     dbeaver-bin
+    deno
     desktop-file-utils
     dig
+    element-desktop
     element-desktop
     elementary-xfce-icon-theme
     emacs-pgtk
@@ -428,6 +429,7 @@
     gajim
     galculator
     gcc
+    ghostscript
     gimp
     git
     gnome-mahjongg
@@ -446,7 +448,7 @@
     imagemagickBig
     inkscape
     inputs.agenix.packages.x86_64-linux.default
-    # jetbrains.pycharm
+    jetbrains.pycharm
     k9s
     keepassxc
     krew
@@ -459,6 +461,7 @@
     libsForQt5.qtstyleplugins
     lm_sensors
     lmstudio
+    localsend
     lsof
     mc
     mediainfo
@@ -469,13 +472,12 @@
     mpv
     nextcloud-client
     nix-bash-completions
-    typescript
-    typescript-language-server
     nodejs
     nomacs
     nvd
     nvme-cli
     obs-studio
+    openssl
     pandoc
     parted
     pavucontrol
@@ -503,6 +505,8 @@
     tor-browser
     transmission_4-gtk
     tree
+    typescript
+    typescript-language-server
     unar
     unzipNLS
     usbutils
@@ -518,9 +522,6 @@
     xdg-utils
     yt-dlp
     zathura
-    localsend
-    element-desktop
-    deno
   ]) ++ (with pkgs.gnomeExtensions; [
     advanced-weather-companion
     appindicator

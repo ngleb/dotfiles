@@ -38,6 +38,7 @@
       [builtintheme][devtoolstheme="dark"]
     ) {
     --toolbar-bgcolor: rgba(43, 42, 51, 5) !important; /* Original: rgba(43, 42, 51, 1) */
+    --toolbar-background-color: rgba(43, 42, 51, 5) !important;
   }
 }
 /** Compatibility Fixes *******************************************************/
@@ -215,10 +216,10 @@
   #tab-preview-panel {
     --panel-background: var(
       --arrowpanel-background
-    ) !important; /* Original: var(--tab-selected-bgcolor, var(--toolbar-bgcolor)) */
+    ) !important; /* Original: var(--tab-selected-bgcolor, var(--toolbar-bgcolor, var(--toolbar-background-color))) */
     --panel-color: var(
       --arrowpanel-color
-    ) !important; /* Original: var(--tab-selected-textcolor, var(--toolbar-color)) */
+    ) !important; /* Original: var(--tab-selected-textcolor, var(--toolbar-color, var(--toolbar-text-color))) */
   }
   /*= Design token =============================================================*/
   :root,
@@ -493,6 +494,7 @@
       --button-color: var(--win-text-color) !important;
       --input-color: var(--win-text-color) !important;
       --toolbar-color: var(--win-text-color) !important;
+      --toolbar-text-color: var(--win-text-color) !important;
       --toolbar-non-lwt-textcolor: var(--win-text-color) !important;
       --toolbarbutton-icon-fill: var(--win-text-color) !important;
       --toolbar-field-focus-color: var(--win-text-color) !important;
@@ -518,6 +520,7 @@
       /* Component Background Color */
       --menu-background-color: var(--win-component-bgcolor) !important;
       --toolbar-bgcolor: var(--win-component-bgcolor) !important;
+      --toolbar-background-color: var(--win-component-bgcolor) !important;
       --toolbar-non-lwt-bgcolor: var(--win-component-bgcolor) !important;
       --arrowpanel-background: var(--win-component-bgcolor) !important;
       --autocomplete-popup-background: var(--win-component-bgcolor) !important;
@@ -764,6 +767,7 @@
   @media (-moz-platform: windows) and (prefers-color-scheme: dark) {
     :root[lwt-default-theme-in-dark-mode][lwthemetextcolor="bright"] {
       --toolbar-bgcolor: var(--win-component-bgcolor) !important; /* Original: rgba(43, 42, 51, 1) */
+      --toolbar-background-color: var(--win-component-bgcolor) !important; /* Original: rgba(43, 42, 51, 1) */
     }
   }
   @media (-moz-platform: windows) {
@@ -827,7 +831,11 @@
           color-mix(in srgb, currentColor 11%, transparent),
           color-mix(in srgb, currentColor 11%, transparent)
         ),
-        linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)), var(--lwt-header-image, none) !important;
+        linear-gradient(
+          var(--toolbar-bgcolor, var(--toolbar-background-color)),
+          var(--toolbar-bgcolor, var(--toolbar-background-color))
+        ),
+        var(--lwt-header-image, none) !important;
     }
   }
   /*= Windows10 - Titlebar accent color ========================================*/
@@ -949,6 +957,7 @@
       --autocomplete-popup-background: var(--mac-bgcolor) !important;
       /* Selected Background Color */
       --toolbar-bgcolor: var(--mac-selected-bgcolor) !important;
+      --toolbar-background-color: var(--mac-selected-bgcolor) !important;
       --toolbar-non-lwt-bgcolor: var(--mac-selected-bgcolor) !important;
       /* Field Background Color */
       --input-bgcolor: var(--mac-field-bgcolor) !important;
@@ -1117,6 +1126,7 @@
     @media (prefers-color-scheme: dark) {
       :root[lwt-default-theme-in-dark-mode][lwthemetextcolor="bright"] {
         --toolbar-bgcolor: color-mix(in srgb, rgb(255, 255, 255) 15%, -moz-dialog) !important;
+        --toolbar-background-color: color-mix(in srgb, rgb(255, 255, 255) 15%, -moz-dialog) !important;
       }
     }
     /* Hard Coded */
@@ -1830,11 +1840,12 @@
     --arrowpanel-color: var(--lwt-tab-text) !important;
     --focus-outline-color: rgb(172, 112, 255) !important;
     --toolbar-bgcolor: #322560 !important;
-    --toolbar-non-lwt-bgcolor: var(--toolbar-bgcolor) !important;
+    --toolbar-background-color: #322560 !important;
+    --toolbar-non-lwt-bgcolor: var(--toolbar-bgcolor, var(--toolbar-background-color)) !important;
     --lwt-accent-color: #19162f !important;
     --in-content-page-background: var(--lwt-accent-color) !important;
     --toolbar-field-background-color: #0b0724 !important;
-    --lwt-selected-tab-background-color: var(--toolbar-bgcolor) !important;
+    --lwt-selected-tab-background-color: var(--toolbar-bgcolor, var(--toolbar-background-color)) !important;
     --toolbarbutton-hover-background: rgba(255, 255, 255, 0.05) !important;
     --toolbarbutton-active-background: #4d4175 !important;
     --arrowpanel-background: #1d1935 !important;
@@ -2393,7 +2404,11 @@
     }
     #nav-bar,
     #PersonalToolbar {
-      background-image: linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)), var(--lwt-additional-images);
+      background-image: linear-gradient(
+          var(--toolbar-bgcolor, var(--toolbar-background-color)),
+          var(--toolbar-bgcolor, var(--toolbar-background-color))
+        ),
+        var(--lwt-additional-images);
       background-repeat: repeat-x, var(--lwt-background-tiling);
       background-position: 0 0, var(--lwt-background-alignment);
       background-attachment: scroll, fixed !important;
@@ -4045,7 +4060,7 @@
 
 @media -moz-pref("userChrome.rounding.square_tab") {
   :root {
-    --tab-border-radius: 0 !important; /* Original: 4px */
+    --tab-border-radius: 0px !important; /* Original: 4px */
   }
 }
 @media not -moz-pref("userChrome.rounding.square_tab") {
@@ -4055,7 +4070,7 @@
 }
 @media -moz-pref("userChrome.rounding.square_button") {
   :root {
-    --urlbar-icon-border-radius: 0 !important; /* Original: calc(var(--toolbarbutton-border-radius) - 1px); */
+    --urlbar-icon-border-radius: 0px !important; /* Original: calc(var(--toolbarbutton-border-radius) - 1px); */
   }
   .toolbarbutton-1,
   .toolbarbutton-icon,
@@ -4066,7 +4081,7 @@
   .urlbarView-action,
   toolbarbutton.bookmark-item:not(.subviewbutton),
   #sidebar-switcher-target {
-    --toolbarbutton-border-radius: 0; /* Original: 4px */
+    --toolbarbutton-border-radius: 0px; /* Original: 4px */
   }
   button,
   .close-icon,
@@ -4075,7 +4090,7 @@
   findbar toolbarbutton,
   .notification-button,
   #main-menubar > menu {
-    border-radius: 0 !important;
+    border-radius: 0px !important;
   }
 }
 @media -moz-pref("userChrome.rounding.square_tab") or -moz-pref("userChrome.rounding.square_button") {
@@ -4087,13 +4102,13 @@
 }
 @media -moz-pref("userChrome.rounding.square_panel") {
   :root {
-    --arrowpanel-border-radius: 0 !important;
+    --arrowpanel-border-radius: 0px !important;
   }
 }
 @media -moz-pref("userChrome.rounding.square_panelitem") {
   :root {
-    --arrowpanel-menuitem-border-radius: 0 !important;
-    --subviewbutton-border-radius: 0 !important;
+    --arrowpanel-menuitem-border-radius: 0px !important;
+    --subviewbutton-border-radius: 0px !important;
   }
 }
 @media -moz-pref("userChrome.rounding.square_menupopup") {
@@ -4107,17 +4122,17 @@
   xul|menulist > xul|menupopup xul|menu,
   xul|menulist > xul|menupopup xul|menuitem,
   .customization-uidensity-menuitem {
-    border-radius: 0 !important;
+    border-radius: 0px !important;
   }
 }
 @media -moz-pref("userChrome.rounding.square_infobox") {
   #sanitizeEverythingWarningBox {
-    border-radius: 0 !important;
+    border-radius: 0px !important;
   }
 }
 @media -moz-pref("userChrome.rounding.square_toolbar") {
   :root {
-    --uc-rounding-toolbar: 0;
+    --uc-rounding-toolbar: 0px;
   }
   .container.infobar,
   .container.infobar::before,
@@ -4141,19 +4156,19 @@
   #urlbar-input-container,
   #urlbar-background,
   #searchbar {
-    --toolbarbutton-border-radius: 0;
+    --toolbarbutton-border-radius: 0px;
   }
 }
 @media -moz-pref("userChrome.rounding.square_urlView_item") {
   .urlbarView-row,
   .urlbarView-row-inner {
-    --toolbarbutton-border-radius: 0;
+    --toolbarbutton-border-radius: 0px;
   }
 }
 @media -moz-pref("userChrome.rounding.square_checklabel") {
   input[type="checkbox"],
   .checkbox-check {
-    border-radius: 0 !important;
+    border-radius: 0px !important;
   }
 }
 @media -moz-pref("userChrome.rounding.square_dialog") {
@@ -4622,7 +4637,8 @@
   }
 }
 @media -moz-pref("userChrome.padding.urlView_expanding") or -moz-pref("userChrome.urlView.as_commandbar") {
-  #urlbar[breakout][breakout-extend] {
+  /* .browser-titlebar is Vertical Tabbar */
+  #nav-bar:not(.browser-titlebar) #urlbar[breakout][breakout-extend] {
     top: calc(var(--urlbar-container-height) * 2 - var(--urlbar-height)) !important;
     width: var(--urlbar-width) !important;
     position: relative !important;
@@ -4891,8 +4907,7 @@
     padding: unset !important;
     padding-top: 4px !important;
   }
-}
-/*= Popup Panel - Reduce padding =============================================*/
+} /*= Popup Panel - Reduce padding =============================================*/
 @media -moz-pref("userChrome.padding.popup_panel") {
   #protections-popup-main-header-label {
     height: unset !important; /* Original: 37.6px */
@@ -4991,7 +5006,8 @@
         @media -moz-pref("userChrome.tab.color_like_toolbar") {
           #navigator-toolbox {
             border-bottom-color: var(
-              --toolbar-bgcolor
+              --toolbar-bgcolor,
+              var(--toolbar-background-color)
             ) !important; /* Original: 1px solid var(--chrome-content-separator-color); */
           }
         }
@@ -5104,7 +5120,8 @@
             @media -moz-pref("userChrome.tab.color_like_toolbar") {
               #navigator-toolbox {
                 border-bottom-color: var(
-                  --toolbar-bgcolor
+                  --toolbar-bgcolor,
+                  var(--toolbar-background-color)
                 ) !important; /* Original: 1px solid var(--chrome-content-separator-color); */
               }
             }
@@ -5246,7 +5263,7 @@
     }
     @media -moz-pref("userChrome.tabbar.one_liner.combine_navbar") {
       #navigator-toolbox {
-        background-color: var(--toolbar-bgcolor) !important;
+        background-color: var(--toolbar-bgcolor, var(--toolbar-background-color)) !important;
       }
       #nav-bar {
         --lwt-tabs-border-color: transparent;
@@ -5350,7 +5367,7 @@
       }
       @media -moz-pref("userChrome.tabbar.one_liner.combine_navbar") {
         #navigator-toolbox {
-          background-color: var(--toolbar-bgcolor) !important;
+          background-color: var(--toolbar-bgcolor, var(--toolbar-background-color)) !important;
         }
         #nav-bar {
           --lwt-tabs-border-color: transparent;
@@ -7107,6 +7124,10 @@
       box-shadow: 0 -0.01px 0 ThreeDShadow;
     }
   }
+  /* Split Tab */
+  #tabbrowser-tabs:not([orient="vertical"]) tab-split-view-wrapper {
+    margin-bottom: 0 !important;
+  }
 }
 /*= Selected Tab =============================================================*/
 /*= Selected Tab - Bold ======================================================*/
@@ -7125,7 +7146,7 @@
   }
   #TabsToolbar #firefox-view-button[open] > .toolbarbutton-icon,
   .tab-background:is([selected], [multiselected]) {
-    background-color: var(--tab-selected-bgcolor, var(--toolbar-bgcolor)) !important;
+    background-color: var(--tab-selected-bgcolor, var(--toolbar-bgcolor, var(--toolbar-background-color))) !important;
   }
   :root:is(:-moz-lwtheme, [lwtheme]) #pinned-tabs-container > .tabbrowser-tab > .tab-stack > .tab-background[selected],
   :root:is(:-moz-lwtheme, [lwtheme])
@@ -7171,10 +7192,14 @@
     > .tabbrowser-tab
     > .tab-stack
     > .tab-background[selected] {
-    /* Original: linear-gradient(var(--lwt-selected-tab-background-color, transparent), var(--lwt-selected-tab-background-color, transparent)), linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)), var(--lwt-header-image, none)
+    /* Original: linear-gradient(var(--lwt-selected-tab-background-color, transparent), var(--lwt-selected-tab-background-color, transparent)), linear-gradient(var(--toolbar-bgcolor, var(--toolbar-background-color)), var(--toolbar-bgcolor, var(--toolbar-background-color))), var(--lwt-header-image, none)
      */
     background-image: linear-gradient(transparent, transparent),
-      linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)), var(--lwt-header-image, none) !important;
+      linear-gradient(
+        var(--toolbar-bgcolor, var(--toolbar-background-color)),
+        var(--toolbar-bgcolor, var(--toolbar-background-color))
+      ),
+      var(--lwt-header-image, none) !important;
     background-position: 0, 0, right top;
     background-attachment: scroll, scroll, fixed;
     background-repeat: repeat-x, repeat-x, no-repeat !important;
@@ -7229,7 +7254,11 @@
       > .tab-stack
       > .tab-background[selected] {
       background-image: linear-gradient(transparent, transparent),
-        linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)), var(--lwt-additional-images, none) !important;
+        linear-gradient(
+          var(--toolbar-bgcolor, var(--toolbar-background-color)),
+          var(--toolbar-bgcolor, var(--toolbar-background-color))
+        ),
+        var(--lwt-additional-images, none) !important;
       background-repeat: repeat-x, repeat-x, var(--lwt-background-tiling) !important;
       background-position: 0 0, 0 0, var(--lwt-background-alignment) !important;
     }
@@ -7271,7 +7300,7 @@
     background-attachment: scroll, scroll, fixed;
     background-color: transparent;
     background-image: linear-gradient(var(--lwt-selected-tab-background-color, transparent), var(--lwt-selected-tab-background-color, transparent)),
-                      linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)),
+                      linear-gradient(var(--toolbar-bgcolor, var(--toolbar-background-color)), var(--toolbar-bgcolor, var(--toolbar-background-color))),
                       var(--lwt-header-image, none);
     background-position: 0 0, 0 0, right top;
     background-repeat: repeat-x, repeat-x, no-repeat;
@@ -7311,6 +7340,29 @@
     );
     --uc-tab-shadow-color-bundle: var(--tab-line-color, var(--lwt-tab-line-color, rgba(128, 128, 142, 0.9)));
   }
+  #tabbrowser-tabs:not([noshadowfortests]) {
+    /* filter create new stacking context */
+  }
+  #tabbrowser-tabs:not([noshadowfortests]) .tab-background:is([selected], [multiselected]) {
+    box-shadow: unset !important;
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
+  }
+  #tabbrowser-tabs:not([noshadowfortests])[orient="vertical"]
+    .tab-background:is([selected], [multiselected])
+    .tab-group-line {
+    height: calc(100% + 6px + var(--tab-block-margin));
+    transform: translateY(-2px);
+  }
+  #tabbrowser-tabs:not([noshadowfortests])[expanded][orient="vertical"]
+    .tab-background:is([selected], [multiselected])
+    .tab-group-line {
+    inset-inline-start: calc(-1 * var(--tab-inner-inline-margin)) !important;
+  }
+  #tabbrowser-tabs:not([noshadowfortests]):not([expanded])[orient="vertical"]
+    .tab-background:is([selected], [multiselected])
+    .tab-group-line {
+    inset-inline-start: calc(-1 * var(--tab-inner-inline-margin) + 2px) !important;
+  }
   #tabbrowser-tabs:not([noshadowfortests]) .tab-background:is([selected], [multiselected]) {
     box-shadow: unset !important;
     filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
@@ -7340,7 +7392,7 @@
     #TabsToolbar[brighttext]
     #tabbrowser-tabs:not([noshadowfortests])
     .tabbrowser-tab[multiselected]:not([visuallyselected]) {
-    --uc-tab-shadow-color: var(--toolbar-color);
+    --uc-tab-shadow-color: var(--toolbar-color, var(--toolbar-text-color));
   }
   /* For themes outside of Light and Dark (which are curated by Mozilla), show a thicker border
      around the tab to help themes that are dependent on tab_line to show the selected tab. */
@@ -7417,15 +7469,15 @@
               :root:not([customizing="true"]) .tabbrowser-tab .tab-background::before,
               :root:not([customizing="true"]) .tabbrowser-tab .tab-background::after {
                 /* Based on tab background
-                   background-image: linear-gradient(var(--lwt-selected-tab-background-color, transparent), var(--lwt-selected-tab-background-color, transparent)), linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)), var(--lwt-header-image, none);
+                   background-image: linear-gradient(var(--lwt-selected-tab-background-color, transparent), var(--lwt-selected-tab-background-color, transparent)), linear-gradient(var(--toolbar-bgcolor, var(--toolbar-background-color)), var(--toolbar-bgcolor, var(--toolbar-background-color))), var(--lwt-header-image, none);
 
                    defaults
-                   background-color: var(--tab-selected-bgcolor, var(--toolbar-bgcolor));
+                   background-color: var(--tab-selected-bgcolor, var(--toolbar-bgcolor, var(--toolbar-background-color)));
                    background-image: var(--tab-selected-bgimage, var(--toolbar-bgimage));
                 */
                 fill: var(
                   --lwt-selected-tab-background-color,
-                  var(--tab-selected-bgcolor, var(--toolbar-bgcolor))
+                  var(--tab-selected-bgcolor, var(--toolbar-bgcolor, var(--toolbar-background-color)))
                 ) !important;
               }
             }
@@ -7439,7 +7491,7 @@
             }
             :root:not([customizing="true"]) .tabbrowser-tab[visuallyselected] .tab-background::before,
             :root:not([customizing="true"]) .tabbrowser-tab[visuallyselected] .tab-background::after {
-              fill: var(--tab-selected-bgcolor, var(--toolbar-bgcolor));
+              fill: var(--tab-selected-bgcolor, var(--toolbar-bgcolor, var(--toolbar-background-color)));
               stroke: var(--tab-line-color, var(--tabs-border-color, rgba(128, 128, 142, 0.9)));
             }
             @media not -moz-pref("userChrome.tab.bottom_rounded_corner.all") {
@@ -7450,7 +7502,7 @@
             }
             :root:not([customizing="true"]) .tabbrowser-tab[multiselected] .tab-background::before,
             :root:not([customizing="true"]) .tabbrowser-tab[multiselected] .tab-background::after {
-              fill: var(--tab-selected-bgcolor, var(--toolbar-bgcolor));
+              fill: var(--tab-selected-bgcolor, var(--toolbar-bgcolor, var(--toolbar-background-color)));
             }
             :root:not([customizing="true"])
               .tabbrowser-tab:hover:not([visuallyselected], [multiselected])
@@ -7488,7 +7540,7 @@
               .tabbrowser-tab[visuallyselected]
               .tab-background::after {
               /* As Selected Tab - Box Shadow */
-              stroke: var(--toolbar-color);
+              stroke: var(--toolbar-color, var(--toolbar-text-color));
             }
             @media (-moz-gtk-csd-available) {
               :root:not([customizing="true"]) {
@@ -7639,13 +7691,16 @@
       .tabbrowser-tab .tab-background::before,
       .tabbrowser-tab .tab-background::after {
         /* Based on tab background
-             background-image: linear-gradient(var(--lwt-selected-tab-background-color, transparent), var(--lwt-selected-tab-background-color, transparent)), linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)), var(--lwt-header-image, none);
+             background-image: linear-gradient(var(--lwt-selected-tab-background-color, transparent), var(--lwt-selected-tab-background-color, transparent)), linear-gradient(var(--toolbar-bgcolor, var(--toolbar-background-color)), var(--toolbar-bgcolor, var(--toolbar-background-color))), var(--lwt-header-image, none);
 
              defaults
-             background-color: var(--tab-selected-bgcolor, var(--toolbar-bgcolor));
+             background-color: var(--tab-selected-bgcolor, var(--toolbar-bgcolor, var(--toolbar-background-color)));
              background-image: var(--tab-selected-bgimage, var(--toolbar-bgimage));
         */
-        fill: var(--lwt-selected-tab-background-color, var(--tab-selected-bgcolor, var(--toolbar-bgcolor))) !important;
+        fill: var(
+          --lwt-selected-tab-background-color,
+          var(--tab-selected-bgcolor, var(--toolbar-bgcolor, var(--toolbar-background-color)))
+        ) !important;
       }
     }
     .tabbrowser-tab .tab-background::before {
@@ -7669,7 +7724,7 @@
     }
     .tabbrowser-tab:is([visuallyselected], [multiselected]) .tab-background::before,
     .tabbrowser-tab:is([visuallyselected], [multiselected]) .tab-background::after {
-      fill: var(--tab-selected-bgcolor, var(--toolbar-bgcolor));
+      fill: var(--tab-selected-bgcolor, var(--toolbar-bgcolor, var(--toolbar-background-color)));
     }
     .tabbrowser-tab:hover:not([visuallyselected], [multiselected]) .tab-background::before,
     .tabbrowser-tab:hover:not([visuallyselected], [multiselected]) .tab-background::after {
@@ -7793,7 +7848,7 @@
   :root:not([customizing="true"]) #TabsToolbar[brighttext] tab[visuallyselected] > stack::before,
   :root:not([customizing="true"]) #TabsToolbar[brighttext] tab[visuallyselected] > stack::after {
     /* As Selected Tab - Box Shadow */
-    stroke: var(--toolbar-color) !important;
+    stroke: var(--toolbar-color, var(--toolbar-text-color)) !important;
   }
   /* Animation */
   .tabbrowser-tab:not([selected="true"], [multiselected]) .tab-context-line {
@@ -7918,7 +7973,7 @@
     :root:not([customizing="true"]) #TabsToolbar[brighttext] tab[visuallyselected] > stack::before,
     :root:not([customizing="true"]) #TabsToolbar[brighttext] tab[visuallyselected] > stack::after {
       /* As Selected Tab - Box Shadow */
-      stroke: var(--toolbar-color) !important;
+      stroke: var(--toolbar-color, var(--toolbar-text-color)) !important;
     }
     /* Remove side's background color border */
     :root:is(:-moz-lwtheme, [lwtheme])
@@ -8045,10 +8100,38 @@
     ~ #tabbrowser-arrowscrollbox:not([orient="vertical"])
     .tabbrowser-tab:not([visuallyselected], [multiselected], :hover):first-of-type
     .tab-stack::before,
+  #pinned-tabs-container:not([orient="vertical"]):not(:empty):has(
+      .tabbrowser-tab[pinned]:is([visuallyselected], [multiselected], :hover):last-of-type
+    )
+    ~ #tabbrowser-arrowscrollbox:not([orient="vertical"]):has(tab-split-view-wrapper:first-child)
+    .tabbrowser-tab:not([visuallyselected], [multiselected], :hover):first-of-type
+    .tab-stack::before,
   #tabbrowser-tabs:not([orient="vertical"])
     .tabbrowser-tab:not([visuallyselected], [multiselected], :hover, :first-of-type)
+    .tab-stack::before,
+  #tabbrowser-tabs:not([orient="vertical"])
+    tab-split-view-wrapper
+    .tabbrowser-tab:not([visuallyselected], [multiselected], :hover)
     .tab-stack::before {
     opacity: var(--tab-separator-opacity);
+  }
+  #pinned-tabs-container:not([orient="vertical"]):not(:empty):has(
+      .tabbrowser-tab[pinned]:is([visuallyselected], [multiselected], :hover):last-of-type
+    )
+    ~ #tabbrowser-arrowscrollbox:not([orient="vertical"])
+    tab-split-view-wrapper:first-child
+    .tabbrowser-tab:first-of-type
+    .tab-stack::before,
+  #tabbrowser-tabs:not([orient="vertical"])
+    .tabbrowser-tab:is([visuallyselected], [multiselected], :hover)
+    + tab-split-view-wrapper
+    .tabbrowser-tab:first-child
+    .tab-stack::before,
+  #tabbrowser-tabs:not([orient="vertical"])
+    tab-split-view-wrapper:has(.tabbrowser-tab:is([visuallyselected], [multiselected], :hover))
+    + .tabbrowser-tab:not([visuallyselected], [multiselected], :hover)
+    .tab-stack::before {
+    opacity: 0 !important;
   }
   @media -moz-pref("userChrome.tabbar.one_liner") {
     @media not -moz-pref("userChrome.tabbar.one_liner.tabbar_first") {
@@ -8164,6 +8247,10 @@
   /* Latest Tab & New tab margin */
   #tabbrowser-tabs:not([orient="vertical"]) #tabbrowser-arrowscrollbox:not([overflowing]) .tabbrowser-tab:last-of-type {
     margin-inline-end: 1px !important;
+  }
+  /* Split Tab */
+  #tabbrowser-tabs tab-split-view-wrapper .tabbrowser-tab:last-child {
+    border-inline-start: none !important;
   }
 }
 /*= Unselected Tab - Static Separator ========================================*/
@@ -8615,6 +8702,19 @@
     padding-inline-start: 3px !important; /* Original: 0px */
     width: 19px !important; /* Redefine from 19px !important, Original: 17px = (width - padding)  */
   }
+  #tabbrowser-tabs[orient="vertical"]:not([expanded]) .tab-close-button {
+    padding: 2px !important;
+    width: 16px !important;
+    height: 16px !important;
+    background-image: linear-gradient(var(--close-button-extra-background)),
+      linear-gradient(var(--tab-selected-bgcolor, var(--toolbar-bgcolor, var(--toolbar-background-color)))),
+      linear-gradient(var(--toolbox-bgcolor)) !important;
+  }
+  #tabbrowser-tabs[orient="vertical"]:not([expanded]) .tab-close-button:-moz-window-inactive {
+    background-image: linear-gradient(var(--close-button-extra-background)),
+      linear-gradient(var(--tab-selected-bgcolor, var(--toolbar-bgcolor, var(--toolbar-background-color)))),
+      linear-gradient(var(--toolbox-bgcolor-inactive)) !important;
+  }
 }
 /** Clipped tabs - Show close button at pinned tab ****************************/
 @media -moz-pref("userChrome.tab.close_button_at_pinned") {
@@ -8948,8 +9048,8 @@
   .tab-icon-overlay:not([crashed])[muted]:hover,
   .tab-icon-overlay:not([crashed])[activemedia-blocked]:hover {
     color: var(--toolbar-bgcolor, white) !important;
-    stroke: var(--lwt-tab-text, var(--toolbar-color)) !important;
-    background-color: var(--lwt-tab-text, var(--toolbar-color)) !important;
+    stroke: var(--lwt-tab-text, var(--toolbar-color, var(--toolbar-text-color))) !important;
+    background-color: var(--lwt-tab-text, var(--toolbar-color, var(--toolbar-text-color))) !important;
     fill-opacity: 0.95 !important;
   }
   #TabsToolbar[brighttext] .tab-icon-overlay:not([crashed])[soundplaying]:hover,
@@ -9038,10 +9138,11 @@
       display: block;
       position: absolute;
       top: 50%;
+      left: var(--tab-inline-padding);
       transform: translate(var(--uc-container-position-x), var(--uc-container-position-y));
       /* Shape */
       border-bottom: 2px solid var(--identity-icon-color);
-      width: calc(100% - 30px);
+      width: calc(100% - (var(--tab-inline-padding) + var(--tab-inner-inline-margin)) * 2);
       opacity: 0.75;
     }
     .tabbrowser-tab[visuallyselected] .tab-content::before {
@@ -9052,7 +9153,7 @@
         width: 25%;
       }
       .tabbrowser-tab[visuallyselected]:not([pinned]) .tab-content::before {
-        width: calc(100% - 30px);
+        width: calc(100% - (var(--tab-inline-padding) + var(--tab-inner-inline-margin)) * 2);
       }
       #tabbrowser-tabs[closebuttons="activetab"] .tabbrowser-tab[visuallyselected]:not([pinned]) .tab-content::before {
         width: calc(100% - 33px);
@@ -9066,12 +9167,17 @@
       }
     }
     /* Pinned Tab */
-    .tabbrowser-tab[pinned] .tab-content::before {
+    .tabbrowser-tab[pinned] .tab-content::before,
+    #tabbrowser-tabs[orient="vertical"]:not([expanded]) .tab-content::before {
+      left: unset;
       transform: translateY(var(--uc-container-position-y));
-      width: 16px;
+      width: 16px !important;
     }
     @media -moz-pref("userChrome.tab.close_button_at_pinned") {
-      .tabbrowser-tab[pinned][visuallyselected]:not([busy]):hover .tab-content::before {
+      .tabbrowser-tab[pinned][visuallyselected]:not([busy]):hover .tab-content::before,
+      #tabbrowser-tabs[orient="vertical"]:not([expanded])
+        .tabbrowser-tab[visuallyselected]:not([busy]):hover
+        .tab-content::before {
         opacity: 0;
       }
     }
@@ -9079,12 +9185,28 @@
       .tabbrowser-tab:is([image], [pinned])[usercontextid]
         > .tab-stack
         > .tab-content[attention]:not([selected])::before,
-      .tabbrowser-tab[usercontextid] > .tab-stack > .tab-content[pinned][titlechanged]:not([selected])::before {
+      #tabbrowser-tabs[orient="vertical"]:not([expanded])
+        .tabbrowser-tab[image][usercontextid]
+        > .tab-stack
+        > .tab-content[attention]:not([selected])::before,
+      .tabbrowser-tab[usercontextid] > .tab-stack > .tab-content[pinned][titlechanged]:not([selected])::before,
+      #tabbrowser-tabs[orient="vertical"]:not([expanded])
+        .tabbrowser-tab[usercontextid]
+        > .tab-stack
+        > .tab-content[titlechanged]:not([selected])::before {
         opacity: 0;
       }
       /* Pinned Tab - Titlechanged Indicator override */
       .tabbrowser-tab:is([image], [pinned])[usercontextid] > .tab-stack > .tab-content[attention]:not([selected]),
-      .tabbrowser-tab[usercontextid] > .tab-stack > .tab-content[pinned][titlechanged]:not([selected]) {
+      #tabbrowser-tabs[orient="vertical"]:not([expanded])
+        .tabbrowser-tab[image][usercontextid]
+        > .tab-stack
+        > .tab-content[attention]:not([selected]),
+      .tabbrowser-tab[usercontextid] > .tab-stack > .tab-content[pinned][titlechanged]:not([selected]),
+      #tabbrowser-tabs[orient="vertical"]:not([expanded])
+        .tabbrowser-tab[usercontextid]
+        > .tab-stack
+        > .tab-content[titlechanged]:not([selected]) {
         /* Original: radial-gradient(circle, var(--attention-icon-color), var(--attention-icon-color) 2px, transparent 2px); */
         --dotted-identity-image: radial-gradient(
           circle,
@@ -9096,7 +9218,15 @@
         background-position-x: var(--uc-titlechanged-container-position-x) !important;
       }
       .tabbrowser-tab:is([image], [pinned]) > .tab-stack > .tab-content[attention]:not([selected]),
-      .tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected]) {
+      #tabbrowser-tabs[orient="vertical"]:not([expanded])
+        .tabbrowser-tab[image]
+        > .tab-stack
+        > .tab-content[attention]:not([selected]),
+      .tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected]),
+      #tabbrowser-tabs[orient="vertical"]:not([expanded])
+        .tabbrowser-tab
+        > .tab-stack
+        > .tab-content[titlechanged]:not([selected]) {
         /* Original: center bottom calc(6.5px + var(--tabs-navbar-shadow-size)); */
         background-position-y: top var(--uc-container-position-y) !important;
       }
@@ -9104,9 +9234,17 @@
       .tabbrowser-tab:is([image], [pinned])[usercontextid]:is([soundplaying], [muted], [activemedia-blocked])
         > .tab-stack
         > .tab-content[attention]:not([selected]),
+      #tabbrowser-tabs[orient="vertical"]:not([expanded])
+        .tabbrowser-tab[image][usercontextid]:is([soundplaying], [muted], [activemedia-blocked])
+        > .tab-stack
+        > .tab-content[attention]:not([selected]),
       .tabbrowser-tab[usercontextid]:is([soundplaying], [muted], [activemedia-blocked])
         > .tab-stack
-        > .tab-content[pinned][titlechanged]:not([selected]) {
+        > .tab-content[pinned][titlechanged]:not([selected]),
+      #tabbrowser-tabs[orient="vertical"]:not([expanded])
+        .tabbrowser-tab[usercontextid]:is([soundplaying], [muted], [activemedia-blocked])
+        > .tab-stack
+        > .tab-content[titlechanged]:not([selected]) {
         --uc-titlechanged-container-position-x: calc(32% - 1px), calc(50% - 1px), calc(70% - 1px);
       }
       :root[uidensity="compact"]
@@ -9114,15 +9252,33 @@
         > .tab-stack
         > .tab-content[attention]:not([selected]),
       :root[uidensity="compact"]
+        #tabbrowser-tabs[orient="vertical"]:not([expanded])
+        .tabbrowser-tab[image][usercontextid]:is([soundplaying], [muted], [activemedia-blocked])
+        > .tab-stack
+        > .tab-content[attention]:not([selected]),
+      :root[uidensity="compact"]
         .tabbrowser-tab[usercontextid]:is([soundplaying], [muted], [activemedia-blocked])
         > .tab-stack
-        > .tab-content[pinned][titlechanged]:not([selected]) {
+        > .tab-content[pinned][titlechanged]:not([selected]),
+      :root[uidensity="compact"]
+        #tabbrowser-tabs[orient="vertical"]:not([expanded])
+        .tabbrowser-tab[usercontextid]:is([soundplaying], [muted], [activemedia-blocked])
+        > .tab-stack
+        > .tab-content[titlechanged]:not([selected]) {
         --uc-titlechanged-container-position-x: calc(30% - 1px), calc(50% - 1px), calc(70% - 1px);
       }
     }
     @media -moz-pref("userChrome.tab.container.on_top") {
       .tabbrowser-tab:is([image], [pinned]) > .tab-stack > .tab-content[attention]:not([selected]),
-      .tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected]) {
+      #tabbrowser-tabs[orient="vertical"]:not([expanded])
+        .tabbrowser-tab[image]
+        > .tab-stack
+        > .tab-content[attention]:not([selected]),
+      .tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected]),
+      #tabbrowser-tabs[orient="vertical"]:not([expanded])
+        .tabbrowser-tab
+        > .tab-stack
+        > .tab-content[titlechanged]:not([selected]) {
         /* Original: center bottom calc(6.5px + var(--tabs-navbar-shadow-size)); */
         background-position-y: top var(--uc-container-position-y-bottom) !important;
       }
@@ -9866,7 +10022,7 @@
       @media not -moz-pref("userChrome.combined.urlbar.home_button") {
         #nav-bar-customization-target > #back-button {
           z-index: 3 !important;
-          background-color: var(--toolbar-bgcolor) !important;
+          background-color: var(--toolbar-bgcolor, var(--toolbar-background-color)) !important;
           background-clip: content-box !important;
           border-radius: 100%;
           padding-block: 0 !important;
@@ -9907,7 +10063,7 @@
     @media not -moz-pref("userChrome.combined.urlbar.nav_button") {
       #nav-bar-customization-target > #back-button {
         z-index: 3 !important;
-        background-color: var(--toolbar-bgcolor) !important;
+        background-color: var(--toolbar-bgcolor, var(--toolbar-background-color)) !important;
         background-clip: content-box !important;
         border-radius: 100%;
         padding-block: 0 !important;
@@ -9951,7 +10107,7 @@
     #nav-bar-customization-target > #home-button {
       position: relative;
       z-index: 3 !important;
-      background-color: var(--toolbar-bgcolor) !important;
+      background-color: var(--toolbar-bgcolor, var(--toolbar-background-color)) !important;
       background-clip: content-box !important;
       border-radius: 100%;
       padding-block: 0 !important;
@@ -10037,7 +10193,7 @@
   #nav-bar-customization-target > #home-button {
     position: relative;
     z-index: 3 !important;
-    background-color: var(--toolbar-bgcolor) !important;
+    background-color: var(--toolbar-bgcolor, var(--toolbar-background-color)) !important;
     background-clip: content-box !important;
     border-radius: 100%;
     padding-block: 0 !important;
@@ -10242,7 +10398,7 @@
   .findbar-closebutton {
     border-style: solid;
     border-color: var(--chrome-content-separator-color);
-    background: var(--uc-light-bkgnd-color, var(--toolbar-bgcolor)) !important;
+    background: var(--uc-light-bkgnd-color, var(--toolbar-bgcolor, var(--toolbar-background-color))) !important;
     pointer-events: auto;
     height: 33px !important;
   }
@@ -12820,11 +12976,6 @@
       #blockedPopupDontShowMessage {
         padding-inline-end: var(--context-menu-background-padding) !important;
       }
-      /* text position */
-      :not(menu, #ContentSelectDropdown, #context-navigation) > menupopup:not(.in-menulist) > menuitem > .menu-text,
-      :not(menu, #ContentSelectDropdown, #context-navigation) > menupopup:not(.in-menulist) > menu > .menu-text {
-        padding-inline-start: var(--context-menu-mac-padding) !important;
-      }
       /* Checkbox menuitem, None iconic menu */
       :not(menu, #ContentSelectDropdown, #context-navigation)
         > menupopup:not(.in-menulist)
@@ -14620,6 +14771,7 @@
       [builtintheme][devtoolstheme="dark"]
     ) {
     --toolbar-bgcolor: rgba(43, 42, 51, 5) !important; /* Original: rgba(43, 42, 51, 1) */
+    --toolbar-background-color: rgba(43, 42, 51, 5) !important;
   }
 }
 /** Compatibility Fixes *******************************************************/
@@ -14830,10 +14982,10 @@
   #tab-preview-panel {
     --panel-background: var(
       --arrowpanel-background
-    ) !important; /* Original: var(--tab-selected-bgcolor, var(--toolbar-bgcolor)) */
+    ) !important; /* Original: var(--tab-selected-bgcolor, var(--toolbar-bgcolor, var(--toolbar-background-color))) */
     --panel-color: var(
       --arrowpanel-color
-    ) !important; /* Original: var(--tab-selected-textcolor, var(--toolbar-color)) */
+    ) !important; /* Original: var(--tab-selected-textcolor, var(--toolbar-color, var(--toolbar-text-color))) */
   }
 }
 @media (-moz-bool-pref: "userChrome.compatibility.theme") {
@@ -15113,6 +15265,7 @@
     --button-color: var(--win-text-color) !important;
     --input-color: var(--win-text-color) !important;
     --toolbar-color: var(--win-text-color) !important;
+    --toolbar-text-color: var(--win-text-color) !important;
     --toolbar-non-lwt-textcolor: var(--win-text-color) !important;
     --toolbarbutton-icon-fill: var(--win-text-color) !important;
     --toolbar-field-focus-color: var(--win-text-color) !important;
@@ -15138,6 +15291,7 @@
     /* Component Background Color */
     --menu-background-color: var(--win-component-bgcolor) !important;
     --toolbar-bgcolor: var(--win-component-bgcolor) !important;
+    --toolbar-background-color: var(--win-component-bgcolor) !important;
     --toolbar-non-lwt-bgcolor: var(--win-component-bgcolor) !important;
     --arrowpanel-background: var(--win-component-bgcolor) !important;
     --autocomplete-popup-background: var(--win-component-bgcolor) !important;
@@ -15373,6 +15527,7 @@
 @media (-moz-bool-pref: "userChrome.theme.system_default") and (-moz-platform: windows) and (prefers-color-scheme: dark) {
   :root[lwt-default-theme-in-dark-mode][lwthemetextcolor="bright"] {
     --toolbar-bgcolor: var(--win-component-bgcolor) !important; /* Original: rgba(43, 42, 51, 1) */
+    --toolbar-background-color: var(--win-component-bgcolor) !important; /* Original: rgba(43, 42, 51, 1) */
   }
 }
 @media (-moz-bool-pref: "userChrome.theme.system_default") and (-moz-platform: windows) {
@@ -15436,7 +15591,11 @@
         color-mix(in srgb, currentColor 11%, transparent),
         color-mix(in srgb, currentColor 11%, transparent)
       ),
-      linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)), var(--lwt-header-image, none) !important;
+      linear-gradient(
+        var(--toolbar-bgcolor, var(--toolbar-background-color)),
+        var(--toolbar-bgcolor, var(--toolbar-background-color))
+      ),
+      var(--lwt-header-image, none) !important;
   }
 }
 @media (-moz-bool-pref: "userChrome.theme.system_default") and (-moz-windows-accent-color-in-titlebar) {
@@ -15555,6 +15714,7 @@
     --autocomplete-popup-background: var(--mac-bgcolor) !important;
     /* Selected Background Color */
     --toolbar-bgcolor: var(--mac-selected-bgcolor) !important;
+    --toolbar-background-color: var(--mac-selected-bgcolor) !important;
     --toolbar-non-lwt-bgcolor: var(--mac-selected-bgcolor) !important;
     /* Field Background Color */
     --input-bgcolor: var(--mac-field-bgcolor) !important;
@@ -15739,6 +15899,7 @@
 @media (-moz-bool-pref: "userChrome.theme.system_default") and (-moz-bool-pref: "layout.css.osx-font-smoothing.enabled") and (prefers-color-scheme: dark) {
   :root[lwt-default-theme-in-dark-mode][lwthemetextcolor="bright"] {
     --toolbar-bgcolor: color-mix(in srgb, rgb(255, 255, 255) 15%, -moz-dialog) !important;
+    --toolbar-background-color: color-mix(in srgb, rgb(255, 255, 255) 15%, -moz-dialog) !important;
   }
 }
 @media (-moz-bool-pref: "userChrome.theme.system_default") and (-moz-bool-pref: "layout.css.osx-font-smoothing.enabled") and (-moz-bool-pref: "userChrome.tab.color_like_toolbar") {
@@ -16445,11 +16606,12 @@
     --arrowpanel-color: var(--lwt-tab-text) !important;
     --focus-outline-color: rgb(172, 112, 255) !important;
     --toolbar-bgcolor: #322560 !important;
-    --toolbar-non-lwt-bgcolor: var(--toolbar-bgcolor) !important;
+    --toolbar-background-color: #322560 !important;
+    --toolbar-non-lwt-bgcolor: var(--toolbar-bgcolor, var(--toolbar-background-color)) !important;
     --lwt-accent-color: #19162f !important;
     --in-content-page-background: var(--lwt-accent-color) !important;
     --toolbar-field-background-color: #0b0724 !important;
-    --lwt-selected-tab-background-color: var(--toolbar-bgcolor) !important;
+    --lwt-selected-tab-background-color: var(--toolbar-bgcolor, var(--toolbar-background-color)) !important;
     --toolbarbutton-hover-background: rgba(255, 255, 255, 0.05) !important;
     --toolbarbutton-active-background: #4d4175 !important;
     --arrowpanel-background: #1d1935 !important;
@@ -17050,7 +17212,11 @@
   }
   #nav-bar,
   #PersonalToolbar {
-    background-image: linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)), var(--lwt-additional-images);
+    background-image: linear-gradient(
+        var(--toolbar-bgcolor, var(--toolbar-background-color)),
+        var(--toolbar-bgcolor, var(--toolbar-background-color))
+      ),
+      var(--lwt-additional-images);
     background-repeat: repeat-x, var(--lwt-background-tiling);
     background-position: 0 0, var(--lwt-background-alignment);
     background-attachment: scroll, fixed !important;
@@ -18800,7 +18966,7 @@
 
 @media (-moz-bool-pref: "userChrome.rounding.square_tab") {
   :root {
-    --tab-border-radius: 0 !important; /* Original: 4px */
+    --tab-border-radius: 0px !important; /* Original: 4px */
   }
 }
 @media not (-moz-bool-pref: "userChrome.rounding.square_tab") {
@@ -18810,7 +18976,7 @@
 }
 @media (-moz-bool-pref: "userChrome.rounding.square_button") {
   :root {
-    --urlbar-icon-border-radius: 0 !important; /* Original: calc(var(--toolbarbutton-border-radius) - 1px); */
+    --urlbar-icon-border-radius: 0px !important; /* Original: calc(var(--toolbarbutton-border-radius) - 1px); */
   }
   .toolbarbutton-1,
   .toolbarbutton-icon,
@@ -18821,7 +18987,7 @@
   .urlbarView-action,
   toolbarbutton.bookmark-item:not(.subviewbutton),
   #sidebar-switcher-target {
-    --toolbarbutton-border-radius: 0; /* Original: 4px */
+    --toolbarbutton-border-radius: 0px; /* Original: 4px */
   }
   button,
   .close-icon,
@@ -18830,7 +18996,7 @@
   findbar toolbarbutton,
   .notification-button,
   #main-menubar > menu {
-    border-radius: 0 !important;
+    border-radius: 0px !important;
   }
 }
 @media (-moz-bool-pref: "userChrome.rounding.square_tab"), (-moz-bool-pref: "userChrome.rounding.square_button") {
@@ -18842,13 +19008,13 @@
 }
 @media (-moz-bool-pref: "userChrome.rounding.square_panel") {
   :root {
-    --arrowpanel-border-radius: 0 !important;
+    --arrowpanel-border-radius: 0px !important;
   }
 }
 @media (-moz-bool-pref: "userChrome.rounding.square_panelitem") {
   :root {
-    --arrowpanel-menuitem-border-radius: 0 !important;
-    --subviewbutton-border-radius: 0 !important;
+    --arrowpanel-menuitem-border-radius: 0px !important;
+    --subviewbutton-border-radius: 0px !important;
   }
 }
 @media (-moz-bool-pref: "userChrome.rounding.square_menupopup") {
@@ -18862,17 +19028,17 @@
   xul|menulist > xul|menupopup xul|menu,
   xul|menulist > xul|menupopup xul|menuitem,
   .customization-uidensity-menuitem {
-    border-radius: 0 !important;
+    border-radius: 0px !important;
   }
 }
 @media (-moz-bool-pref: "userChrome.rounding.square_infobox") {
   #sanitizeEverythingWarningBox {
-    border-radius: 0 !important;
+    border-radius: 0px !important;
   }
 }
 @media (-moz-bool-pref: "userChrome.rounding.square_toolbar") {
   :root {
-    --uc-rounding-toolbar: 0;
+    --uc-rounding-toolbar: 0px;
   }
   .container.infobar,
   .container.infobar::before,
@@ -18896,19 +19062,19 @@
   #urlbar-input-container,
   #urlbar-background,
   #searchbar {
-    --toolbarbutton-border-radius: 0;
+    --toolbarbutton-border-radius: 0px;
   }
 }
 @media (-moz-bool-pref: "userChrome.rounding.square_urlView_item") {
   .urlbarView-row,
   .urlbarView-row-inner {
-    --toolbarbutton-border-radius: 0;
+    --toolbarbutton-border-radius: 0px;
   }
 }
 @media (-moz-bool-pref: "userChrome.rounding.square_checklabel") {
   input[type="checkbox"],
   .checkbox-check {
-    border-radius: 0 !important;
+    border-radius: 0px !important;
   }
 }
 @media (-moz-bool-pref: "userChrome.rounding.square_dialog") {
@@ -19393,7 +19559,8 @@
   }
 }
 @media (-moz-bool-pref: "userChrome.padding.urlView_expanding"), (-moz-bool-pref: "userChrome.urlView.as_commandbar") {
-  #urlbar[breakout][breakout-extend] {
+  /* .browser-titlebar is Vertical Tabbar */
+  #nav-bar:not(.browser-titlebar) #urlbar[breakout][breakout-extend] {
     top: calc(var(--urlbar-container-height) * 2 - var(--urlbar-height)) !important;
     width: var(--urlbar-width) !important;
     position: relative !important;
@@ -19771,7 +19938,8 @@
 @media (-moz-bool-pref: "userChrome.tabbar.on_bottom") and (not (-moz-bool-pref: "userChrome.tabbar.one_liner")) and (not (-moz-bool-pref: "userChrome.tabbar.on_bottom.above_bookmark")) and (-moz-bool-pref: "userChrome.tab.connect_to_window") and (-moz-bool-pref: "userChrome.tab.color_like_toolbar") {
   #navigator-toolbox {
     border-bottom-color: var(
-      --toolbar-bgcolor
+      --toolbar-bgcolor,
+      var(--toolbar-background-color)
     ) !important; /* Original: 1px solid var(--chrome-content-separator-color); */
   }
 }
@@ -19878,7 +20046,8 @@
 @media screen and (-moz-bool-pref: "userChrome.tabbar.on_bottom") and (-moz-bool-pref: "userChrome.tabbar.one_liner") and (-moz-bool-pref: "userChrome.tabbar.one_liner.responsive") and (max-width: 1100px) and (not (-moz-bool-pref: "userChrome.tabbar.on_bottom.above_bookmark")) and (-moz-bool-pref: "userChrome.tab.connect_to_window") and (-moz-bool-pref: "userChrome.tab.color_like_toolbar") {
   #navigator-toolbox {
     border-bottom-color: var(
-      --toolbar-bgcolor
+      --toolbar-bgcolor,
+      var(--toolbar-background-color)
     ) !important; /* Original: 1px solid var(--chrome-content-separator-color); */
   }
 }
@@ -20020,7 +20189,7 @@
 }
 @media (-moz-bool-pref: "userChrome.tabbar.one_liner") and (not (-moz-bool-pref: "userChrome.tabbar.one_liner.responsive")) and (-moz-bool-pref: "userChrome.tabbar.one_liner.combine_navbar") {
   #navigator-toolbox {
-    background-color: var(--toolbar-bgcolor) !important;
+    background-color: var(--toolbar-bgcolor, var(--toolbar-background-color)) !important;
   }
   #nav-bar {
     --lwt-tabs-border-color: transparent;
@@ -20139,7 +20308,7 @@
 }
 @media screen and (-moz-bool-pref: "userChrome.tabbar.one_liner") and (-moz-bool-pref: "userChrome.tabbar.one_liner.responsive") and (min-width: 1100px) and (-moz-bool-pref: "userChrome.tabbar.one_liner.combine_navbar") {
   #navigator-toolbox {
-    background-color: var(--toolbar-bgcolor) !important;
+    background-color: var(--toolbar-bgcolor, var(--toolbar-background-color)) !important;
   }
   #nav-bar {
     --lwt-tabs-border-color: transparent;
@@ -22278,6 +22447,7 @@
   }
   /* Pinned Tab - tabbrowser-arrowscrollbox overflowing */
   /* Border top #889 */
+  /* Split Tab */
 }
 @media (-moz-bool-pref: "userChrome.tab.connect_to_window") and (not (-moz-bool-pref: "userChrome.tabbar.multi_row")) {
   #TabsToolbar:not([multibar]) {
@@ -22306,6 +22476,11 @@
     box-shadow: 0 -0.01px 0 ThreeDShadow;
   }
 }
+@media (-moz-bool-pref: "userChrome.tab.connect_to_window") {
+  #tabbrowser-tabs:not([orient="vertical"]) tab-split-view-wrapper {
+    margin-bottom: 0 !important;
+  }
+}
 /*= Selected Tab =============================================================*/
 /*= Selected Tab - Bold ======================================================*/
 @media (-moz-bool-pref: "userChrome.tab.selected_bold") {
@@ -22323,7 +22498,7 @@
   }
   #TabsToolbar #firefox-view-button[open] > .toolbarbutton-icon,
   .tab-background:is([selected], [multiselected]) {
-    background-color: var(--tab-selected-bgcolor, var(--toolbar-bgcolor)) !important;
+    background-color: var(--tab-selected-bgcolor, var(--toolbar-bgcolor, var(--toolbar-background-color))) !important;
   }
   :root:is(:-moz-lwtheme, [lwtheme]) #pinned-tabs-container > .tabbrowser-tab > .tab-stack > .tab-background[selected],
   :root:is(:-moz-lwtheme, [lwtheme])
@@ -22369,10 +22544,14 @@
     > .tabbrowser-tab
     > .tab-stack
     > .tab-background[selected] {
-    /* Original: linear-gradient(var(--lwt-selected-tab-background-color, transparent), var(--lwt-selected-tab-background-color, transparent)), linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)), var(--lwt-header-image, none)
+    /* Original: linear-gradient(var(--lwt-selected-tab-background-color, transparent), var(--lwt-selected-tab-background-color, transparent)), linear-gradient(var(--toolbar-bgcolor, var(--toolbar-background-color)), var(--toolbar-bgcolor, var(--toolbar-background-color))), var(--lwt-header-image, none)
      */
     background-image: linear-gradient(transparent, transparent),
-      linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)), var(--lwt-header-image, none) !important;
+      linear-gradient(
+        var(--toolbar-bgcolor, var(--toolbar-background-color)),
+        var(--toolbar-bgcolor, var(--toolbar-background-color))
+      ),
+      var(--lwt-header-image, none) !important;
     background-position: 0, 0, right top;
     background-attachment: scroll, scroll, fixed;
     background-repeat: repeat-x, repeat-x, no-repeat !important;
@@ -22428,7 +22607,11 @@
     > .tab-stack
     > .tab-background[selected] {
     background-image: linear-gradient(transparent, transparent),
-      linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)), var(--lwt-additional-images, none) !important;
+      linear-gradient(
+        var(--toolbar-bgcolor, var(--toolbar-background-color)),
+        var(--toolbar-bgcolor, var(--toolbar-background-color))
+      ),
+      var(--lwt-additional-images, none) !important;
     background-repeat: repeat-x, repeat-x, var(--lwt-background-tiling) !important;
     background-position: 0 0, 0 0, var(--lwt-background-alignment) !important;
   }
@@ -22469,7 +22652,7 @@
     background-attachment: scroll, scroll, fixed;
     background-color: transparent;
     background-image: linear-gradient(var(--lwt-selected-tab-background-color, transparent), var(--lwt-selected-tab-background-color, transparent)),
-                      linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)),
+                      linear-gradient(var(--toolbar-bgcolor, var(--toolbar-background-color)), var(--toolbar-bgcolor, var(--toolbar-background-color))),
                       var(--lwt-header-image, none);
     background-position: 0 0, 0 0, right top;
     background-repeat: repeat-x, repeat-x, no-repeat;
@@ -22509,6 +22692,29 @@
     );
     --uc-tab-shadow-color-bundle: var(--tab-line-color, var(--lwt-tab-line-color, rgba(128, 128, 142, 0.9)));
   }
+  #tabbrowser-tabs:not([noshadowfortests]) {
+    /* filter create new stacking context */
+  }
+  #tabbrowser-tabs:not([noshadowfortests]) .tab-background:is([selected], [multiselected]) {
+    box-shadow: unset !important;
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
+  }
+  #tabbrowser-tabs:not([noshadowfortests])[orient="vertical"]
+    .tab-background:is([selected], [multiselected])
+    .tab-group-line {
+    height: calc(100% + 6px + var(--tab-block-margin));
+    transform: translateY(-2px);
+  }
+  #tabbrowser-tabs:not([noshadowfortests])[expanded][orient="vertical"]
+    .tab-background:is([selected], [multiselected])
+    .tab-group-line {
+    inset-inline-start: calc(-1 * var(--tab-inner-inline-margin)) !important;
+  }
+  #tabbrowser-tabs:not([noshadowfortests]):not([expanded])[orient="vertical"]
+    .tab-background:is([selected], [multiselected])
+    .tab-group-line {
+    inset-inline-start: calc(-1 * var(--tab-inner-inline-margin) + 2px) !important;
+  }
   #tabbrowser-tabs:not([noshadowfortests]) .tab-background:is([selected], [multiselected]) {
     box-shadow: unset !important;
     filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
@@ -22538,7 +22744,7 @@
     #TabsToolbar[brighttext]
     #tabbrowser-tabs:not([noshadowfortests])
     .tabbrowser-tab[multiselected]:not([visuallyselected]) {
-    --uc-tab-shadow-color: var(--toolbar-color);
+    --uc-tab-shadow-color: var(--toolbar-color, var(--toolbar-text-color));
   }
   /* For themes outside of Light and Dark (which are curated by Mozilla), show a thicker border
      around the tab to help themes that are dependent on tab_line to show the selected tab. */
@@ -22611,13 +22817,16 @@
   :root:not([customizing="true"]) .tabbrowser-tab .tab-background::before,
   :root:not([customizing="true"]) .tabbrowser-tab .tab-background::after {
     /* Based on tab background
-       background-image: linear-gradient(var(--lwt-selected-tab-background-color, transparent), var(--lwt-selected-tab-background-color, transparent)), linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)), var(--lwt-header-image, none);
+       background-image: linear-gradient(var(--lwt-selected-tab-background-color, transparent), var(--lwt-selected-tab-background-color, transparent)), linear-gradient(var(--toolbar-bgcolor, var(--toolbar-background-color)), var(--toolbar-bgcolor, var(--toolbar-background-color))), var(--lwt-header-image, none);
 
        defaults
-       background-color: var(--tab-selected-bgcolor, var(--toolbar-bgcolor));
+       background-color: var(--tab-selected-bgcolor, var(--toolbar-bgcolor, var(--toolbar-background-color)));
        background-image: var(--tab-selected-bgimage, var(--toolbar-bgimage));
     */
-    fill: var(--lwt-selected-tab-background-color, var(--tab-selected-bgcolor, var(--toolbar-bgcolor))) !important;
+    fill: var(
+      --lwt-selected-tab-background-color,
+      var(--tab-selected-bgcolor, var(--toolbar-bgcolor, var(--toolbar-background-color)))
+    ) !important;
   }
 }
 @media (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner") and (not (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.wave")) and (not (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.australis")) and (not (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.chrome")) and (not (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.chrome_legacy")) and (not (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.edge")) {
@@ -22635,7 +22844,7 @@
 @media (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner") and (not (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.wave")) and (not (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.australis")) and (not (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.chrome")) and (not (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.chrome_legacy")) and (not (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.edge")) {
   :root:not([customizing="true"]) .tabbrowser-tab[visuallyselected] .tab-background::before,
   :root:not([customizing="true"]) .tabbrowser-tab[visuallyselected] .tab-background::after {
-    fill: var(--tab-selected-bgcolor, var(--toolbar-bgcolor));
+    fill: var(--tab-selected-bgcolor, var(--toolbar-bgcolor, var(--toolbar-background-color)));
     stroke: var(--tab-line-color, var(--tabs-border-color, rgba(128, 128, 142, 0.9)));
   }
 }
@@ -22648,7 +22857,7 @@
 @media (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner") and (not (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.wave")) and (not (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.australis")) and (not (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.chrome")) and (not (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.chrome_legacy")) and (not (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.edge")) {
   :root:not([customizing="true"]) .tabbrowser-tab[multiselected] .tab-background::before,
   :root:not([customizing="true"]) .tabbrowser-tab[multiselected] .tab-background::after {
-    fill: var(--tab-selected-bgcolor, var(--toolbar-bgcolor));
+    fill: var(--tab-selected-bgcolor, var(--toolbar-bgcolor, var(--toolbar-background-color)));
   }
 }
 @media (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner") and (not (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.wave")) and (not (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.australis")) and (not (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.chrome")) and (not (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.chrome_legacy")) and (not (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.edge")) {
@@ -22686,7 +22895,7 @@
     .tabbrowser-tab[visuallyselected]
     .tab-background::after {
     /* As Selected Tab - Box Shadow */
-    stroke: var(--toolbar-color);
+    stroke: var(--toolbar-color, var(--toolbar-text-color));
   }
 }
 @media (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner") and (not (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.wave")) and (not (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.australis")) and (not (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.chrome")) and (not (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.chrome_legacy")) and (not (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.edge")) and (-moz-gtk-csd-available) {
@@ -22880,13 +23089,16 @@
   .tabbrowser-tab .tab-background::before,
   .tabbrowser-tab .tab-background::after {
     /* Based on tab background
-         background-image: linear-gradient(var(--lwt-selected-tab-background-color, transparent), var(--lwt-selected-tab-background-color, transparent)), linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)), var(--lwt-header-image, none);
+         background-image: linear-gradient(var(--lwt-selected-tab-background-color, transparent), var(--lwt-selected-tab-background-color, transparent)), linear-gradient(var(--toolbar-bgcolor, var(--toolbar-background-color)), var(--toolbar-bgcolor, var(--toolbar-background-color))), var(--lwt-header-image, none);
 
          defaults
-         background-color: var(--tab-selected-bgcolor, var(--toolbar-bgcolor));
+         background-color: var(--tab-selected-bgcolor, var(--toolbar-bgcolor, var(--toolbar-background-color)));
          background-image: var(--tab-selected-bgimage, var(--toolbar-bgimage));
     */
-    fill: var(--lwt-selected-tab-background-color, var(--tab-selected-bgcolor, var(--toolbar-bgcolor))) !important;
+    fill: var(
+      --lwt-selected-tab-background-color,
+      var(--tab-selected-bgcolor, var(--toolbar-bgcolor, var(--toolbar-background-color)))
+    ) !important;
   }
 }
 @media (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner") and (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.wave"),
@@ -22939,7 +23151,7 @@
   }
   .tabbrowser-tab:is([visuallyselected], [multiselected]) .tab-background::before,
   .tabbrowser-tab:is([visuallyselected], [multiselected]) .tab-background::after {
-    fill: var(--tab-selected-bgcolor, var(--toolbar-bgcolor));
+    fill: var(--tab-selected-bgcolor, var(--toolbar-bgcolor, var(--toolbar-background-color)));
   }
 }
 @media (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner") and (-moz-bool-pref: "userChrome.tab.bottom_rounded_corner.wave"),
@@ -23110,7 +23322,7 @@
   :root:not([customizing="true"]) #TabsToolbar[brighttext] tab[visuallyselected] > stack::before,
   :root:not([customizing="true"]) #TabsToolbar[brighttext] tab[visuallyselected] > stack::after {
     /* As Selected Tab - Box Shadow */
-    stroke: var(--toolbar-color) !important;
+    stroke: var(--toolbar-color, var(--toolbar-text-color)) !important;
   }
   /* Animation */
   .tabbrowser-tab:not([selected="true"], [multiselected]) .tab-context-line {
@@ -23247,7 +23459,7 @@
   :root:not([customizing="true"]) #TabsToolbar[brighttext] tab[visuallyselected] > stack::before,
   :root:not([customizing="true"]) #TabsToolbar[brighttext] tab[visuallyselected] > stack::after {
     /* As Selected Tab - Box Shadow */
-    stroke: var(--toolbar-color) !important;
+    stroke: var(--toolbar-color, var(--toolbar-text-color)) !important;
   }
 }
 @media (not (-moz-bool-pref: "userChrome.tab.photon_like_contextline")) and (-moz-bool-pref: "userChrome.tab.supernova_like_contextline") {
@@ -23306,6 +23518,7 @@
   }
   /* Animate */
   /* Latest Tab & New tab margin */
+  /* Split Tab */
 }
 @media (-moz-bool-pref: "userChrome.tab.dynamic_separator") and (-moz-bool-pref: "userChrome.tab.newtab_button_like_tab") {
   #tabbrowser-tabs:not([orient="vertical"]) .tab-stack::before,
@@ -23384,10 +23597,40 @@
     ~ #tabbrowser-arrowscrollbox:not([orient="vertical"])
     .tabbrowser-tab:not([visuallyselected], [multiselected], :hover):first-of-type
     .tab-stack::before,
+  #pinned-tabs-container:not([orient="vertical"]):not(:empty):has(
+      .tabbrowser-tab[pinned]:is([visuallyselected], [multiselected], :hover):last-of-type
+    )
+    ~ #tabbrowser-arrowscrollbox:not([orient="vertical"]):has(tab-split-view-wrapper:first-child)
+    .tabbrowser-tab:not([visuallyselected], [multiselected], :hover):first-of-type
+    .tab-stack::before,
   #tabbrowser-tabs:not([orient="vertical"])
     .tabbrowser-tab:not([visuallyselected], [multiselected], :hover, :first-of-type)
+    .tab-stack::before,
+  #tabbrowser-tabs:not([orient="vertical"])
+    tab-split-view-wrapper
+    .tabbrowser-tab:not([visuallyselected], [multiselected], :hover)
     .tab-stack::before {
     opacity: var(--tab-separator-opacity);
+  }
+}
+@media (-moz-bool-pref: "userChrome.tab.dynamic_separator") {
+  #pinned-tabs-container:not([orient="vertical"]):not(:empty):has(
+      .tabbrowser-tab[pinned]:is([visuallyselected], [multiselected], :hover):last-of-type
+    )
+    ~ #tabbrowser-arrowscrollbox:not([orient="vertical"])
+    tab-split-view-wrapper:first-child
+    .tabbrowser-tab:first-of-type
+    .tab-stack::before,
+  #tabbrowser-tabs:not([orient="vertical"])
+    .tabbrowser-tab:is([visuallyselected], [multiselected], :hover)
+    + tab-split-view-wrapper
+    .tabbrowser-tab:first-child
+    .tab-stack::before,
+  #tabbrowser-tabs:not([orient="vertical"])
+    tab-split-view-wrapper:has(.tabbrowser-tab:is([visuallyselected], [multiselected], :hover))
+    + .tabbrowser-tab:not([visuallyselected], [multiselected], :hover)
+    .tab-stack::before {
+    opacity: 0 !important;
   }
 }
 @media (-moz-bool-pref: "userChrome.tab.dynamic_separator") and (-moz-bool-pref: "userChrome.tabbar.one_liner") and (not (-moz-bool-pref: "userChrome.tabbar.one_liner.tabbar_first")) and (not (-moz-bool-pref: "userChrome.tabbar.one_liner.responsive")) {
@@ -23498,6 +23741,11 @@
 @media (-moz-bool-pref: "userChrome.tab.dynamic_separator") {
   #tabbrowser-tabs:not([orient="vertical"]) #tabbrowser-arrowscrollbox:not([overflowing]) .tabbrowser-tab:last-of-type {
     margin-inline-end: 1px !important;
+  }
+}
+@media (-moz-bool-pref: "userChrome.tab.dynamic_separator") {
+  #tabbrowser-tabs tab-split-view-wrapper .tabbrowser-tab:last-child {
+    border-inline-start: none !important;
   }
 }
 /*= Unselected Tab - Static Separator ========================================*/
@@ -23982,6 +24230,21 @@
     width: 19px !important; /* Redefine from 19px !important, Original: 17px = (width - padding)  */
   }
 }
+@media (-moz-bool-pref: "userChrome.tab.close_button_at_hover") {
+  #tabbrowser-tabs[orient="vertical"]:not([expanded]) .tab-close-button {
+    padding: 2px !important;
+    width: 16px !important;
+    height: 16px !important;
+    background-image: linear-gradient(var(--close-button-extra-background)),
+      linear-gradient(var(--tab-selected-bgcolor, var(--toolbar-bgcolor, var(--toolbar-background-color)))),
+      linear-gradient(var(--toolbox-bgcolor)) !important;
+  }
+  #tabbrowser-tabs[orient="vertical"]:not([expanded]) .tab-close-button:-moz-window-inactive {
+    background-image: linear-gradient(var(--close-button-extra-background)),
+      linear-gradient(var(--tab-selected-bgcolor, var(--toolbar-bgcolor, var(--toolbar-background-color)))),
+      linear-gradient(var(--toolbox-bgcolor-inactive)) !important;
+  }
+}
 /** Clipped tabs - Show close button at pinned tab ****************************/
 @media (-moz-bool-pref: "userChrome.tab.close_button_at_pinned") and (not (-moz-bool-pref: "userChrome.tabbar.as_titlebar")) {
   #tabbrowser-tabs {
@@ -24333,8 +24596,8 @@
   .tab-icon-overlay:not([crashed])[muted]:hover,
   .tab-icon-overlay:not([crashed])[activemedia-blocked]:hover {
     color: var(--toolbar-bgcolor, white) !important;
-    stroke: var(--lwt-tab-text, var(--toolbar-color)) !important;
-    background-color: var(--lwt-tab-text, var(--toolbar-color)) !important;
+    stroke: var(--lwt-tab-text, var(--toolbar-color, var(--toolbar-text-color))) !important;
+    background-color: var(--lwt-tab-text, var(--toolbar-color, var(--toolbar-text-color))) !important;
     fill-opacity: 0.95 !important;
   }
 }
@@ -24436,10 +24699,11 @@
     display: block;
     position: absolute;
     top: 50%;
+    left: var(--tab-inline-padding);
     transform: translate(var(--uc-container-position-x), var(--uc-container-position-y));
     /* Shape */
     border-bottom: 2px solid var(--identity-icon-color);
-    width: calc(100% - 30px);
+    width: calc(100% - (var(--tab-inline-padding) + var(--tab-inner-inline-margin)) * 2);
     opacity: 0.75;
   }
 }
@@ -24453,7 +24717,7 @@
     width: 25%;
   }
   .tabbrowser-tab[visuallyselected]:not([pinned]) .tab-content::before {
-    width: calc(100% - 30px);
+    width: calc(100% - (var(--tab-inline-padding) + var(--tab-inner-inline-margin)) * 2);
   }
   #tabbrowser-tabs[closebuttons="activetab"] .tabbrowser-tab[visuallyselected]:not([pinned]) .tab-content::before {
     width: calc(100% - 33px);
@@ -24466,24 +24730,45 @@
   }
 }
 @media (-moz-bool-pref: "userChrome.tab.container") and (not (-moz-bool-pref: "userChrome.tabbar.as_titlebar")) {
-  .tabbrowser-tab[pinned] .tab-content::before {
+  .tabbrowser-tab[pinned] .tab-content::before,
+  #tabbrowser-tabs[orient="vertical"]:not([expanded]) .tab-content::before {
+    left: unset;
     transform: translateY(var(--uc-container-position-y));
-    width: 16px;
+    width: 16px !important;
   }
 }
 @media (-moz-bool-pref: "userChrome.tab.container") and (not (-moz-bool-pref: "userChrome.tabbar.as_titlebar")) and (-moz-bool-pref: "userChrome.tab.close_button_at_pinned") {
-  .tabbrowser-tab[pinned][visuallyselected]:not([busy]):hover .tab-content::before {
+  .tabbrowser-tab[pinned][visuallyselected]:not([busy]):hover .tab-content::before,
+  #tabbrowser-tabs[orient="vertical"]:not([expanded])
+    .tabbrowser-tab[visuallyselected]:not([busy]):hover
+    .tab-content::before {
     opacity: 0;
   }
 }
 @media (-moz-bool-pref: "userChrome.tab.container") and (not (-moz-bool-pref: "userChrome.tabbar.as_titlebar")) and (not (-moz-bool-pref: "userChrome.tab.container.on_top")) {
   .tabbrowser-tab:is([image], [pinned])[usercontextid] > .tab-stack > .tab-content[attention]:not([selected])::before,
-  .tabbrowser-tab[usercontextid] > .tab-stack > .tab-content[pinned][titlechanged]:not([selected])::before {
+  #tabbrowser-tabs[orient="vertical"]:not([expanded])
+    .tabbrowser-tab[image][usercontextid]
+    > .tab-stack
+    > .tab-content[attention]:not([selected])::before,
+  .tabbrowser-tab[usercontextid] > .tab-stack > .tab-content[pinned][titlechanged]:not([selected])::before,
+  #tabbrowser-tabs[orient="vertical"]:not([expanded])
+    .tabbrowser-tab[usercontextid]
+    > .tab-stack
+    > .tab-content[titlechanged]:not([selected])::before {
     opacity: 0;
   }
   /* Pinned Tab - Titlechanged Indicator override */
   .tabbrowser-tab:is([image], [pinned])[usercontextid] > .tab-stack > .tab-content[attention]:not([selected]),
-  .tabbrowser-tab[usercontextid] > .tab-stack > .tab-content[pinned][titlechanged]:not([selected]) {
+  #tabbrowser-tabs[orient="vertical"]:not([expanded])
+    .tabbrowser-tab[image][usercontextid]
+    > .tab-stack
+    > .tab-content[attention]:not([selected]),
+  .tabbrowser-tab[usercontextid] > .tab-stack > .tab-content[pinned][titlechanged]:not([selected]),
+  #tabbrowser-tabs[orient="vertical"]:not([expanded])
+    .tabbrowser-tab[usercontextid]
+    > .tab-stack
+    > .tab-content[titlechanged]:not([selected]) {
     /* Original: radial-gradient(circle, var(--attention-icon-color), var(--attention-icon-color) 2px, transparent 2px); */
     --dotted-identity-image: radial-gradient(
       circle,
@@ -24495,7 +24780,15 @@
     background-position-x: var(--uc-titlechanged-container-position-x) !important;
   }
   .tabbrowser-tab:is([image], [pinned]) > .tab-stack > .tab-content[attention]:not([selected]),
-  .tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected]) {
+  #tabbrowser-tabs[orient="vertical"]:not([expanded])
+    .tabbrowser-tab[image]
+    > .tab-stack
+    > .tab-content[attention]:not([selected]),
+  .tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected]),
+  #tabbrowser-tabs[orient="vertical"]:not([expanded])
+    .tabbrowser-tab
+    > .tab-stack
+    > .tab-content[titlechanged]:not([selected]) {
     /* Original: center bottom calc(6.5px + var(--tabs-navbar-shadow-size)); */
     background-position-y: top var(--uc-container-position-y) !important;
   }
@@ -24503,9 +24796,17 @@
   .tabbrowser-tab:is([image], [pinned])[usercontextid]:is([soundplaying], [muted], [activemedia-blocked])
     > .tab-stack
     > .tab-content[attention]:not([selected]),
+  #tabbrowser-tabs[orient="vertical"]:not([expanded])
+    .tabbrowser-tab[image][usercontextid]:is([soundplaying], [muted], [activemedia-blocked])
+    > .tab-stack
+    > .tab-content[attention]:not([selected]),
   .tabbrowser-tab[usercontextid]:is([soundplaying], [muted], [activemedia-blocked])
     > .tab-stack
-    > .tab-content[pinned][titlechanged]:not([selected]) {
+    > .tab-content[pinned][titlechanged]:not([selected]),
+  #tabbrowser-tabs[orient="vertical"]:not([expanded])
+    .tabbrowser-tab[usercontextid]:is([soundplaying], [muted], [activemedia-blocked])
+    > .tab-stack
+    > .tab-content[titlechanged]:not([selected]) {
     --uc-titlechanged-container-position-x: calc(32% - 1px), calc(50% - 1px), calc(70% - 1px);
   }
   :root[uidensity="compact"]
@@ -24513,15 +24814,33 @@
     > .tab-stack
     > .tab-content[attention]:not([selected]),
   :root[uidensity="compact"]
+    #tabbrowser-tabs[orient="vertical"]:not([expanded])
+    .tabbrowser-tab[image][usercontextid]:is([soundplaying], [muted], [activemedia-blocked])
+    > .tab-stack
+    > .tab-content[attention]:not([selected]),
+  :root[uidensity="compact"]
     .tabbrowser-tab[usercontextid]:is([soundplaying], [muted], [activemedia-blocked])
     > .tab-stack
-    > .tab-content[pinned][titlechanged]:not([selected]) {
+    > .tab-content[pinned][titlechanged]:not([selected]),
+  :root[uidensity="compact"]
+    #tabbrowser-tabs[orient="vertical"]:not([expanded])
+    .tabbrowser-tab[usercontextid]:is([soundplaying], [muted], [activemedia-blocked])
+    > .tab-stack
+    > .tab-content[titlechanged]:not([selected]) {
     --uc-titlechanged-container-position-x: calc(30% - 1px), calc(50% - 1px), calc(70% - 1px);
   }
 }
 @media (-moz-bool-pref: "userChrome.tab.container") and (not (-moz-bool-pref: "userChrome.tabbar.as_titlebar")) and (-moz-bool-pref: "userChrome.tab.container.on_top") {
   .tabbrowser-tab:is([image], [pinned]) > .tab-stack > .tab-content[attention]:not([selected]),
-  .tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected]) {
+  #tabbrowser-tabs[orient="vertical"]:not([expanded])
+    .tabbrowser-tab[image]
+    > .tab-stack
+    > .tab-content[attention]:not([selected]),
+  .tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected]),
+  #tabbrowser-tabs[orient="vertical"]:not([expanded])
+    .tabbrowser-tab
+    > .tab-stack
+    > .tab-content[titlechanged]:not([selected]) {
     /* Original: center bottom calc(6.5px + var(--tabs-navbar-shadow-size)); */
     background-position-y: top var(--uc-container-position-y-bottom) !important;
   }
@@ -25333,7 +25652,7 @@
   (-moz-bool-pref: "userChrome.combined.urlbar.nav_button") and (not (-moz-bool-pref: "userChrome.combined.nav_button.home_button")) and (-moz-bool-pref: "userChrome.combined.urlbar.nav_button") and (not (-moz-bool-pref: "userChrome.combined.urlbar.home_button")) {
   #nav-bar-customization-target > #back-button {
     z-index: 3 !important;
-    background-color: var(--toolbar-bgcolor) !important;
+    background-color: var(--toolbar-bgcolor, var(--toolbar-background-color)) !important;
     background-clip: content-box !important;
     border-radius: 100%;
     padding-block: 0 !important;
@@ -25381,7 +25700,7 @@
   (-moz-bool-pref: "userChrome.combined.urlbar.nav_button") and (not (-moz-bool-pref: "userChrome.combined.nav_button.home_button")) and (not (-moz-bool-pref: "userChrome.combined.urlbar.nav_button")) {
   #nav-bar-customization-target > #back-button {
     z-index: 3 !important;
-    background-color: var(--toolbar-bgcolor) !important;
+    background-color: var(--toolbar-bgcolor, var(--toolbar-background-color)) !important;
     background-clip: content-box !important;
     border-radius: 100%;
     padding-block: 0 !important;
@@ -25429,7 +25748,7 @@
   #nav-bar-customization-target > #home-button {
     position: relative;
     z-index: 3 !important;
-    background-color: var(--toolbar-bgcolor) !important;
+    background-color: var(--toolbar-bgcolor, var(--toolbar-background-color)) !important;
     background-clip: content-box !important;
     border-radius: 100%;
     padding-block: 0 !important;
@@ -25522,7 +25841,7 @@
   #nav-bar-customization-target > #home-button {
     position: relative;
     z-index: 3 !important;
-    background-color: var(--toolbar-bgcolor) !important;
+    background-color: var(--toolbar-bgcolor, var(--toolbar-background-color)) !important;
     background-clip: content-box !important;
     border-radius: 100%;
     padding-block: 0 !important;
@@ -25737,7 +26056,7 @@
   .findbar-closebutton {
     border-style: solid;
     border-color: var(--chrome-content-separator-color);
-    background: var(--uc-light-bkgnd-color, var(--toolbar-bgcolor)) !important;
+    background: var(--uc-light-bkgnd-color, var(--toolbar-bgcolor, var(--toolbar-background-color))) !important;
     pointer-events: auto;
     height: 33px !important;
   }
@@ -28821,11 +29140,6 @@
     > menu:not(.menu-iconic, .in-menulist, [checked="true"]),
   #blockedPopupDontShowMessage {
     padding-inline-end: var(--context-menu-background-padding) !important;
-  }
-  /* text position */
-  :not(menu, #ContentSelectDropdown, #context-navigation) > menupopup:not(.in-menulist) > menuitem > .menu-text,
-  :not(menu, #ContentSelectDropdown, #context-navigation) > menupopup:not(.in-menulist) > menu > .menu-text {
-    padding-inline-start: var(--context-menu-mac-padding) !important;
   }
   /* Checkbox menuitem, None iconic menu */
   :not(menu, #ContentSelectDropdown, #context-navigation) > menupopup:not(.in-menulist) > menuitem[type="checkbox"] {
