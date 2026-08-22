@@ -96,6 +96,8 @@
 
   virtualisation.libvirtd.enable = true;
 
+  programs.nix-ld.enable = true;
+
   programs.virt-manager.enable = true;
 
   fileSystems = {
@@ -398,6 +400,7 @@
     (llama-cpp.override {
       vulkanSupport = true;
     })
+    (pkgs.callPackage ./pycharm-wrapper.nix {})
     adwaita-qt
     adwaita-qt6
     aegisub
@@ -500,7 +503,7 @@
     speedtest-cli
     spoofdpi
     stern
-    telegram-desktop
+    unstable.telegram-desktop
     thunderbird
     tor-browser
     transmission_4-gtk
