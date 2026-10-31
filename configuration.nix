@@ -401,6 +401,7 @@
       vulkanSupport = true;
     })
     (pkgs.callPackage ./pycharm-wrapper.nix {})
+    uv
     adwaita-qt
     adwaita-qt6
     aegisub
