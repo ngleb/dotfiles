@@ -240,28 +240,8 @@
         "hosts allow" = "192.168.1. 192.168.122. 127.0.0.1 localhost";
         "map to guest" = "bad user";
       };
-      Movies = {
-        path = "/media/data/Movies";
-        browseable = "yes";
-        "read only" = "yes";
-        "guest ok" = "no";
-        "create mask" = "0644";
-        "directory mask" = "0755";
-        "force user" = "gleb";
-        "force group" = "users";
-      };
       Data = {
         path = "/media/data";
-        browseable = "yes";
-        "read only" = "yes";
-        "guest ok" = "no";
-        "create mask" = "0644";
-        "directory mask" = "0755";
-        "force user" = "gleb";
-        "force group" = "users";
-      };
-      Passport = {
-        path = "/media/passport";
         browseable = "yes";
         "read only" = "yes";
         "guest ok" = "no";
