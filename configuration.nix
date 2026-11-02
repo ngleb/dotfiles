@@ -106,18 +106,33 @@
       fsType = "ext4";
       options = [ "noatime" ];
     };
-    # "/media/passport" = {
-    #   device = "/dev/disk/by-uuid/526EDBA46EDB7EE3";
-    #   fsType = "ntfs-3g";
-    #   options = [ "rw" "uid=1000" "gid=1000" "dmask=0002" "fmask=0113" "windows_names" ];
-    # };
     "/media/media" = {
       device = "//192.168.1.2/Media";
       fsType = "cifs";
-      options = let
-        # this line prevents hanging on network split
-        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,user,users";
-      in ["${automount_opts},credentials=/etc/nixos/smb-secrets,file_mode=0644,dir_mode=0755,uid=1000,gid=1000"];
+      options = [
+        # Never block boot/activation on this mount
+        "nofail"
+        "noauto"
+
+        # Lazy-mount on first access, give up quickly if unreachable
+        "x-systemd.automount"
+        "x-systemd.idle-timeout=60"
+        "x-systemd.device-timeout=5s"
+        "x-systemd.mount-timeout=5s"
+
+        # Allow users to mount/unmount
+        "user"
+        "users"
+
+        # CIFS specifics
+        "credentials=/etc/nixos/smb-secrets"
+        "forceuid"
+        "forcegid"
+        "file_mode=0644"
+        "dir_mode=0755"
+        "uid=1000"
+        "gid=1000"
+      ];
     };
   };
 
